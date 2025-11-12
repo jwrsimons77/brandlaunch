@@ -1,0 +1,114 @@
+# Netlify Configuration for BRAND_NAME
+# https://docs.netlify.com/configure-builds/file-based-configuration/
+
+# Build settings
+[build]
+  # The directory to publish (root directory since this is a static site)
+  publish = "."
+
+  # No build command needed for static HTML site
+  # If you add a build process later, uncomment and modify:
+  # command = "npm run build"
+
+# Redirect and header rules
+[[redirects]]
+  # Redirect default Netlify subdomain to www (optional, configure after adding custom domain)
+  # from = "https://your-site.netlify.app/*"
+  # to = "https://www.yourdomain.com/:splat"
+  # status = 301
+  # force = true
+
+[[redirects]]
+  # SPA fallback for 404 pages (serve index.html)
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Custom headers for security and performance
+[[headers]]
+  for = "/*"
+  [headers.values]
+    # Security headers
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    X-XSS-Protection = "1; mode=block"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "geolocation=(), microphone=(), camera=()"
+
+    # Content Security Policy (adjust as needed for your content)
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://fonts.googleapis.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self';"
+
+[[headers]]
+  # Cache static assets for 1 year
+  for = "/css/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/js/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/images/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  # Cache HTML for shorter duration
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=3600, must-revalidate"
+
+[[headers]]
+  # Don't cache the main index.html
+  for = "/index.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+# Form settings
+[build.environment]
+  # Environment variables (if needed)
+  # NODE_VERSION = "18"
+
+# Plugin configuration
+[[plugins]]
+  # Netlify Forms plugin (automatically enabled, but explicit is better)
+  package = "@netlify/plugin-forms"
+
+# Image optimization (optional - uncomment to enable)
+# [[plugins]]
+#   package = "@netlify/plugin-image-optim"
+
+# Lighthouse CI plugin (optional - for performance monitoring)
+# [[plugins]]
+#   package = "@netlify/plugin-lighthouse"
+#   [plugins.inputs]
+#     output_path = "reports/lighthouse.html"
+
+# Dev server settings (for local development)
+[dev]
+  command = "npx http-server . -p 8888"
+  port = 8888
+  publish = "."
+  autoLaunch = false
+
+# Context-specific settings
+# Production context
+[context.production]
+  command = ""
+  publish = "."
+
+# Deploy Preview context
+[context.deploy-preview]
+  command = ""
+  publish = "."
+
+# Branch-specific context (example for staging)
+[context.staging]
+  command = ""
+  publish = "."
+
+# Functions directory (if you add serverless functions later)
+# [functions]
+#   directory = "netlify/functions"
