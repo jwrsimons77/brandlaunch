@@ -133,16 +133,18 @@ animatedElements.forEach(element => {
 // ===================================
 // NETLIFY FORM HANDLING
 // ===================================
-const membershipForm = document.getElementById('membershipForm');
+const notifyForm = document.getElementById('notifyForm');
+const membershipForm = document.getElementById('membershipForm'); // Keep for backward compatibility
 const formSuccess = document.getElementById('formSuccess');
+const activeForm = notifyForm || membershipForm;
 
-if (membershipForm) {
-    membershipForm.addEventListener('submit', async (e) => {
+if (activeForm) {
+    activeForm.addEventListener('submit', async (e) => {
         // Don't prevent default - let Netlify handle the submission
         // But we can show custom success message if desired
 
         // Optional: Show loading state
-        const submitButton = membershipForm.querySelector('button[type="submit"]');
+        const submitButton = activeForm.querySelector('button[type="submit"]');
         const originalText = submitButton.textContent;
         submitButton.textContent = 'Joining...';
         submitButton.disabled = true;
@@ -152,8 +154,8 @@ if (membershipForm) {
 // Check URL for Netlify form success parameter
 const urlParams = new URLSearchParams(window.location.search);
 if (urlParams.get('success') === 'true' || window.location.pathname.includes('success')) {
-    if (membershipForm && formSuccess) {
-        membershipForm.style.display = 'none';
+    if (activeForm && formSuccess) {
+        activeForm.style.display = 'none';
         formSuccess.classList.add('active');
 
         // Scroll to success message
@@ -401,9 +403,10 @@ document.querySelectorAll('.social-link').forEach(link => {
 });
 
 // Track form submission
-if (membershipForm) {
-    membershipForm.addEventListener('submit', function() {
-        trackEvent('Form', 'Submit', 'Membership Form');
+if (activeForm) {
+    activeForm.addEventListener('submit', function() {
+        const formName = notifyForm ? 'Notify Form' : 'Membership Form';
+        trackEvent('Form', 'Submit', formName);
     });
 }
 
