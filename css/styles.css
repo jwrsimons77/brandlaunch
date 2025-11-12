@@ -1173,6 +1173,268 @@ a:hover {
 }
 
 /* ===================================
+   PRODUCT DROP SECTION
+   =================================== */
+.drop-grid {
+    display: grid;
+    gap: var(--spacing-lg);
+}
+
+.product-card {
+    background-color: var(--color-white);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    border: 2px solid var(--color-light);
+    transition: all var(--transition-base);
+}
+
+.product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--color-primary);
+}
+
+.product-card-featured {
+    border-color: var(--color-primary);
+}
+
+.product-image {
+    position: relative;
+    aspect-ratio: 1;
+    overflow: hidden;
+    background-color: var(--color-light);
+}
+
+.product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition-slow);
+}
+
+.product-card:hover .product-image img {
+    transform: scale(1.05);
+}
+
+.product-badge {
+    position: absolute;
+    top: var(--spacing-sm);
+    right: var(--spacing-sm);
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--radius-full);
+    font-size: var(--font-size-xs);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.product-content {
+    padding: var(--spacing-lg);
+}
+
+.product-title {
+    font-size: var(--font-size-xl);
+    font-family: var(--font-display);
+    margin-bottom: var(--spacing-xs);
+}
+
+.product-description {
+    color: var(--color-gray);
+    font-size: var(--font-size-sm);
+    margin-bottom: var(--spacing-md);
+}
+
+.product-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.product-price {
+    font-size: var(--font-size-2xl);
+    font-weight: 700;
+    font-family: var(--font-display);
+}
+
+.product-status {
+    font-size: var(--font-size-xs);
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--color-primary);
+    letter-spacing: 0.05em;
+}
+
+/* Drop Info */
+.drop-info {
+    display: grid;
+    gap: var(--spacing-lg);
+    margin-top: var(--spacing-2xl);
+    padding: var(--spacing-xl);
+    background-color: var(--color-light);
+    border-radius: var(--radius-lg);
+}
+
+.drop-info-item h4 {
+    font-size: var(--font-size-base);
+    font-family: var(--font-display);
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-xs);
+}
+
+.drop-info-item p {
+    color: var(--color-gray);
+    margin: 0;
+}
+
+/* ===================================
+   SIMPLIFIED ABOUT SECTION
+   =================================== */
+.about-simple {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.about-simple h2 {
+    font-size: var(--font-size-4xl);
+    color: var(--color-white);
+    margin-bottom: var(--spacing-md);
+}
+
+.about-simple .lead {
+    color: var(--color-gray-light);
+    font-size: var(--font-size-lg);
+}
+
+/* ===================================
+   MINIMAL EVENTS SECTION
+   =================================== */
+.events-grid-minimal {
+    display: grid;
+    gap: var(--spacing-lg);
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.event-card-minimal {
+    display: flex;
+    gap: var(--spacing-lg);
+    padding: var(--spacing-lg);
+    background-color: var(--color-light);
+    border-radius: var(--radius-lg);
+    border: 2px solid transparent;
+    transition: all var(--transition-base);
+}
+
+.event-card-minimal:hover {
+    border-color: var(--color-primary);
+    transform: translateX(8px);
+}
+
+.event-date-badge {
+    flex-shrink: 0;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    border-radius: var(--radius-md);
+}
+
+.date-month {
+    font-size: var(--font-size-sm);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.date-day {
+    font-size: var(--font-size-3xl);
+    font-weight: 900;
+    font-family: var(--font-display);
+    line-height: 1;
+}
+
+.event-details h3 {
+    font-size: var(--font-size-xl);
+    font-family: var(--font-display);
+    margin-bottom: var(--spacing-xs);
+}
+
+.event-location {
+    font-size: var(--font-size-sm);
+    color: var(--color-primary);
+    font-weight: 600;
+    margin-bottom: var(--spacing-xs);
+}
+
+.event-description {
+    color: var(--color-gray);
+    font-size: var(--font-size-sm);
+    margin: 0;
+}
+
+/* ===================================
+   NOTIFY SECTION (Replaces Join)
+   =================================== */
+.notify-wrapper {
+    display: grid;
+    gap: var(--spacing-xl);
+    align-items: start;
+}
+
+.notify-form-wrapper {
+    position: relative;
+}
+
+.notify-form {
+    background-color: var(--color-white);
+    padding: var(--spacing-xl);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+}
+
+/* ===================================
+   MINIMAL FOOTER
+   =================================== */
+.footer-content-minimal {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-lg);
+    flex-wrap: wrap;
+    gap: var(--spacing-lg);
+}
+
+.footer-social {
+    display: flex;
+    gap: var(--spacing-md);
+}
+
+.footer-social a {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-dark);
+    border-radius: 50%;
+    color: var(--color-gray-light);
+    transition: all var(--transition-base);
+}
+
+.footer-social a:hover {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    transform: translateY(-2px);
+}
+
+/* ===================================
    RESPONSIVE DESIGN - TABLET
    =================================== */
 @media (min-width: 768px) {
@@ -1241,6 +1503,22 @@ a:hover {
         grid-template-columns: repeat(2, 1fr);
     }
 
+    /* Product Drop (Tablet) */
+    .drop-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .product-card-featured {
+        grid-column: span 2;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0;
+    }
+
+    .product-card-featured .product-image {
+        aspect-ratio: auto;
+    }
+
     /* Contact */
     .contact-content {
         grid-template-columns: 1fr 1fr;
@@ -1277,6 +1555,20 @@ a:hover {
     /* Gallery - 3 columns on desktop */
     .gallery-grid {
         grid-template-columns: repeat(3, 1fr);
+    }
+
+    /* Product Drop */
+    .drop-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .drop-info {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    /* Notify */
+    .notify-wrapper {
+        grid-template-columns: 1fr 1fr;
     }
 }
 
