@@ -115,6 +115,7 @@ html {
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
 }
 
 body {
@@ -124,6 +125,8 @@ body {
     color: var(--color-dark);
     background-color: var(--color-white);
     overflow-x: hidden;
+    width: 100%;
+    position: relative;
 }
 
 /* ===================================
@@ -414,7 +417,7 @@ a:hover {
     display: inline-block;
     padding: var(--spacing-sm) var(--spacing-lg);
     font-family: var(--font-primary);
-    font-size: var(--font-size-base);
+    font-size: var(--font-size-sm);
     font-weight: 600;
     text-align: center;
     text-transform: uppercase;
@@ -424,6 +427,8 @@ a:hover {
     cursor: pointer;
     transition: all var(--transition-base);
     text-decoration: none;
+    white-space: nowrap;
+    min-width: 140px;
 }
 
 .btn-primary {
@@ -511,7 +516,7 @@ a:hover {
 
 .hero-title-top {
     font-family: var(--font-display);
-    font-size: var(--font-size-2xl);
+    font-size: clamp(1.25rem, 5vw, 2rem);
     font-weight: 400;
     letter-spacing: 0.1em;
     color: var(--color-primary);
@@ -519,7 +524,7 @@ a:hover {
 
 .hero-title-main {
     font-family: var(--font-display);
-    font-size: var(--font-size-5xl);
+    font-size: clamp(2.5rem, 12vw, 4rem);
     font-weight: 900;
     letter-spacing: 0.05em;
     line-height: 0.9;
@@ -542,8 +547,15 @@ a:hover {
     display: flex;
     flex-direction: column;
     gap: var(--spacing-sm);
-    align-items: center;
+    align-items: stretch;
     justify-content: center;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.hero-cta .btn {
+    width: 100%;
 }
 
 /* Scroll Indicator */
@@ -604,7 +616,7 @@ a:hover {
 }
 
 .section-title {
-    font-size: var(--font-size-4xl);
+    font-size: clamp(2rem, 8vw, 3rem);
     margin-bottom: var(--spacing-sm);
 }
 
@@ -1231,29 +1243,33 @@ a:hover {
 }
 
 .product-content {
-    padding: var(--spacing-lg);
+    padding: var(--spacing-md);
 }
 
 .product-title {
-    font-size: var(--font-size-xl);
+    font-size: clamp(1.125rem, 4vw, 1.25rem);
     font-family: var(--font-display);
     margin-bottom: var(--spacing-xs);
+    line-height: 1.2;
 }
 
 .product-description {
     color: var(--color-gray);
     font-size: var(--font-size-sm);
     margin-bottom: var(--spacing-md);
+    line-height: 1.5;
 }
 
 .product-footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: var(--spacing-sm);
+    flex-wrap: wrap;
 }
 
 .product-price {
-    font-size: var(--font-size-2xl);
+    font-size: clamp(1.5rem, 5vw, 2rem);
     font-weight: 700;
     font-family: var(--font-display);
 }
@@ -1269,43 +1285,95 @@ a:hover {
 /* Drop Info */
 .drop-info {
     display: grid;
-    gap: var(--spacing-lg);
-    margin-top: var(--spacing-2xl);
-    padding: var(--spacing-xl);
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-xl);
+    padding: var(--spacing-md);
     background-color: var(--color-light);
     border-radius: var(--radius-lg);
 }
 
 .drop-info-item h4 {
-    font-size: var(--font-size-base);
+    font-size: var(--font-size-sm);
     font-family: var(--font-display);
     color: var(--color-primary);
     margin-bottom: var(--spacing-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
 }
 
 .drop-info-item p {
     color: var(--color-gray);
     margin: 0;
+    font-size: var(--font-size-sm);
+    line-height: 1.5;
 }
 
 /* ===================================
-   SIMPLIFIED ABOUT SECTION
+   ABOUT SECTION - STORY FORMAT
    =================================== */
-.about-simple {
-    max-width: 800px;
+.about-content-story {
+    max-width: 900px;
     margin: 0 auto;
+}
+
+.about-header {
     text-align: center;
+    margin-bottom: var(--spacing-xl);
 }
 
-.about-simple h2 {
-    font-size: var(--font-size-4xl);
-    color: var(--color-white);
+.about-story {
+    margin-bottom: var(--spacing-2xl);
+}
+
+.about-story p {
+    font-size: clamp(1rem, 3vw, 1.125rem);
+    line-height: 1.8;
     margin-bottom: var(--spacing-md);
+    color: var(--color-gray);
 }
 
-.about-simple .lead {
-    color: var(--color-gray-light);
+.about-story .lead {
+    font-size: clamp(1.125rem, 4vw, 1.25rem);
+    font-weight: 500;
+    color: var(--color-dark);
+    line-height: 1.7;
+}
+
+.about-values-simple {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-lg);
+    margin-top: var(--spacing-xl);
+}
+
+.value-simple {
+    text-align: center;
+    padding: var(--spacing-lg);
+    background-color: var(--color-light);
+    border-radius: var(--radius-lg);
+    transition: transform var(--transition-base);
+}
+
+.value-simple:hover {
+    transform: translateY(-4px);
+}
+
+.value-icon {
+    font-size: var(--font-size-4xl);
+    display: block;
+    margin-bottom: var(--spacing-sm);
+}
+
+.value-simple h4 {
     font-size: var(--font-size-lg);
+    font-family: var(--font-display);
+    margin-bottom: var(--spacing-xs);
+}
+
+.value-simple p {
+    font-size: var(--font-size-sm);
+    color: var(--color-gray);
+    margin: 0;
 }
 
 /* ===================================
@@ -1320,23 +1388,28 @@ a:hover {
 
 .event-card-minimal {
     display: flex;
-    gap: var(--spacing-lg);
-    padding: var(--spacing-lg);
-    background-color: var(--color-light);
+    gap: var(--spacing-md);
+    padding: var(--spacing-md);
+    background-color: var(--color-dark-secondary);
     border-radius: var(--radius-lg);
-    border: 2px solid transparent;
+    border: 2px solid rgba(255, 255, 255, 0.1);
     transition: all var(--transition-base);
 }
 
 .event-card-minimal:hover {
     border-color: var(--color-primary);
-    transform: translateX(8px);
+    transform: translateX(4px);
+    background-color: rgba(255, 70, 85, 0.1);
+}
+
+.bg-dark .section-description {
+    color: var(--color-gray-light);
 }
 
 .event-date-badge {
     flex-shrink: 0;
-    width: 80px;
-    height: 80px;
+    width: 70px;
+    height: 70px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -1361,22 +1434,24 @@ a:hover {
 }
 
 .event-details h3 {
-    font-size: var(--font-size-xl);
+    font-size: clamp(1rem, 4vw, 1.25rem);
     font-family: var(--font-display);
     margin-bottom: var(--spacing-xs);
+    color: var(--color-white);
 }
 
 .event-location {
-    font-size: var(--font-size-sm);
+    font-size: var(--font-size-xs);
     color: var(--color-primary);
     font-weight: 600;
     margin-bottom: var(--spacing-xs);
 }
 
 .event-description {
-    color: var(--color-gray);
-    font-size: var(--font-size-sm);
+    color: var(--color-gray-light);
+    font-size: var(--font-size-xs);
     margin: 0;
+    line-height: 1.5;
 }
 
 /* ===================================
@@ -1472,6 +1547,12 @@ a:hover {
 
     .hero-cta {
         flex-direction: row;
+        max-width: 600px;
+    }
+
+    .hero-cta .btn {
+        width: auto;
+        flex: 1;
     }
 
     /* About */
