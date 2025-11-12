@@ -1309,24 +1309,71 @@ a:hover {
 }
 
 /* ===================================
-   SIMPLIFIED ABOUT SECTION
+   ABOUT SECTION - STORY FORMAT
    =================================== */
-.about-simple {
-    max-width: 800px;
+.about-content-story {
+    max-width: 900px;
     margin: 0 auto;
+}
+
+.about-header {
     text-align: center;
+    margin-bottom: var(--spacing-xl);
 }
 
-.about-simple h2 {
-    font-size: clamp(2rem, 8vw, 3rem);
-    color: var(--color-white);
+.about-story {
+    margin-bottom: var(--spacing-2xl);
+}
+
+.about-story p {
+    font-size: clamp(1rem, 3vw, 1.125rem);
+    line-height: 1.8;
     margin-bottom: var(--spacing-md);
+    color: var(--color-gray);
 }
 
-.about-simple .lead {
-    color: var(--color-gray-light);
-    font-size: clamp(1rem, 4vw, 1.125rem);
+.about-story .lead {
+    font-size: clamp(1.125rem, 4vw, 1.25rem);
+    font-weight: 500;
+    color: var(--color-dark);
     line-height: 1.7;
+}
+
+.about-values-simple {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-lg);
+    margin-top: var(--spacing-xl);
+}
+
+.value-simple {
+    text-align: center;
+    padding: var(--spacing-lg);
+    background-color: var(--color-light);
+    border-radius: var(--radius-lg);
+    transition: transform var(--transition-base);
+}
+
+.value-simple:hover {
+    transform: translateY(-4px);
+}
+
+.value-icon {
+    font-size: var(--font-size-4xl);
+    display: block;
+    margin-bottom: var(--spacing-sm);
+}
+
+.value-simple h4 {
+    font-size: var(--font-size-lg);
+    font-family: var(--font-display);
+    margin-bottom: var(--spacing-xs);
+}
+
+.value-simple p {
+    font-size: var(--font-size-sm);
+    color: var(--color-gray);
+    margin: 0;
 }
 
 /* ===================================
@@ -1343,15 +1390,20 @@ a:hover {
     display: flex;
     gap: var(--spacing-md);
     padding: var(--spacing-md);
-    background-color: var(--color-light);
+    background-color: var(--color-dark-secondary);
     border-radius: var(--radius-lg);
-    border: 2px solid transparent;
+    border: 2px solid rgba(255, 255, 255, 0.1);
     transition: all var(--transition-base);
 }
 
 .event-card-minimal:hover {
     border-color: var(--color-primary);
     transform: translateX(4px);
+    background-color: rgba(255, 70, 85, 0.1);
+}
+
+.bg-dark .section-description {
+    color: var(--color-gray-light);
 }
 
 .event-date-badge {
@@ -1385,6 +1437,7 @@ a:hover {
     font-size: clamp(1rem, 4vw, 1.25rem);
     font-family: var(--font-display);
     margin-bottom: var(--spacing-xs);
+    color: var(--color-white);
 }
 
 .event-location {
@@ -1395,7 +1448,7 @@ a:hover {
 }
 
 .event-description {
-    color: var(--color-gray);
+    color: var(--color-gray-light);
     font-size: var(--font-size-xs);
     margin: 0;
     line-height: 1.5;
