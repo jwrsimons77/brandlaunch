@@ -10,19 +10,8 @@
   # If you add a build process later, uncomment and modify:
   # command = "npm run build"
 
-# Redirect and header rules
-[[redirects]]
-  # Redirect default Netlify subdomain to www (optional, configure after adding custom domain)
-  # from = "https://your-site.netlify.app/*"
-  # to = "https://www.yourdomain.com/:splat"
-  # status = 301
-  # force = true
-
-[[redirects]]
-  # SPA fallback for 404 pages (serve index.html)
-  from = "/*"
-  to = "/index.html"
-  status = 200
+# Redirects are configured in the _redirects file
+# See: https://docs.netlify.com/routing/redirects/
 
 # Custom headers for security and performance
 [[headers]]
@@ -71,12 +60,8 @@
   # Environment variables (if needed)
   # NODE_VERSION = "18"
 
-# Plugin configuration
-[[plugins]]
-  # Netlify Forms plugin (automatically enabled, but explicit is better)
-  package = "@netlify/plugin-forms"
-
-# Image optimization (optional - uncomment to enable)
+# Plugin configuration (optional - uncomment to enable specific plugins)
+# Netlify Forms work automatically without plugins for static sites
 # [[plugins]]
 #   package = "@netlify/plugin-image-optim"
 
