@@ -518,6 +518,7 @@ a:hover {
     text-decoration: none;
     white-space: nowrap;
     min-width: 140px;
+    color: inherit;
 }
 
 .btn-primary {
@@ -532,10 +533,16 @@ a:hover {
     box-shadow: none;
 }
 
+.btn-primary:link,
 .btn-primary:active,
 .btn-primary:focus,
 .btn-primary:visited {
-    color: var(--color-white);
+    color: var(--color-white) !important;
+}
+
+.btn:active,
+.btn:focus {
+    color: inherit;
 }
 
 .btn-secondary {
@@ -612,7 +619,7 @@ a:hover {
 
     .hero-content {
         padding-top: 0;
-        margin-top: 140px;
+        margin-top: 110px;
     }
 }
 
