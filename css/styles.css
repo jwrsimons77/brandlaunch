@@ -445,7 +445,8 @@ a:hover {
     border: none;
     cursor: pointer;
     padding: var(--spacing-xs);
-    z-index: var(--z-fixed);
+    z-index: calc(var(--z-fixed) + 2);
+    position: relative;
 }
 
 .hamburger-line {
@@ -458,6 +459,14 @@ a:hover {
 
 .navbar.scrolled .hamburger-line {
     background-color: var(--color-dark);
+}
+
+.hamburger.active .hamburger-line {
+    background-color: var(--color-white);
+}
+
+.navbar.scrolled .hamburger.active .hamburger-line {
+    background-color: var(--color-white);
 }
 
 .hamburger.active .hamburger-line:nth-child(1) {
@@ -619,7 +628,37 @@ a:hover {
 
     .hero-content {
         padding-top: 0;
-        margin-top: 110px;
+        margin-top: 95px;
+    }
+
+    .hero-subtitle {
+        margin-bottom: var(--spacing-lg);
+    }
+
+    .hero-stats {
+        margin-top: var(--spacing-lg);
+        gap: var(--spacing-xs);
+    }
+
+    .hero-stats li {
+        padding: var(--spacing-sm);
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-content {
+        margin-top: 85px;
+        padding-left: var(--spacing-md);
+        padding-right: var(--spacing-md);
+    }
+
+    .hero-cta,
+    .hero-stats {
+        max-width: 320px;
+    }
+
+    .hero-cta {
+        gap: var(--spacing-xs);
     }
 }
 
@@ -674,7 +713,7 @@ a:hover {
     align-items: stretch;
     justify-content: center;
     width: 100%;
-    max-width: 400px;
+    max-width: 360px;
     margin: 0 auto;
 }
 
@@ -688,6 +727,9 @@ a:hover {
     gap: var(--spacing-sm);
     list-style: none;
     padding: 0;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 420px;
 }
 
 .hero-stats li {
