@@ -601,7 +601,7 @@ a:hover {
     z-index: 1;
     text-align: center;
     padding: var(--spacing-lg);
-    padding-top: var(--spacing-3xl);
+    padding-top: 120px;
 }
 
 .hero-kicker {
