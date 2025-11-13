@@ -142,31 +142,48 @@ const membershipForm = document.getElementById('membershipForm'); // Keep for ba
 const formSuccess = document.getElementById('formSuccess');
 const activeForm = notifyForm || membershipForm;
 
+const showFormSuccess = () => {
+    if (!activeForm || !formSuccess) return;
+
+    activeForm.style.display = 'none';
+    formSuccess.classList.add('active');
+
+    setTimeout(() => {
+        formSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }, 120);
+};
+
 if (activeForm) {
     activeForm.addEventListener('submit', async (e) => {
-        // Don't prevent default - let Netlify handle the submission
-        // But we can show custom success message if desired
-
-        // Optional: Show loading state
         const submitButton = activeForm.querySelector('button[type="submit"]');
-        const originalText = submitButton.textContent;
-        submitButton.textContent = 'Joining...';
-        submitButton.disabled = true;
+        const originalText = submitButton ? submitButton.textContent : null;
+        if (submitButton) {
+            submitButton.textContent = 'Joining...';
+            submitButton.disabled = true;
+        }
+
+        const isLocalEnv = ['localhost', '127.0.0.1'].includes(window.location.hostname);
+
+        if (isLocalEnv) {
+            e.preventDefault();
+
+            await new Promise((resolve) => setTimeout(resolve, 600));
+
+            showFormSuccess();
+
+            if (submitButton && originalText) {
+                submitButton.textContent = originalText;
+                submitButton.disabled = false;
+            }
+
+            return;
+        }
     });
 }
 
-// Check URL for Netlify form success parameter
 const urlParams = new URLSearchParams(window.location.search);
 if (urlParams.get('success') === 'true' || window.location.pathname.includes('success')) {
-    if (activeForm && formSuccess) {
-        activeForm.style.display = 'none';
-        formSuccess.classList.add('active');
-
-        // Scroll to success message
-        setTimeout(() => {
-            formSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }, 100);
-    }
+    showFormSuccess();
 }
 
 // ===================================
