@@ -1987,13 +1987,14 @@ a:hover {
     }
 
     .hero-cta {
-        flex-direction: row;
-        max-width: 600px;
+        flex-direction: column;
+        max-width: 360px;
+        align-items: center;
     }
 
     .hero-cta .btn {
-        width: auto;
-        flex: 1;
+        width: 100%;
+        flex: 0 0 auto;
     }
 
     .hero-stats {
