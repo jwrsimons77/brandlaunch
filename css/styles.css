@@ -643,6 +643,13 @@ a:hover {
     .hero-stats li {
         padding: var(--spacing-sm);
     }
+
+    .hero-cta,
+    .hero-stats {
+        max-width: 360px;
+        margin-left: auto;
+        margin-right: auto;
+    }
 }
 
 @media (max-width: 480px) {
@@ -655,6 +662,8 @@ a:hover {
     .hero-cta,
     .hero-stats {
         max-width: 320px;
+        margin-left: auto;
+        margin-right: auto;
     }
 
     .hero-cta {
@@ -713,7 +722,7 @@ a:hover {
     align-items: stretch;
     justify-content: center;
     width: 100%;
-    max-width: 360px;
+    max-width: 420px;
     margin: 0 auto;
 }
 
@@ -727,9 +736,9 @@ a:hover {
     gap: var(--spacing-sm);
     list-style: none;
     padding: 0;
+    max-width: 460px;
     margin-left: auto;
     margin-right: auto;
-    max-width: 420px;
 }
 
 .hero-stats li {
@@ -1988,8 +1997,11 @@ a:hover {
     }
 
     .hero-stats {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: var(--spacing-md);
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: var(--spacing-lg);
+        max-width: 720px;
+        margin-left: auto;
+        margin-right: auto;
     }
 
     .values-grid {
