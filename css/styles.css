@@ -532,6 +532,12 @@ a:hover {
     box-shadow: none;
 }
 
+.btn-primary:active,
+.btn-primary:focus,
+.btn-primary:visited {
+    color: var(--color-white);
+}
+
 .btn-secondary {
     background-color: transparent;
     color: var(--color-white);
