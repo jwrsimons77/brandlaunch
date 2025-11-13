@@ -604,6 +604,18 @@ a:hover {
     padding-top: 120px;
 }
 
+@media (max-width: 768px) {
+    .hero {
+        align-items: flex-start;
+        padding-top: 0;
+    }
+
+    .hero-content {
+        padding-top: 0;
+        margin-top: 140px;
+    }
+}
+
 .hero-kicker {
     font-size: var(--font-size-xs);
     text-transform: uppercase;
