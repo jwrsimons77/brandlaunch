@@ -139,18 +139,36 @@ animatedElements.forEach(element => {
 // ===================================
 const notifyForm = document.getElementById('notifyForm');
 const membershipForm = document.getElementById('membershipForm'); // Keep for backward compatibility
-const formSuccess = document.getElementById('formSuccess');
+const toastNotification = document.getElementById('toastNotification');
+
 const activeForm = notifyForm || membershipForm;
+const successCopy = 'Cloud Piercer status: confirmed. Watch your inbox for coordinates, sunrise missions, and brew intel.';
+let toastHideTimeout;
 
-const showFormSuccess = () => {
-    if (!activeForm || !formSuccess) return;
+const showToast = (message) => {
+    if (!toastNotification) return;
 
-    activeForm.style.display = 'none';
-    formSuccess.classList.add('active');
+    toastNotification.textContent = message;
+    toastNotification.classList.add('show');
 
-    setTimeout(() => {
-        formSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }, 120);
+    clearTimeout(toastHideTimeout);
+    toastHideTimeout = setTimeout(() => {
+        toastNotification.classList.remove('show');
+    }, 4800);
+};
+
+if (toastNotification) {
+    toastNotification.addEventListener('click', () => {
+        toastNotification.classList.remove('show');
+        clearTimeout(toastHideTimeout);
+    });
+}
+
+const handleFormSuccess = () => {
+    if (activeForm) {
+        activeForm.reset();
+    }
+    showToast(successCopy);
 };
 
 if (activeForm) {
@@ -169,7 +187,7 @@ if (activeForm) {
 
             await new Promise((resolve) => setTimeout(resolve, 600));
 
-            showFormSuccess();
+            handleFormSuccess();
 
             if (submitButton && originalText) {
                 submitButton.textContent = originalText;
@@ -183,7 +201,14 @@ if (activeForm) {
 
 const urlParams = new URLSearchParams(window.location.search);
 if (urlParams.get('success') === 'true' || window.location.pathname.includes('success')) {
-    showFormSuccess();
+    handleFormSuccess();
+
+    if (urlParams.get('success') === 'true') {
+        urlParams.delete('success');
+        const query = urlParams.toString();
+        const newUrl = `${window.location.pathname}${query ? `?${query}` : ''}${window.location.hash}`;
+        window.history.replaceState({}, '', newUrl);
+    }
 }
 
 // ===================================
