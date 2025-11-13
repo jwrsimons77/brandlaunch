@@ -1,4 +1,4 @@
-# BRAND_NAME Customization Guide
+# AORO Customization Guide
 
 This guide will help you customize the website with your unique brand identity, including name suggestions, color palettes, taglines, and content ideas.
 
@@ -352,7 +352,7 @@ Based on your chosen brand name, secure these handles:
 - [ ] Finalize brand name
 - [ ] Secure social media handles
 - [ ] Register domain name
-- [ ] Replace all BRAND_NAME instances
+- [ ] Replace all AORO instances (if rebranding)
 - [ ] Update color scheme
 - [ ] Add real images
 - [ ] Write custom copy for each section

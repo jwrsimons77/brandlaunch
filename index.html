@@ -3,52 +3,119 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="BRAND_NAME - Pop-up runs and coffee with friends. Manchester & London.">
-    <meta name="keywords" content="running club, coffee, social runs, manchester, london, community">
-    <parameter name="author" content="BRAND_NAME">
+    <meta name="description" content="AORO is the crew-built basecamp for cloud piercers. Limited tee drops, design-led pop-ups, and group adventures fuelled by quality coffee.">
+    <meta name="keywords" content="AORO, adventure apparel, cloud piercer, pop-up basecamp, trail crew, specialty coffee, Aoraki inspired brand">
+    <meta name="author" content="AORO">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://aoro.co/">
 
     <!-- Open Graph / Social Media -->
     <meta property="og:type" content="website">
-    <meta property="og:title" content="BRAND_NAME - Run. Coffee. Friends.">
-    <meta property="og:description" content="Pop-up runs and coffee adventures in Manchester & London.">
+    <meta property="og:title" content="AORO — Pierce the Ordinary">
+    <meta property="og:description" content="Adventure-ready tees, quality coffee, unforgettable mates. Where the crew meets the climb.">
     <meta property="og:image" content="/images/hero/og-image.jpg">
+    <meta property="og:image:alt" content="AORO crew brewing coffee at a mountain basecamp before the climb">
+    <meta property="og:url" content="https://aoro.co/">
+    <meta property="og:site_name" content="AORO">
+    <meta property="og:locale" content="en_NZ">
 
-    <title>BRAND_NAME - Run. Coffee. Friends.</title>
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="AORO — Pierce the Ordinary">
+    <meta name="twitter:description" content="Trail-ready tees, limited drops, and the crew that meets the climb.">
+    <meta name="twitter:image" content="/images/hero/og-image.jpg">
+    <meta name="twitter:site" content="@aoro.cloud">
+
+    <meta name="theme-color" content="#0F1E21">
+    <title>AORO — Pierce the Ordinary</title>
+
+    <!-- Preload -->
+    <link rel="preload" href="/images/hero/hero-bg.jpg" as="image">
 
     <!-- Preconnect for performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&family=Bebas+Neue&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <!-- Stylesheet -->
     <link rel="stylesheet" href="/css/styles.css">
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="/images/icons/favicon.png">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Brand",
+        "name": "AORO",
+        "alternateName": "Cloud Piercers",
+        "description": "Adventure-ready tees, quality coffee, and crew-built pop-ups inspired by Aoraki, New Zealand's highest peak.",
+        "url": "https://aoro.co/",
+        "brand": "AORO",
+        "slogan": "Pierce the Ordinary",
+        "email": "hello@aoro.co",
+        "sameAs": [
+            "https://www.instagram.com/aoro.cloud",
+            "https://www.tiktok.com/@aoro.cloud"
+        ],
+        "foundingDate": "2024",
+        "founder": [
+            {
+                "@type": "Person",
+                "name": "AORO Founders",
+                "description": "Two mates who dreamed up AORO between trail markers and coffee stops."
+            }
+        ],
+        "knowsAbout": [
+            "Adventure apparel",
+            "Pop-up shops",
+            "Trail communities",
+            "Specialty coffee"
+        ],
+        "makesOffer": [
+            {
+                "@type": "Offer",
+                "name": "Limited tee drops",
+                "availability": "https://schema.org/PreOrder"
+            },
+            {
+                "@type": "Offer",
+                "name": "Pop-up basecamp events",
+                "availability": "https://schema.org/InStoreOnly"
+            },
+            {
+                "@type": "Offer",
+                "name": "Group adventures",
+                "availability": "https://schema.org/InStoreOnly"
+            }
+        ]
+    }
+    </script>
 </head>
 <body>
 
     <!-- Navigation -->
-    <nav class="navbar" id="navbar">
+    <nav class="navbar" id="navbar" aria-label="Primary navigation">
         <div class="container">
             <div class="nav-wrapper">
                 <!-- Logo/Brand Name -->
-                <a href="#home" class="logo">
-                    <span class="logo-text">BRAND_NAME</span>
+                <a href="#home" class="logo" aria-label="AORO home">
+                    <span class="logo-text">AORO</span>
                 </a>
 
                 <!-- Desktop Navigation -->
                 <ul class="nav-menu" id="navMenu">
-                    <li><a href="#home" class="nav-link">Home</a></li>
                     <li><a href="#about" class="nav-link">About</a></li>
-                    <li><a href="#events" class="nav-link">Runs</a></li>
-                    <li><a href="#notify" class="nav-link nav-link-cta">Join Us</a></li>
+                    <li><a href="#standards" class="nav-link">Values</a></li>
+                    <li><a href="#find" class="nav-link">Find Us</a></li>
+                    <li><a href="#notify" class="nav-link nav-link-cta">Join</a></li>
                 </ul>
 
                 <!-- Mobile Menu Toggle -->
-                <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+                <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="navMenu">
                     <span class="hamburger-line"></span>
                     <span class="hamburger-line"></span>
                     <span class="hamburger-line"></span>
@@ -68,122 +135,122 @@
         <div class="container">
             <div class="hero-content fade-in-up">
                 <h1 class="hero-title">
-                    <span class="hero-title-top">RUN. COFFEE.</span>
-                    <span class="hero-title-main">FRIENDS.</span>
+                    <span class="hero-title-main">Pierce the Ordinary</span>
                 </h1>
-                <p class="hero-subtitle">Pop-up runs and coffee adventures across Manchester & London</p>
+                <p class="hero-subtitle">Where the crew meets the climb. Adventure-ready tees. Quality coffee. Unforgettable mates.</p>
                 <div class="hero-cta">
                     <a href="#notify" class="btn btn-primary">Join the Crew</a>
-                    <a href="#events" class="btn btn-secondary">See Runs</a>
+                    <a href="#find" class="btn btn-secondary">Next Pop-Up</a>
                 </div>
+                <ul class="hero-stats">
+                    <li>
+                        <span class="hero-stat-label">Limited Drops</span>
+                        <span class="hero-stat-value">Adventure-ready tees built to outlast every mission.</span>
+                    </li>
+                    <li>
+                        <span class="hero-stat-label">Pop-Up Basecamp</span>
+                        <span class="hero-stat-value">Part shop, part café, all community at every stop.</span>
+                    </li>
+                    <li>
+                        <span class="hero-stat-label">Group Adventures</span>
+                        <span class="hero-stat-value">Sunrise hikes, weekend summits, spontaneous missions.</span>
+                    </li>
+                </ul>
             </div>
         </div>
 
         <!-- Scroll Indicator -->
-        <div class="scroll-indicator">
+        <div class="scroll-indicator" aria-hidden="true">
             <span class="scroll-text">Scroll</span>
             <div class="scroll-line"></div>
         </div>
     </section>
 
-    <!-- About Section -->
+    <!-- Story Section -->
     <section id="about" class="about section-padding">
         <div class="container">
             <div class="about-content-story fade-in">
                 <div class="about-header">
                     <span class="section-label">Who We Are</span>
-                    <h2 class="section-title">Two Mates. One Idea.</h2>
+                    <h2 class="section-title">Adventure-ready tees. Quality coffee. Unforgettable mates.</h2>
                 </div>
 
                 <div class="about-story">
-                    <p class="lead">We're just two friends who got tired of running alone and sitting in coffee shops staring at laptops. So we started organizing pop-up runs around Manchester and London—nothing fancy, just good people, good coffee, and a few miles together.</p>
+                    <p class="lead">AORO is for those who'd rather be outside. Named after Aoraki—New Zealand's highest peak, meaning "Cloud Piercer"—we're building more than a brand. We're building a basecamp.</p>
 
-                    <p>What started as a way to get our mates moving turned into something bigger. Now we're bringing together runners of all levels who share our love for adventure, caffeine, and making new connections.</p>
+                    <p>Two mates started this between trail markers and coffee stops. Now it's your turn to join the climb. Expect limited gear that actually keeps up, coffee worth brewing twice, and a crew that shows up rain or shine.</p>
 
-                    <p>BRAND_NAME isn't about times or distances. It's about showing up, exploring your city, grabbing a coffee after, and maybe making a few friends along the way.</p>
-                </div>
-
-                <div class="about-values-simple">
-                    <div class="value-simple">
-                        <span class="value-icon">☕</span>
-                        <h4>Coffee First</h4>
-                        <p>Every run ends at a great coffee spot</p>
-                    </div>
-                    <div class="value-simple">
-                        <span class="value-icon">🏃</span>
-                        <h4>All Paces Welcome</h4>
-                        <p>Fast, slow, walking—we don't care</p>
-                    </div>
-                    <div class="value-simple">
-                        <span class="value-icon">🗺️</span>
-                        <h4>Urban Adventures</h4>
-                        <p>Discover hidden gems in your city</p>
-                    </div>
+                    <p>Every drop, every pop-up, every adventure is crafted to pierce the ordinary. If you're chasing higher ground, you're already one of us.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Runs Section -->
-    <section id="events" class="events section-padding bg-dark">
+    <section id="standards" class="values section-padding section-with-bg">
+        <div class="section-background">
+            <div class="section-image" style="background-image: url('/images/sections/values-bg.jpg')"></div>
+            <div class="section-overlay"></div>
+        </div>
         <div class="container">
             <div class="section-header fade-in">
-                <span class="section-label">Join Us</span>
-                <h2 class="section-title">Upcoming Runs</h2>
-                <p class="section-description">All paces welcome. Coffee included.</p>
+                <span class="section-label">What We Stand For</span>
+                <h2 class="section-title">Pierce the Ordinary</h2>
+                <p class="section-description">Two rules we live by: nothing average, and no one climbs alone.</p>
             </div>
 
-            <div class="events-grid-minimal">
-                <!-- Run 1 - Manchester -->
-                <article class="event-card-minimal fade-in">
-                    <div class="event-date-badge">
-                        <span class="date-month">SAT</span>
-                        <span class="date-day">14</span>
-                    </div>
-                    <div class="event-details">
-                        <h3>Manchester Morning Run</h3>
-                        <p class="event-location">📍 Northern Quarter, Manchester</p>
-                        <p class="event-description">8am start • 5K easy pace • Coffee at Foundation</p>
-                    </div>
+            <div class="values-grid">
+                <article class="value-card fade-in">
+                    <h3>Pierce the Ordinary</h3>
+                    <p>Life's too short for average gear and mediocre coffee. We make things worth having and experiences worth showing up for.</p>
                 </article>
 
-                <!-- Run 2 - London -->
-                <article class="event-card-minimal fade-in">
-                    <div class="event-date-badge">
-                        <span class="date-month">SUN</span>
-                        <span class="date-day">15</span>
-                    </div>
-                    <div class="event-details">
-                        <h3>London Sunday Social</h3>
-                        <p class="event-location">📍 Hackney, London</p>
-                        <p class="event-description">9am start • 7K along the canal • Coffee at E5 Bakehouse</p>
-                    </div>
+                <article class="value-card fade-in">
+                    <h3>Where the crew meets the climb</h3>
+                    <p>The summit's better with mates. Whether it's a mountain or Monday morning, we're in it together.</p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Culture Section -->
+    <section id="find" class="culture section-padding">
+        <div class="container">
+            <div class="section-header fade-in">
+                <span class="section-label">Find Us</span>
+                <h2 class="section-title">Where the crew meets the climb</h2>
+                <p class="section-description">Pop-ups, group missions, and café-fuelled hangs. Show up for the drop, stay for the crew.</p>
+            </div>
+
+            <div class="culture-grid">
+                <article class="culture-card fade-in">
+                    <h3>Pop-Up Events</h3>
+                    <p>Part shop, part basecamp, all community. Limited tees, fresh coffee, real conversations.</p>
+                    <ul class="culture-list" aria-label="Pop-up highlights">
+                        <li>Small-batch drops and collaborative capsules</li>
+                        <li>Pour-overs from our favourite roasters</li>
+                        <li>Basecamp stories, gear trials, and new mates</li>
+                    </ul>
                 </article>
 
-                <!-- Run 3 - Manchester -->
-                <article class="event-card-minimal fade-in">
-                    <div class="event-date-badge">
-                        <span class="date-month">WED</span>
-                        <span class="date-day">18</span>
-                    </div>
-                    <div class="event-details">
-                        <h3>Midweek Manchester</h3>
-                        <p class="event-location">📍 Castlefield, Manchester</p>
-                        <p class="event-description">6:30pm start • 5K social run • Drinks at Pollen</p>
-                    </div>
+                <article class="culture-card fade-in">
+                    <h3>Group Adventures</h3>
+                    <p>Sunrise hikes. Weekend summits. Spontaneous missions. Come solo, leave with a crew.</p>
+                    <ul class="culture-list" aria-label="Group adventure highlights">
+                        <li>Trail recces with local guides</li>
+                        <li>Weekend overnight missions</li>
+                        <li>Post-adventure debriefs over brews</li>
+                    </ul>
                 </article>
 
-                <!-- Run 4 - London -->
-                <article class="event-card-minimal fade-in">
-                    <div class="event-date-badge">
-                        <span class="date-month">SAT</span>
-                        <span class="date-day">21</span>
-                    </div>
-                    <div class="event-details">
-                        <h3>London Coffee Crawl Run</h3>
-                        <p class="event-location">📍 Shoreditch, London</p>
-                        <p class="event-description">10am start • 6K with coffee stops • Multi-café adventure</p>
-                    </div>
+                <article class="culture-card fade-in">
+                    <h3>Coffee &amp; Gear</h3>
+                    <p>Quality that moves with you. Fuel that keeps you going.</p>
+                    <ul class="culture-list" aria-label="Coffee and gear highlights">
+                        <li>Rotating roasters and brew recipes</li>
+                        <li>Adventure-ready layers and accessories</li>
+                        <li>Repair-first mindset to keep pieces in play</li>
+                    </ul>
                 </article>
             </div>
         </div>
@@ -194,9 +261,14 @@
         <div class="container">
             <div class="notify-wrapper">
                 <div class="notify-content fade-in">
-                    <span class="section-label">Join the Crew</span>
-                    <h2 class="section-title">Never Miss a Run</h2>
-                    <p class="lead">Get updates about upcoming runs, new routes, and coffee spots. We'll keep you in the loop about Manchester and London meetups.</p>
+                    <span class="section-label">Join the Cloud Piercers</span>
+                    <h2 class="section-title">Be first to know</h2>
+                    <p class="lead">Limited drops sell fast and missions fill even faster. Add your name and we’ll send the next coordinates straight to you.</p>
+                    <ul class="notify-highlights">
+                        <li>Limited tee drops</li>
+                        <li>Pop-up basecamp locations</li>
+                        <li>Group adventures and sunrise missions</li>
+                    </ul>
                 </div>
 
                 <!-- Netlify Form -->
@@ -211,7 +283,8 @@
                         </p>
 
                         <div class="form-header">
-                            <h3>Join the Crew</h3>
+                            <h3>Join AORO</h3>
+                            <p>Cloud Piercers get early intel on drops, pop-ups, and missions.</p>
                         </div>
 
                         <div class="form-group">
@@ -224,28 +297,34 @@
                             <input type="email" id="email" name="email" required placeholder="your@email.com">
                         </div>
 
-                        <div class="form-group">
-                            <label for="location">Which city?</label>
-                            <select id="location" name="location">
-                                <option value="">Select your city</option>
-                                <option value="manchester">Manchester</option>
-                                <option value="london">London</option>
-                                <option value="both">Both</option>
-                            </select>
-                        </div>
-
                         <button type="submit" class="btn btn-primary btn-block">Join the Crew</button>
 
-                        <p class="form-privacy">We respect your privacy. Unsubscribe anytime.</p>
+                        <p class="form-privacy">Zero spam. Just drop alerts, coordinates, and the occasional brew guide.</p>
                     </form>
 
                     <!-- Success Message -->
-                    <div class="form-success" id="formSuccess">
-                        <div class="success-icon">✓</div>
-                        <h3>You're In!</h3>
-                        <p>Welcome to the crew. We'll email you about the next run.</p>
+                    <div class="form-success" id="formSuccess" role="status">
+                        <div class="success-icon" aria-hidden="true">✓</div>
+                        <h3>You’re on the list</h3>
+                        <p>We’ll drop the next mission details straight to your inbox.</p>
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="origin" class="origin section-padding section-with-bg">
+        <div class="section-background">
+            <div class="section-image" style="background-image: url('/images/sections/values-bg.jpg')"></div>
+            <div class="section-overlay"></div>
+        </div>
+        <div class="container">
+            <div class="origin-content fade-in">
+                <span class="section-label">The Origin</span>
+                <h2 class="section-title">Aoraki: New Zealand's highest peak. Sacred mountain. Cloud Piercer.</h2>
+                <p class="section-description">Started by two mates—one Kiwi, one partner-in-climb—who kept talking about creating something real on the way up. AORO is what happened when we finally did.</p>
+                <p class="origin-paragraph">Limited drops. No compromises. Built for the journey.</p>
             </div>
         </div>
     </section>
@@ -255,31 +334,41 @@
         <div class="container">
             <div class="footer-content-minimal">
                 <div class="footer-brand">
-                    <h3 class="logo-text">BRAND_NAME</h3>
-                    <p>Run. Coffee. Friends.</p>
+                    <h3 class="logo-text">AORO</h3>
+                    <p>Pierce the ordinary.</p>
+                </div>
+
+                <div class="footer-meta">
+                    <p>Everywhere the crew meets the climb</p>
+                    <p><a href="mailto:hello@aoro.co">hello@aoro.co</a></p>
                 </div>
 
                 <div class="footer-social">
-                    <a href="#" aria-label="Instagram">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <a href="https://www.instagram.com/aoro.cloud" aria-label="Instagram" target="_blank" rel="noopener">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" role="img" aria-hidden="true">
                             <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
                         </svg>
                     </a>
-                    <a href="#" aria-label="Twitter">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <a href="https://www.tiktok.com/@aoro.cloud" aria-label="TikTok" target="_blank" rel="noopener">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" role="img" aria-hidden="true">
                             <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                        </svg>
+                    </a>
+                    <a href="https://www.strava.com/clubs/aoro" aria-label="Strava" target="_blank" rel="noopener">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" role="img" aria-hidden="true">
+                            <path d="M14.59 18.36l-2.59 4.64-2.59-4.64h5.18zm-2.59-18.36l-8 14h5l3-5.25L12 14h5l-8-14zm9 9h-3l-2 3.5 3.5 6.25L21 12z"/>
                         </svg>
                     </a>
                 </div>
             </div>
 
             <div class="footer-bottom">
-                <p>&copy; 2025 BRAND_NAME. All rights reserved.</p>
+                <p>&copy; 2025 AORO. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
     <!-- JavaScript -->
-    <script src="/js/main.js"></script>
+    <script src="/js/main.js" defer></script>
 </body>
 </html>

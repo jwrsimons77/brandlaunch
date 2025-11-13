@@ -1,5 +1,5 @@
 /**
- * BRAND_NAME - Main JavaScript
+ * AORO - Main JavaScript
  * Handles mobile menu, scroll animations, and smooth scrolling
  */
 
@@ -14,6 +14,8 @@ const navLinks = document.querySelectorAll('.nav-link');
 hamburger.addEventListener('click', () => {
     hamburger.classList.toggle('active');
     navMenu.classList.toggle('active');
+    const expanded = hamburger.classList.contains('active');
+    hamburger.setAttribute('aria-expanded', expanded);
 
     // Prevent body scroll when menu is open
     if (navMenu.classList.contains('active')) {
@@ -28,6 +30,7 @@ navLinks.forEach(link => {
     link.addEventListener('click', () => {
         hamburger.classList.remove('active');
         navMenu.classList.remove('active');
+        hamburger.setAttribute('aria-expanded', 'false');
         document.body.style.overflow = '';
     });
 });
@@ -37,6 +40,7 @@ document.addEventListener('click', (e) => {
     if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
         hamburger.classList.remove('active');
         navMenu.classList.remove('active');
+        hamburger.setAttribute('aria-expanded', 'false');
         document.body.style.overflow = '';
     }
 });
@@ -270,8 +274,8 @@ document.head.appendChild(style);
 // ===================================
 // CONSOLE WELCOME MESSAGE
 // ===================================
-console.log('%c🏋️ BRAND_NAME ', 'background: #FF4655; color: white; font-size: 20px; font-weight: bold; padding: 10px;');
-console.log('%cWelcome to BRAND_NAME! Interested in joining our development team? Reach out at hello@brandname.com', 'font-size: 12px; color: #666;');
+console.log('%c🏔️ AORO ', 'background: #0F1E21; color: #FFB347; font-size: 20px; font-weight: bold; padding: 10px;');
+console.log('%cWelcome to AORO. Keen to collaborate? Reach out at hello@aoro.co', 'font-size: 12px; color: #666;');
 
 // ===================================
 // PERFORMANCE MONITORING (Optional)
@@ -350,7 +354,7 @@ if (emailInput) {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
         if (email && !emailRegex.test(email)) {
-            this.style.borderColor = '#FF4655';
+            this.style.borderColor = '#FFB347';
         } else {
             this.style.borderColor = '';
         }
@@ -414,7 +418,7 @@ if (activeForm) {
 // INIT: Initialize all components
 // ===================================
 function init() {
-    console.log('🚀 BRAND_NAME initialized');
+    console.log('🚀 AORO initialized');
 
     // Add any initialization code here
     // For example: Initialize third-party libraries, set up event listeners, etc.

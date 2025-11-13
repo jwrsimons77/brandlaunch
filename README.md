@@ -1,6 +1,6 @@
-# BRAND_NAME - Fitness Lifestyle Website
+# AORO — Cloud Piercer Basecamp
 
-A modern, mobile-first fitness lifestyle brand website built for Netlify deployment. Inspired by the bold aesthetics of contemporary fitness communities like Sums Club and UVU Club.
+A modern, mobile-first brand experience for the AORO crew—limited tee drops, coffee-fuelled pop-ups, and mountain-ready storytelling. Built for Netlify deployment with SEO-ready content, structured data, and high-impact visuals that feel like the basecamp before the climb.
 
 ![Version](https://img.shields.io/badge/version-1.0.0-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
@@ -8,14 +8,14 @@ A modern, mobile-first fitness lifestyle brand website built for Netlify deploym
 
 ## ✨ Features
 
-- **Mobile-First Design** - Responsive across all devices (320px+)
-- **Bold, Modern Aesthetic** - Strong typography and minimalist design
-- **Smooth Animations** - Intersection Observer API for scroll animations
-- **Netlify Forms Integration** - Built-in email capture with spam protection
-- **Fast Loading** - Optimized images and efficient code
-- **SEO Friendly** - Semantic HTML and meta tags
-- **Accessible** - WCAG compliant with keyboard navigation support
-- **Zero Dependencies** - Pure HTML, CSS, and JavaScript
+- **Mobile-first layout** optimised for 320px+ with smooth, refined animations
+- **UVU-inspired art direction** using Inter typography with soft coral pink (#FF8B94) highlights
+- **Clean athletic aesthetic** with minimal shadows, refined spacing, and premium feel
+- **SEO upgrades** including rich copywriting, canonical tags, Twitter cards, and Brand JSON-LD structured data
+- **Values & origin storytelling** that deepens mythology and improves AI/search discovery
+- **Netlify Forms waitlist** with enhanced fields (pace, NZ cities) and accessible success feedback
+- **Performance-first build** using pure HTML/CSS/JS, preloaded hero imagery, and Intersection Observer animations
+- **Accessibility improvements** such as focus-visible styling, semantic landmarks, and ARIA-enhanced mobile navigation
 
 ## 📁 Project Structure
 
@@ -39,13 +39,13 @@ brandlaunch/
 
 ## 🎨 Key Sections
 
-1. **Hero Section** - Full-screen hero with video/image background
-2. **About Section** - Brand philosophy and core values
-3. **Events Section** - Upcoming pop-up events and experiences
-4. **Gallery Section** - Instagram-style community showcase
-5. **Join Section** - Membership form with Netlify Forms integration
-6. **Contact Section** - Contact info and social media links
-7. **Footer** - Site links and legal information
+1. **Hero** — Cloud-piercer headline, mission-forward CTAs, and adventure stats
+2. **About** — Origin story inspired by Aoraki with crew-first value pillars
+3. **Values** — “What we stand for” statements highlighting ethos and community
+4. **Find Us** — Pop-up events, group adventures, and coffee & gear touchpoints
+5. **Membership Waitlist** — Netlify-powered form with optional pace & city selectors
+6. **Origin** — Sacred mountain narrative anchoring the brand mythology
+7. **Footer** — Social links, contact details, and locale context
 
 ## 🚀 Quick Start - Netlify Deployment
 
@@ -71,7 +71,7 @@ brandlaunch/
    ```bash
    git init
    git add .
-   git commit -m "Initial commit: BRAND_NAME website"
+   git commit -m "Initial commit: AORO site"
    git branch -M main
    git remote add origin YOUR_REPO_URL
    git push -u origin main
@@ -141,14 +141,14 @@ If you need environment variables (for future integrations):
 
 ### Update Brand Name
 
-Use find-and-replace to update `BRAND_NAME` throughout the codebase:
+Rebranding? Use find-and-replace to update `AORO` throughout the codebase:
 
 ```bash
 # Using grep to find all instances
-grep -r "BRAND_NAME" .
+grep -r "AORO" .
 
 # Or use your code editor's find-and-replace feature
-# Find: BRAND_NAME
+# Find: AORO
 # Replace: Your Actual Brand Name
 ```
 
@@ -369,7 +369,7 @@ For issues or questions about deployment:
 ## 🎯 Next Steps
 
 1. ✅ Deploy to Netlify
-2. ✅ Replace BRAND_NAME with your actual brand name
+2. ✅ Replace AORO with your actual brand name (if you rebrand)
 3. ✅ Update colors and fonts
 4. ✅ Add your images
 5. ✅ Configure custom domain
