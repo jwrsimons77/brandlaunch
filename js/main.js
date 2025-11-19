@@ -173,6 +173,8 @@ const handleFormSuccess = () => {
 
 if (activeForm) {
     activeForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
         const submitButton = activeForm.querySelector('button[type="submit"]');
         const originalText = submitButton ? submitButton.textContent : null;
         if (submitButton) {
@@ -183,8 +185,6 @@ if (activeForm) {
         const isLocalEnv = ['localhost', '127.0.0.1'].includes(window.location.hostname);
 
         if (isLocalEnv) {
-            e.preventDefault();
-
             await new Promise((resolve) => setTimeout(resolve, 600));
 
             handleFormSuccess();
@@ -195,6 +195,31 @@ if (activeForm) {
             }
 
             return;
+        }
+
+        // Production: Submit to Netlify Forms via fetch
+        try {
+            const formData = new FormData(activeForm);
+
+            const response = await fetch('/', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: new URLSearchParams(formData).toString()
+            });
+
+            if (response.ok) {
+                handleFormSuccess();
+            } else {
+                showToast('Oops! Something went wrong. Please try again.');
+            }
+        } catch (error) {
+            console.error('Form submission error:', error);
+            showToast('Oops! Something went wrong. Please try again.');
+        } finally {
+            if (submitButton && originalText) {
+                submitButton.textContent = originalText;
+                submitButton.disabled = false;
+            }
         }
     });
 }
