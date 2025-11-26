@@ -142,24 +142,32 @@ const membershipForm = document.getElementById('membershipForm'); // Keep for ba
 const toastNotification = document.getElementById('toastNotification');
 
 const activeForm = notifyForm || membershipForm;
-const successCopy = 'Cloud Piercer status: confirmed. Watch your inbox for coordinates, sunrise missions, and brew intel.';
+const successCopy = 'Welcome to AORO — coordinates incoming.';
+const errorCopy = 'We hit a snag. Give it another shot in a moment.';
 let toastHideTimeout;
 
-const showToast = (message) => {
+const resetToastState = () => {
     if (!toastNotification) return;
 
+    toastNotification.classList.remove('toast-notification--success', 'toast-notification--error', 'show');
+};
+
+const showToast = (message, type = 'success') => {
+    if (!toastNotification) return;
+
+    resetToastState();
     toastNotification.textContent = message;
-    toastNotification.classList.add('show');
+    toastNotification.classList.add(`toast-notification--${type}`, 'show');
 
     clearTimeout(toastHideTimeout);
     toastHideTimeout = setTimeout(() => {
-        toastNotification.classList.remove('show');
+        resetToastState();
     }, 4800);
 };
 
 if (toastNotification) {
     toastNotification.addEventListener('click', () => {
-        toastNotification.classList.remove('show');
+        resetToastState();
         clearTimeout(toastHideTimeout);
     });
 }
@@ -168,11 +176,13 @@ const handleFormSuccess = () => {
     if (activeForm) {
         activeForm.reset();
     }
-    showToast(successCopy);
+    showToast(successCopy, 'success');
 };
 
 if (activeForm) {
     activeForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
         const submitButton = activeForm.querySelector('button[type="submit"]');
         const originalText = submitButton ? submitButton.textContent : null;
         if (submitButton) {
@@ -182,19 +192,53 @@ if (activeForm) {
 
         const isLocalEnv = ['localhost', '127.0.0.1'].includes(window.location.hostname);
 
-        if (isLocalEnv) {
-            e.preventDefault();
-
-            await new Promise((resolve) => setTimeout(resolve, 600));
-
-            handleFormSuccess();
-
+        const restoreSubmitState = () => {
             if (submitButton && originalText) {
                 submitButton.textContent = originalText;
                 submitButton.disabled = false;
             }
+        };
+
+        const formData = new FormData(activeForm);
+        const encodedFormData = new URLSearchParams();
+        formData.forEach((value, key) => {
+            encodedFormData.append(key, value);
+        });
+        if (!encodedFormData.has('form-name')) {
+            const formName = activeForm.getAttribute('name');
+            if (formName) {
+                encodedFormData.append('form-name', formName);
+            }
+        }
+
+        if (isLocalEnv) {
+            await new Promise((resolve) => setTimeout(resolve, 600));
+
+            handleFormSuccess();
+
+            restoreSubmitState();
 
             return;
+        }
+
+        try {
+            const action = activeForm.getAttribute('action') || '/';
+            const response = await fetch(action, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: encodedFormData.toString()
+            });
+
+            if (!response.ok) {
+                throw new Error(`Form submission failed with status ${response.status}`);
+            }
+
+            handleFormSuccess();
+        } catch (error) {
+            console.error('Form submission error:', error);
+            showToast(errorCopy, 'error');
+        } finally {
+            restoreSubmitState();
         }
     });
 }

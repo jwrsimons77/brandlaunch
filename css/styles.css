@@ -8,10 +8,10 @@
    Customize these for your brand
    =================================== */
 :root {
-    /* Primary Color Palette - Soft coral pink inspired by UVU */
-    --color-primary: #FF8B94;        /* Soft coral pink */
-    --color-primary-dark: #E6737C;
-    --color-primary-light: #FFB3BA;
+    /* Primary Color Palette - Vibrant orchid pink */
+    --color-primary: #F97BD2;        /* Vibrant orchid pink */
+    --color-primary-dark: #D469B2;
+    --color-primary-light: #FA9CDD;
 
     /* Neutral Colors - Clean athletic palette */
     --color-dark: #0A0A0A;
@@ -350,6 +350,10 @@ a:hover {
     border-bottom: none;
 }
 
+.navbar .container {
+    padding-left: calc(var(--container-padding) / 2);
+}
+
 .navbar.scrolled {
     background-color: rgba(255, 255, 255, 0.98);
     backdrop-filter: blur(10px);
@@ -364,18 +368,26 @@ a:hover {
     align-items: center;
 }
 
-.logo-text {
-    font-family: var(--font-display);
-    font-size: var(--font-size-2xl);
-    font-weight: 600;
-    color: var(--color-white);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    transition: color var(--transition-fast);
+.logo {
+    display: inline-flex;
+    align-items: center;
 }
 
-.navbar.scrolled .logo-text {
-    color: var(--color-dark);
+.logo-image {
+    display: block;
+    height: 32px;
+    width: auto;
+    transition: transform var(--transition-fast), filter var(--transition-fast);
+    filter: drop-shadow(0 8px 16px rgba(10, 10, 10, 0.2));
+}
+
+.logo-image:hover,
+.logo-image:focus {
+    transform: translateY(-1px);
+}
+
+.navbar.scrolled .logo-image {
+    filter: none;
 }
 
 .nav-menu {
@@ -1223,31 +1235,86 @@ a:hover {
 .toast-notification {
     position: fixed;
     left: 50%;
-    bottom: 2.5rem;
-    transform: translate(-50%, 120%);
-    background: linear-gradient(135deg, rgba(255, 139, 148, 0.95) 0%, rgba(255, 255, 255, 0.95) 100%);
-    color: var(--color-dark);
-    padding: var(--spacing-sm) var(--spacing-lg);
-    border-radius: var(--radius-full);
-    border: 1px solid rgba(255, 139, 148, 0.45);
-    box-shadow: 0 18px 36px rgba(10, 10, 10, 0.16);
-    font-size: var(--font-size-sm);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
+    bottom: 1.75rem;
+    transform: translate(-50%, calc(100% + 20px)) scale(0.9);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 0.55rem 1.35rem;
+    max-width: min(88%, 320px);
+    border-radius: 999px;
+    font-size: 0.78rem;
+    line-height: 1.4;
     font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: none;
+    color: var(--color-dark);
+    background: rgba(255, 255, 255, 0.65);
+    border: 1px solid rgba(15, 30, 33, 0.08);
+    box-shadow: 0 18px 32px rgba(10, 10, 10, 0.12);
+    backdrop-filter: blur(14px);
     opacity: 0;
     pointer-events: none;
     z-index: calc(var(--z-fixed) + 2);
-    transition: transform var(--transition-base), opacity var(--transition-base);
-    max-width: min(90%, 520px);
-    text-align: center;
-    backdrop-filter: blur(12px);
+    transition:
+        transform 280ms cubic-bezier(0.24, 0.82, 0.25, 1.12),
+        opacity 220ms ease;
+}
+
+.toast-notification::before {
+    content: '';
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.65rem;
+    height: 1.65rem;
+    border-radius: 999px;
+    font-size: 0.9rem;
+    flex-shrink: 0;
+    background: rgba(15, 30, 33, 0.08);
+    color: var(--color-dark);
+}
+
+.toast-notification.toast-notification--success {
+    background: rgba(255, 255, 255, 0.78);
+    border-color: rgba(76, 201, 240, 0.38);
+    box-shadow: 0 18px 28px rgba(76, 201, 240, 0.16);
+}
+
+.toast-notification.toast-notification--success::before {
+    content: '✦';
+    background: rgba(76, 201, 240, 0.18);
+    color: #02687a;
+}
+
+.toast-notification.toast-notification--error {
+    background: rgba(255, 255, 255, 0.78);
+    border-color: rgba(247, 82, 111, 0.38);
+    box-shadow: 0 18px 28px rgba(247, 82, 111, 0.18);
+}
+
+.toast-notification.toast-notification--error::before {
+    content: '!';
+    background: rgba(247, 82, 111, 0.18);
+    color: #84252f;
+    font-weight: 700;
 }
 
 .toast-notification.show {
-    transform: translate(-50%, 0);
+    transform: translate(-50%, 0) scale(1);
     opacity: 1;
     pointer-events: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .toast-notification {
+        transition: opacity 200ms ease;
+        transform: translate(-50%, calc(100% + 20px));
+    }
+
+    .toast-notification.show {
+        transform: translate(-50%, 0);
+    }
 }
 
 /* ===================================
@@ -1437,12 +1504,10 @@ a:hover {
     margin-bottom: var(--spacing-xl);
 }
 
-.footer-brand h3 {
-    color: var(--color-dark);
+.footer-brand .logo-image {
+    height: 34px;
+    width: auto;
     margin-bottom: var(--spacing-sm);
-    font-size: var(--font-size-lg);
-    font-weight: 600;
-    letter-spacing: 0.1em;
 }
 
 .footer-brand p {
