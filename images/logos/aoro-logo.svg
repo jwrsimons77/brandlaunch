@@ -1,9 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 120" role="img" aria-labelledby="title">
-  <title id="title">AORO logo</title>
-  <g fill="#F97BD2">
-    <path fill-rule="evenodd" d="M66 6 18 114h22l18-36v27l14 3.2-3.2 21.4 19.4 12.4h20L66 6Zm.1 37.4-10.8 20.9h20.7L66.1 43.4Z"/>
-    <path fill-rule="evenodd" d="M166 18c-31.4 0-57 25.6-57 57s25.6 57 57 57 57-25.6 57-57-25.6-57-57-57Zm0 92.6c-19.6 0-35.6-16-35.6-35.6S146.4 39.4 166 39.4s35.6 16 35.6 35.6-16 35.6-35.6 35.6Z"/>
-    <path d="M238 18h38.8c30.2 0 52.2 18 52.2 44.5 0 18.6-10.4 32.6-26.6 39.8l29 41.7H301l-27.2-39h-15.8v39h-21V18Zm21 19.6v39h16.2c15.2 0 24.6-8.4 24.6-19.5 0-11.1-9.4-19.5-24.6-19.5H259Z"/>
-    <path fill-rule="evenodd" d="M380 18c-31.4 0-57 25.6-57 57s25.6 57 57 57 57-25.6 57-57-25.6-57-57-57Zm0 92.6c-19.6 0-35.6-16-35.6-35.6S360.4 39.4 380 39.4c19.6 0 35.6 16 35.6 35.6 0 19.6-16 35.6-35.6 35.6Z"/>
-  </g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 200" role="img" aria-labelledby="title">
+  <title id="title">AORO wordmark</title>
+  <rect width="800" height="200" fill="none"/>
+  <text x="50%" y="55%" text-anchor="middle" dominant-baseline="middle"
+        font-family="Inter, 'Arial Black', sans-serif"
+        font-size="150" font-weight="700" letter-spacing="0.12em"
+        fill="#F97BD2">AORO</text>
 </svg>
