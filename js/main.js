@@ -233,6 +233,34 @@ if (activeForm) {
                 throw new Error(`Form submission failed with status ${response.status}`);
             }
 
+            const nameValue = formData.get('name');
+            const emailValue = formData.get('email');
+
+            if (nameValue && emailValue) {
+                const functionResponse = await fetch('/.netlify/functions/form-submission', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        data: {
+                            name: nameValue,
+                            email: emailValue
+                        }
+                    })
+                });
+
+                if (!functionResponse.ok) {
+                    let errorDetails = {};
+                    try {
+                        errorDetails = await functionResponse.json();
+                    } catch (parseError) {
+                        // ignore parse errors
+                    }
+                    throw new Error(errorDetails.error || `Notify function failed with status ${functionResponse.status}`);
+                }
+            } else {
+                console.warn('Notify form missing name or email; skipping function trigger.');
+            }
+
             handleFormSuccess();
         } catch (error) {
             console.error('Form submission error:', error);

@@ -5,11 +5,20 @@ exports.handler = async (event) => {
   }
 
   try {
-    const data = JSON.parse(event.body);
+    const rawBody = event.body ? JSON.parse(event.body) : {};
+    const submissionData = rawBody.payload?.data || rawBody.data || rawBody;
+
+    if (!submissionData || typeof submissionData !== 'object') {
+      throw new Error('Invalid submission payload');
+    }
 
     // Extract form data
-    const name = data.payload.data.name;
-    const email = data.payload.data.email;
+    const name = submissionData.name;
+    const email = submissionData.email;
+
+    if (!name || !email) {
+      throw new Error('Missing required form fields');
+    }
 
     // Default HTML email (used if template ID not provided)
     const htmlEmail = `
