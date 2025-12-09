@@ -59,7 +59,7 @@
 # Form settings
 [build.environment]
   # Environment variables (if needed)
-  # NODE_VERSION = "18"
+  NODE_VERSION = "18"
 
 # Plugin configuration (optional - uncomment to enable specific plugins)
 # Netlify Forms work automatically without plugins for static sites
