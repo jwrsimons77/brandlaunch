@@ -86,7 +86,7 @@ exports.handler = async (event) => {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        from: 'AORO <onboarding@resend.dev>',
+        from: 'AORO <hello@aoro.co.uk>',
         to: email,
         subject: 'Thanks for joining the climb',
         html: htmlEmail
@@ -98,6 +98,12 @@ exports.handler = async (event) => {
     if (!response.ok) {
       throw new Error(result.message || 'Failed to send email');
     }
+
+    console.log('Email sent via Resend', {
+      status: response.status,
+      id: result.id || null,
+      to: email,
+    });
 
     return {
       statusCode: 200,
