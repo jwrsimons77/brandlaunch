@@ -154,7 +154,7 @@
                 <h1 class="sr-only">AORO Drop 001 · Cloud Piercer Tee</h1>
                 <div class="hero-drop fade-in-up">
                     <article class="hero-drop-card">
-                        <div class="hero-drop-artwork">
+                        <div class="hero-drop-artwork" role="button" tabindex="0" aria-label="View a larger image of the Cloud Piercer Tee from Drop 001">
                             <img src="/images/drops/cloud-piercer-tee.jpg" alt="Front and back of the Cloud Piercer Tee from Drop 001">
                         </div>
                         <div class="hero-drop-body">
@@ -304,6 +304,17 @@
             </div>
         </div>
     </footer>
+
+    <!-- Hero image modal -->
+    <div class="image-modal" id="heroImageModal" aria-hidden="true">
+        <div class="image-modal__backdrop"></div>
+        <div class="image-modal__dialog" role="dialog" aria-modal="true" aria-label="Larger view of the Cloud Piercer Tee from Drop 001">
+            <button class="image-modal__close" type="button" aria-label="Close image view">
+                ×
+            </button>
+            <img src="/images/drops/cloud-piercer-tee.jpg" alt="Front and back of the Cloud Piercer Tee from Drop 001" class="image-modal__img">
+        </div>
+    </div>
 
     <!-- JavaScript -->
     <div id="toastNotification" class="toast-notification" role="status" aria-live="assertive"></div>

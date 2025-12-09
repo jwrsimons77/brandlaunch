@@ -300,6 +300,64 @@ galleryItems.forEach(item => {
 });
 
 // ===================================
+// HERO IMAGE MODAL
+// ===================================
+const heroArtwork = document.querySelector('.hero-drop-artwork');
+const heroImageModal = document.getElementById('heroImageModal');
+
+if (heroArtwork && heroImageModal) {
+    const heroArtworkImg = heroArtwork.querySelector('img');
+    const heroModalImg = heroImageModal.querySelector('.image-modal__img');
+    const heroModalClose = heroImageModal.querySelector('.image-modal__close');
+    const heroModalBackdrop = heroImageModal.querySelector('.image-modal__backdrop');
+
+    const openHeroModal = () => {
+        if (heroArtworkImg && heroModalImg) {
+            heroModalImg.src = heroArtworkImg.src;
+            heroModalImg.alt = heroArtworkImg.alt;
+        }
+
+        heroImageModal.classList.add('image-modal--open');
+        heroImageModal.setAttribute('aria-hidden', 'false');
+    };
+
+    const closeHeroModal = () => {
+        heroImageModal.classList.remove('image-modal--open');
+        heroImageModal.setAttribute('aria-hidden', 'true');
+        heroArtwork.focus();
+    };
+
+    const handleHeroArtworkActivate = (event) => {
+        if (event.type === 'keydown') {
+            const key = event.key;
+            if (key !== 'Enter' && key !== ' ') {
+                return;
+            }
+            event.preventDefault();
+        }
+
+        openHeroModal();
+    };
+
+    heroArtwork.addEventListener('click', handleHeroArtworkActivate);
+    heroArtwork.addEventListener('keydown', handleHeroArtworkActivate);
+
+    if (heroModalClose) {
+        heroModalClose.addEventListener('click', closeHeroModal);
+    }
+
+    if (heroModalBackdrop) {
+        heroModalBackdrop.addEventListener('click', closeHeroModal);
+    }
+
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && heroImageModal.classList.contains('image-modal--open')) {
+            closeHeroModal();
+        }
+    });
+}
+
+// ===================================
 // PARALLAX EFFECT FOR HERO (Optional)
 // ===================================
 const heroBackground = document.querySelector('.hero-background');
