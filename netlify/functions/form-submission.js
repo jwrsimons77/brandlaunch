@@ -22,8 +22,10 @@ exports.handler = async (event) => {
         from: 'AORO <hello@aoro.co.uk>',
         to: email,
         subject: 'Thanks for joining the climb',
-        template: 'welcome-cloud-piercers',
-        locals: { name }
+        template: {
+          name: 'welcome-cloud-piercers',
+          data: { name }
+        }
       })
     });
 
