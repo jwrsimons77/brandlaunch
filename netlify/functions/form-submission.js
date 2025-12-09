@@ -140,6 +140,35 @@ exports.handler = async (event) => {
       to: email,
     });
 
+    // Add contact to Resend audience if configured
+    const audienceId = process.env.RESEND_AUDIENCE_ID;
+    if (audienceId) {
+      try {
+        const contactResponse = await fetch(`https://api.resend.com/audiences/${audienceId}/contacts`, {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${process.env.RESEND_API_KEY}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            email,
+            first_name: name
+          })
+        });
+
+        if (!contactResponse.ok) {
+          const contactResult = await contactResponse.json();
+          console.error('Failed to add contact to Resend audience', contactResult);
+        } else {
+          console.log('Contact added to Resend audience', { email, audienceId });
+        }
+      } catch (audienceError) {
+        console.error('Error adding contact to Resend audience', audienceError);
+      }
+    } else {
+      console.warn('RESEND_AUDIENCE_ID not configured; skipping contact save.');
+    }
+
     return {
       statusCode: 200,
       body: JSON.stringify({ message: 'Email sent successfully' })
