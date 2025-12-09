@@ -8,17 +8,17 @@
    Customize these for your brand
    =================================== */
 :root {
-    /* Primary Color Palette - Vibrant orchid pink */
-    --color-primary: #F97BD2;        /* Vibrant orchid pink */
-    --color-primary-dark: #D469B2;
-    --color-primary-light: #FA9CDD;
+    /* Primary Color Palette - AORO pink */
+    --color-primary: #FF8B94;        /* Brand primary pink */
+    --color-primary-dark: #E46F78;
+    --color-primary-light: #FFC2C7;
 
     /* Neutral Colors - Clean athletic palette */
     --color-dark: #0A0A0A;
     --color-dark-secondary: #1A1A1A;
     --color-gray: rgba(10, 10, 10, 0.65);
     --color-gray-light: #CCCCCC;
-    --color-light: #F8F8F8;
+    --color-light: #F5F5F5;
     --color-white: #FFFFFF;
 
     /* Accent Colors */
@@ -261,13 +261,25 @@ a:hover {
     display: none !important;
 }
 
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
 /* ===================================
    ANIMATIONS
    =================================== */
 @keyframes fadeInUp {
     from {
         opacity: 0;
-        transform: translateY(30px);
+        transform: translateY(18px);
     }
     to {
         opacity: 1;
@@ -320,12 +332,14 @@ a:hover {
 /* Fade in animations triggered by JavaScript */
 .fade-in {
     opacity: 0;
-    animation: fadeIn 0.8s ease forwards;
+    animation: fadeIn 0.9s ease forwards;
+    animation-play-state: paused;
 }
 
 .fade-in-up {
     opacity: 0;
-    animation: fadeInUp 0.8s ease forwards;
+    animation: fadeInUp 0.9s ease forwards;
+    animation-play-state: paused;
 }
 
 .fade-in.visible,
@@ -342,12 +356,62 @@ a:hover {
     left: 0;
     right: 0;
     z-index: var(--z-fixed);
-    background-color: transparent;
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-    transition: background-color var(--transition-base), box-shadow var(--transition-base);
+    background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    transition:
+        background-color var(--transition-base),
+        box-shadow var(--transition-base),
+        border-color var(--transition-base);
     padding: var(--spacing-sm) 0;
-    border-bottom: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* Brand marquee (inspired by SUMS review strip) */
+.brand-marquee {
+    position: relative;
+    z-index: var(--z-sticky);
+    background-color: var(--color-dark);
+    color: var(--color-light);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    overflow: hidden;
+    font-size: var(--font-size-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    padding-block: 0.4rem;
+    margin-top: 72px; /* mobile: clear full nav height so strip starts just below */
+}
+
+@media (min-width: 768px) {
+    .brand-marquee {
+        margin-top: 60px;
+    }
+}
+
+.brand-marquee-track {
+    display: inline-flex;
+    align-items: center;
+    gap: 2rem;
+    white-space: nowrap;
+    padding-inline: 1.5rem;
+    animation: marqueeSlide 28s linear infinite;
+}
+
+.brand-marquee-item {
+    opacity: 0.8;
+}
+
+.brand-marquee:hover .brand-marquee-track {
+    animation-play-state: paused;
+}
+
+@keyframes marqueeSlide {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
 }
 
 .navbar .container {
@@ -355,11 +419,9 @@ a:hover {
 }
 
 .navbar.scrolled {
-    background-color: rgba(255, 255, 255, 0.98);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.06);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    background-color: rgba(0, 0, 0, 0.82);
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.6);
+    border-bottom-color: rgba(255, 255, 255, 0.06);
 }
 
 .nav-wrapper {
@@ -410,7 +472,7 @@ a:hover {
 }
 
 .navbar.scrolled .nav-link {
-    color: var(--color-dark);
+    color: var(--color-white);
 }
 
 .nav-link::after {
@@ -425,7 +487,7 @@ a:hover {
 }
 
 .nav-link:hover {
-    color: var(--color-primary);
+    color: var(--color-primary-light);
 }
 
 .nav-link:hover::after {
@@ -470,7 +532,7 @@ a:hover {
 }
 
 .navbar.scrolled .hamburger-line {
-    background-color: var(--color-dark);
+    background-color: var(--color-white);
 }
 
 .hamburger.active .hamburger-line {
@@ -589,11 +651,12 @@ a:hover {
 .hero {
     position: relative;
     min-height: 100vh;
+    padding: clamp(4rem, 8vw, 6rem) 0 clamp(3rem, 7vw, 5.5rem);
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    color: var(--color-white);
+    color: var(--color-dark);
 }
 
 .hero-background {
@@ -603,16 +666,20 @@ a:hover {
     width: 100%;
     height: 100%;
     z-index: -1;
+    overflow: hidden;
 }
 
 .hero-video,
 .hero-image {
+    position: absolute;
+    inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
     background-size: cover;
     background-position: center;
     background-color: var(--color-dark);
+    transform: scale(1.02);
 }
 
 .hero-overlay {
@@ -621,26 +688,43 @@ a:hover {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, rgba(10, 10, 10, 0.4) 0%, rgba(10, 10, 10, 0.6) 100%);
+    /* Subtle dark tint so the mountain photo stays visible but cinematic */
+    background: linear-gradient(
+        135deg,
+        rgba(6, 10, 12, 0.7) 0%,
+        rgba(6, 10, 12, 0.45) 35%,
+        rgba(6, 10, 12, 0.25) 70%,
+        rgba(6, 10, 12, 0.15) 100%
+    );
+    z-index: 1;
 }
 
 .hero-content {
     position: relative;
-    z-index: 1;
-    text-align: center;
-    padding: var(--spacing-lg);
-    padding-top: 120px;
+    z-index: 2;
+    text-align: left;
+    max-width: 1280px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 clamp(1.5rem, 5vw, 3rem);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: clamp(1.75rem, 3.5vw, 2.75rem);
 }
 
 @media (max-width: 768px) {
     .hero {
         align-items: flex-start;
-        padding-top: 0;
+        /* even tighter top padding so the floating card sits a touch higher */
+        padding: clamp(1rem, 4.5vw, 1.75rem) 0 clamp(2.5rem, 8vw, 4rem);
     }
 
     .hero-content {
-        padding-top: 0;
-        margin-top: 95px;
+        /* small offset to clear nav + marquee, but minimise empty sky */
+        margin-top: 10px;
+        padding-left: clamp(1rem, 5vw, 1.5rem);
+        padding-right: clamp(1rem, 5vw, 1.5rem);
     }
 
     .hero-subtitle {
@@ -666,7 +750,8 @@ a:hover {
 
 @media (max-width: 480px) {
     .hero-content {
-        margin-top: 85px;
+        /* keep consistent with general mobile spacing, but tighter to marquee */
+        margin-top: 10px;
         padding-left: var(--spacing-md);
         padding-right: var(--spacing-md);
     }
@@ -778,6 +863,200 @@ a:hover {
     color: var(--color-white);
 }
 
+.hero-drop {
+    margin-top: clamp(1.75rem, 4.5vw, 3rem);
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding-inline: clamp(1rem, 4vw, 2rem);
+}
+
+.hero-drop-card {
+    display: grid;
+    /* Give the artwork more space versus the copy, especially on desktop */
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.9fr);
+    gap: clamp(1.5rem, 3.5vw, 2.75rem);
+    width: min(94vw, 1180px);
+    padding: clamp(1.75rem, 4vw, 2.75rem);
+    border-radius: 32px;
+    background: #ffffff;
+    border: 1px solid rgba(10, 10, 10, 0.04);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.18);
+    color: var(--color-dark);
+    backdrop-filter: blur(18px);
+    align-items: center;
+    justify-items: center;
+    margin: 0 auto;
+    isolation: isolate;
+}
+
+.hero-drop-artwork {
+    position: relative;
+    border-radius: 30px;
+    overflow: hidden;
+    width: 100%;
+    aspect-ratio: 4 / 4.2;
+    /* Taller container and tighter padding so the tee artwork feels larger */
+    min-height: clamp(420px, 55vw, 720px);
+    padding: clamp(0.6rem, 1.2vw, 1rem);
+    max-width: 680px;
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.18);
+    background: #f7f7f7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-drop-artwork img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+    filter: drop-shadow(0 18px 32px rgba(0, 0, 0, 0.35));
+}
+
+.hero-drop-body {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(0.9rem, 2.2vw, 1.5rem);
+    text-align: left;
+    max-width: 520px;
+    width: 100%;
+}
+
+.hero-drop-body .section-label {
+    margin-bottom: 0;
+    color: var(--color-primary);
+    letter-spacing: 0.16em;
+}
+
+.hero-drop-title {
+    font-size: clamp(2.3rem, 5vw, 3.3rem);
+    color: var(--color-dark);
+    margin-bottom: 0.2rem;
+    letter-spacing: -0.02em;
+}
+
+.hero-drop-summary {
+    margin-bottom: 0.25rem;
+    color: var(--color-gray);
+}
+
+.hero-drop-meta {
+    font-size: 0.95rem;
+    color: rgba(10, 10, 10, 0.6);
+}
+
+.hero-drop-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    list-style: none;
+    padding: 0;
+    margin: 0.25rem 0 0.5rem;
+    justify-content: flex-start;
+}
+
+.hero-drop-tags li {
+    font-size: var(--font-size-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    padding: 0.35rem 0.9rem;
+    border-radius: 999px;
+    border: 1px solid rgba(10, 10, 10, 0.12);
+    background-color: #ffffff;
+}
+
+.hero-drop-btn {
+    align-self: flex-start;
+    padding-inline: calc(var(--spacing-md) * 1.5);
+    box-shadow: 0 12px 28px rgba(255, 139, 148, 0.46);
+}
+
+@media (min-width: 1200px) {
+    .hero-drop {
+        padding-inline: clamp(1.5rem, 4vw, 3rem);
+    }
+
+    .hero-drop-card {
+        width: min(90vw, 1260px);
+        gap: clamp(2.2rem, 4vw, 3.4rem);
+    }
+}
+
+@media (max-width: 992px) {
+    .hero-drop {
+        padding-inline: var(--spacing-md);
+    }
+
+    .hero-drop-card {
+        grid-template-columns: 1fr;
+        text-align: center;
+        /* Slightly tighter gap so the artwork fills more of the viewport */
+        gap: clamp(1.25rem, 4vw, 2rem);
+        width: min(96vw, 820px);
+        margin: 0 auto;
+    }
+
+    .hero-drop-artwork {
+        max-width: min(100%, 720px);
+        margin: 0 auto;
+        aspect-ratio: 4 / 4.2;
+        min-height: clamp(380px, 80vw, 640px);
+    }
+
+    .hero-drop-body {
+        text-align: center;
+        align-items: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-drop {
+        padding-inline: var(--spacing-sm);
+        margin-top: 0.5rem;
+    }
+
+    /* Tighter hero card + image on mobile so it doesn't feel full-screen */
+    .hero-drop-card {
+        border-radius: 24px;
+        padding: 1.25rem 1.25rem 1.75rem;
+    }
+
+    .hero-drop-artwork {
+        aspect-ratio: 4 / 3;
+        min-height: clamp(260px, 60vw, 360px);
+        padding: 0.5rem;
+    }
+
+    .hero-drop-body {
+        align-items: center;
+    }
+
+    .hero-drop-tags {
+        justify-content: center;
+    }
+
+    .hero-drop-btn {
+        align-self: center;
+        width: 100%;
+        max-width: 280px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-drop {
+        /* match tablet spacing so the card sits closer to the banner */
+        margin-top: 0.5rem;
+        gap: var(--spacing-md);
+    }
+
+    .hero-drop-btn {
+        width: 100%;
+    }
+}
+
 /* Scroll Indicator */
 .scroll-indicator {
     display: none;
@@ -826,7 +1105,7 @@ a:hover {
 }
 
 .section-title {
-    font-size: clamp(1.75rem, 6vw, 2.5rem);
+    font-size: clamp(2rem, 7vw, 3rem);
     margin-bottom: var(--spacing-md);
     font-weight: 600;
 }
@@ -1701,6 +1980,158 @@ a:hover {
     margin: 0;
     font-size: var(--font-size-sm);
     line-height: 1.5;
+}
+
+/* ===================================
+   DROP 001 FEATURE
+   =================================== */
+.drop {
+    position: relative;
+    background: linear-gradient(180deg, rgba(15, 32, 39, 0.92) 0%, rgba(32, 61, 71, 0.9) 100%);
+    overflow: hidden;
+}
+
+.drop::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(70% 100% at 0% 0%, rgba(249, 123, 210, 0.12) 0%, rgba(249, 123, 210, 0) 70%);
+    pointer-events: none;
+}
+
+.drop .container {
+    position: relative;
+}
+
+.drop-wrapper {
+    position: relative;
+    display: flex;
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: center;
+}
+
+.drop-media {
+    flex: 1.1;
+    min-height: clamp(320px, 48vw, 420px);
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 24px 48px rgba(12, 26, 33, 0.35);
+}
+
+.drop-media::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(140deg, rgba(15, 32, 39, 0.1) 0%, rgba(15, 32, 39, 0.6) 75%);
+}
+
+.drop-media-image {
+    position: absolute;
+    inset: 0;
+    background-image: url('/images/drops/cloud-piercer-tee.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #0f2027;
+    transform: scale(1.02);
+}
+
+.drop-content {
+    flex: 0.9;
+    color: #f6f6f6;
+    max-width: 520px;
+}
+
+.drop-content .section-label {
+    color: #f97bd2;
+}
+
+.drop-content .section-title {
+    color: #ffffff;
+    margin-bottom: 1rem;
+}
+
+.drop-content .lead {
+    color: rgba(255, 255, 255, 0.85);
+    margin-bottom: 1rem;
+}
+
+.drop-meta {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.95rem;
+    margin-bottom: 2rem;
+    letter-spacing: 0.02em;
+}
+
+.drop-highlights {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: var(--spacing-md);
+    margin-bottom: 2.5rem;
+}
+
+.drop-highlight {
+    background: rgba(10, 22, 28, 0.55);
+    border: 1px solid rgba(249, 123, 210, 0.2);
+    border-radius: 18px;
+    padding: var(--spacing-md);
+    box-shadow: 0 18px 32px rgba(10, 22, 28, 0.35);
+    backdrop-filter: blur(12px);
+}
+
+.drop-highlight h3 {
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: #f97bd2;
+    margin-bottom: 0.5rem;
+}
+
+.drop-highlight p {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.78);
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.drop .btn-primary {
+    background-color: #f97bd2;
+    color: #0f2027;
+    border-color: transparent;
+    box-shadow: 0 12px 24px rgba(249, 123, 210, 0.3);
+}
+
+.drop .btn-primary:hover,
+.drop .btn-primary:focus-visible {
+    background-color: #fa9cdd;
+    color: #0f2027;
+}
+
+@media (max-width: 992px) {
+    .drop-wrapper {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .drop-media {
+        width: 100%;
+    }
+
+    .drop-content {
+        max-width: none;
+    }
+
+    .drop .btn-primary {
+        width: 100%;
+        max-width: 320px;
+    }
+}
+
+@media (max-width: 600px) {
+    .hero-drop-media {
+        min-height: 220px;
+    }
 }
 
 /* ===================================
