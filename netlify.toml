@@ -5,6 +5,7 @@
 [build]
   # The directory to publish (root directory since this is a static site)
   publish = "."
+  functions = "netlify/functions"
 
   # No build command needed for static HTML site
   # If you add a build process later, uncomment and modify:
