@@ -173,8 +173,9 @@ a:hover {
     padding: 0 var(--container-padding);
 }
 
+/* MOBILE-FIRST: Reduced vertical spacing for better mobile flow */
 .section-padding {
-    padding: var(--spacing-3xl) 0;
+    padding: var(--spacing-2xl) 0; /* 4rem (64px) on mobile, lighter feel */
 }
 
 #notify.section-padding {
@@ -1137,7 +1138,7 @@ a:hover {
    =================================== */
 .section-header {
     text-align: center;
-    margin-bottom: var(--spacing-2xl);
+    margin-bottom: var(--spacing-xl); /* MOBILE: Reduced from 2xl to xl for tighter flow */
 }
 
 .section-label {
@@ -1183,9 +1184,10 @@ a:hover {
 /* ===================================
    ABOUT SECTION
    =================================== */
+/* MOBILE: Single column with reduced gap */
 .about-content {
     display: grid;
-    gap: var(--spacing-xl);
+    gap: var(--spacing-lg); /* Reduced from xl to lg for mobile */
 }
 
 .about-intro {
@@ -1902,14 +1904,14 @@ a:hover {
 .footer {
     background-color: var(--color-light);
     color: var(--color-dark);
-    padding: var(--spacing-2xl) 0 var(--spacing-lg);
+    padding: var(--spacing-xl) 0 var(--spacing-md); /* MOBILE: Reduced top/bottom padding */
     border-top: 1px solid rgba(0, 0, 0, 0.06);
 }
 
 .footer-content {
     display: grid;
-    gap: var(--spacing-xl);
-    margin-bottom: var(--spacing-xl);
+    gap: var(--spacing-md); /* MOBILE: Reduced gap for tighter flow */
+    margin-bottom: var(--spacing-lg); /* MOBILE: Reduced bottom margin */
 }
 
 .footer-brand .logo-image {
@@ -2273,11 +2275,11 @@ a:hover {
 
 .about-header {
     text-align: center;
-    margin-bottom: var(--spacing-xl);
+    margin-bottom: var(--spacing-lg); /* MOBILE: Reduced spacing for tighter flow */
 }
 
 .about-story {
-    margin-bottom: var(--spacing-2xl);
+    margin-bottom: var(--spacing-xl); /* MOBILE: Reduced from 2xl to xl */
 }
 
 .about-story p {
@@ -2334,9 +2336,10 @@ a:hover {
 /* ===================================
    VALUES SECTION
    =================================== */
+/* MOBILE: Single column with optimized spacing */
 .values-grid {
     display: grid;
-    gap: var(--spacing-lg);
+    gap: var(--spacing-md); /* MOBILE: Reduced from lg to md for tighter stacking */
     max-width: 800px;
     margin: 0 auto;
 }
@@ -2345,7 +2348,7 @@ a:hover {
     background-color: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: var(--radius-md);
-    padding: var(--spacing-xl);
+    padding: var(--spacing-lg); /* MOBILE: Reduced from xl to lg for less bulk */
     color: var(--color-white);
     box-shadow: none;
     backdrop-filter: blur(10px);
@@ -2513,9 +2516,10 @@ a:hover {
 /* ===================================
    NOTIFY SECTION (Replaces Join)
    =================================== */
+/* MOBILE: Single column with optimized gap */
 .notify-wrapper {
     display: grid;
-    gap: var(--spacing-xl);
+    gap: var(--spacing-lg); /* MOBILE: Reduced from xl for tighter vertical flow */
     align-items: start;
 }
 
@@ -2525,7 +2529,7 @@ a:hover {
 
 .notify-form {
     background-color: var(--color-white);
-    padding: var(--spacing-xl);
+    padding: var(--spacing-lg); /* MOBILE: Reduced padding for less bulk */
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-lg);
 }
@@ -2576,6 +2580,11 @@ a:hover {
         --font-size-4xl: 3rem;      /* 48px */
         --font-size-5xl: 4rem;      /* 64px */
         --font-size-6xl: 5rem;      /* 80px */
+    }
+
+    /* TABLET: Restore fuller section padding */
+    .section-padding {
+        padding: var(--spacing-3xl) 0; /* 6rem (96px) on tablet+ */
     }
 
     /* Navigation */
@@ -2630,10 +2639,34 @@ a:hover {
     .about-content {
         grid-template-columns: 1fr 1fr;
         align-items: center;
+        gap: var(--spacing-xl); /* TABLET: Restore fuller gap */
     }
 
     .about-image {
         height: 600px;
+    }
+
+    /* Section headers */
+    .section-header {
+        margin-bottom: var(--spacing-2xl); /* TABLET: Restore fuller margin */
+    }
+
+    /* About story section */
+    .about-header {
+        margin-bottom: var(--spacing-xl); /* TABLET: Restore fuller margin */
+    }
+
+    .about-story {
+        margin-bottom: var(--spacing-2xl); /* TABLET: Restore fuller margin */
+    }
+
+    /* Values grid */
+    .values-grid {
+        gap: var(--spacing-lg); /* TABLET: Restore fuller gap */
+    }
+
+    .value-card {
+        padding: var(--spacing-xl); /* TABLET: Restore fuller padding */
     }
 
     /* Events */
@@ -2684,9 +2717,24 @@ a:hover {
         grid-template-columns: repeat(2, 1fr);
     }
 
+    /* Notify wrapper */
+    .notify-wrapper {
+        gap: var(--spacing-xl); /* TABLET: Restore fuller gap */
+    }
+
+    .notify-form {
+        padding: var(--spacing-xl); /* TABLET: Restore fuller padding */
+    }
+
     /* Footer */
+    .footer {
+        padding: var(--spacing-2xl) 0 var(--spacing-lg); /* TABLET: Restore fuller padding */
+    }
+
     .footer-content {
         grid-template-columns: 1.5fr 3fr;
+        gap: var(--spacing-xl); /* TABLET: Restore fuller gap */
+        margin-bottom: var(--spacing-xl); /* TABLET: Restore fuller margin */
     }
 
     .footer-links {
@@ -2744,6 +2792,37 @@ a:hover {
     /* Gallery - 4 columns on large screens */
     .gallery-grid {
         grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* ===================================
+   MOBILE-SPECIFIC OPTIMIZATIONS
+   =================================== */
+@media (max-width: 767px) {
+    /* Ensure notify content has optimal mobile spacing */
+    .notify-content {
+        text-align: center;
+    }
+
+    .notify-content .lead {
+        margin-bottom: var(--spacing-md);
+    }
+
+    /* Tighter form header on mobile */
+    .form-header {
+        margin-bottom: var(--spacing-md);
+    }
+
+    /* Reduce footer bottom padding for cleaner mobile end */
+    .footer-bottom {
+        padding-top: var(--spacing-md);
+    }
+
+    /* Events and culture grids - ensure single column */
+    .events-grid,
+    .culture-grid,
+    .events-grid-minimal {
+        gap: var(--spacing-md); /* Tighter gaps on mobile */
     }
 }
 
