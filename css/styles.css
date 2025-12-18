@@ -536,7 +536,12 @@ a:hover {
     background: none;
     border: none;
     cursor: pointer;
-    padding: var(--spacing-xs);
+    /* Ensure minimum 44x44px tap target for accessibility */
+    padding: 10px;
+    min-width: 44px;
+    min-height: 44px;
+    align-items: center;
+    justify-content: center;
     z-index: calc(var(--z-fixed) + 2);
     position: relative;
 }
@@ -583,21 +588,35 @@ a:hover {
     width: 80%;
     max-width: 400px;
     height: 100vh;
-    background-color: rgba(10, 10, 10, 0.75);
+    background-color: rgba(10, 10, 10, 0.95);
     backdrop-filter: blur(30px);
     -webkit-backdrop-filter: blur(30px);
     padding: var(--spacing-3xl) var(--spacing-lg);
     box-shadow: var(--shadow-xl);
     animation: slideInRight 0.3s ease;
     z-index: calc(var(--z-fixed) + 1);
+    gap: var(--spacing-xs);
 }
 
 .nav-menu.active .nav-link {
     color: var(--color-white);
+    /* Ensure minimum 44px tap target for mobile */
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    padding: var(--spacing-sm) var(--spacing-md);
+    width: 100%;
+    font-size: var(--font-size-base);
 }
 
 .nav-menu.active .nav-link:hover {
     color: var(--color-primary);
+}
+
+.nav-menu.active .nav-link-cta {
+    margin-top: var(--spacing-sm);
+    justify-content: center;
+    text-align: center;
 }
 
 /* ===================================
