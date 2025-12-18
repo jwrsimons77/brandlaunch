@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AORO T-Shirt Preorder - Limited edition running tee. Preorder now, ships in 3 weeks. £29.99">
+    <meta name="keywords" content="AORO, preorder, t-shirt, running apparel, limited edition">
+    <title>AORO T-Shirt (Preorder) | £29.99</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/images/icons/favicon.svg">
+
+    <style>
+        /* AORO Product Page Styles - Isolated, inspired by premium product pages */
+        :root {
+            --color-primary: #FF8B94;
+            --color-primary-dark: #E46F78;
+            --color-dark: #0A0A0A;
+            --color-dark-secondary: #1A1A1A;
+            --color-gray: rgba(10, 10, 10, 0.65);
+            --color-gray-light: #CCCCCC;
+            --color-light: #F5F5F5;
+            --color-white: #FFFFFF;
+            --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            --transition-base: 0.3s ease;
+            --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-primary);
+            background-color: var(--color-white);
+            color: var(--color-dark);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--color-white);
+            border-bottom: 1px solid var(--color-light);
+            z-index: 1000;
+            padding: 1rem 1.5rem;
+        }
+
+        .header-content {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--color-dark);
+            text-decoration: none;
+            letter-spacing: 0.05em;
+        }
+
+        .back-link {
+            color: var(--color-gray);
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: color var(--transition-base);
+        }
+
+        .back-link:hover {
+            color: var(--color-dark);
+        }
+
+        /* Main Container */
+        .main-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding-top: 80px;
+        }
+
+        /* Product Layout */
+        .product-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            padding: 2rem 1.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .product-container {
+                grid-template-columns: 1fr 1fr;
+                gap: 3rem;
+                padding: 3rem 2rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .product-container {
+                gap: 4rem;
+                padding: 4rem 3rem;
+            }
+        }
+
+        /* Image Section */
+        .product-image-section {
+            position: relative;
+        }
+
+        .product-image-wrapper {
+            position: sticky;
+            top: 100px;
+            background: var(--color-light);
+            border-radius: 12px;
+            overflow: hidden;
+            aspect-ratio: 3/4;
+        }
+
+        .product-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .preorder-badge {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: var(--color-primary);
+            color: var(--color-white);
+            padding: 0.5rem 1rem;
+            border-radius: 999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        /* Product Info Section */
+        .product-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .product-title {
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+        }
+
+        @media (min-width: 768px) {
+            .product-title {
+                font-size: 2.5rem;
+            }
+        }
+
+        .product-price {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--color-dark);
+        }
+
+        .preorder-message {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--color-light);
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            font-size: 0.875rem;
+            color: var(--color-gray);
+        }
+
+        .preorder-message::before {
+            content: "⏱";
+            font-size: 1rem;
+        }
+
+        /* Size Selector */
+        .size-selector {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .size-label {
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--color-gray);
+        }
+
+        .size-options {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.75rem;
+        }
+
+        .size-option {
+            position: relative;
+        }
+
+        .size-option input[type="radio"] {
+            position: absolute;
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .size-option label {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            border: 2px solid var(--color-gray-light);
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition-base);
+            background: var(--color-white);
+        }
+
+        .size-option input[type="radio"]:checked + label {
+            border-color: var(--color-dark);
+            background: var(--color-dark);
+            color: var(--color-white);
+        }
+
+        .size-option label:hover {
+            border-color: var(--color-dark);
+        }
+
+        .size-error {
+            display: none;
+            color: #dc2626;
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+        }
+
+        .size-error.visible {
+            display: block;
+        }
+
+        /* CTA Button */
+        .preorder-button {
+            width: 100%;
+            padding: 1.25rem 2rem;
+            background: var(--color-dark);
+            color: var(--color-white);
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            transition: all var(--transition-base);
+            margin-top: 1rem;
+        }
+
+        .preorder-button:hover:not(:disabled) {
+            background: var(--color-dark-secondary);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .preorder-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .preorder-button.loading {
+            position: relative;
+            color: transparent;
+        }
+
+        .preorder-button.loading::after {
+            content: "";
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            top: 50%;
+            left: 50%;
+            margin-left: -10px;
+            margin-top: -10px;
+            border: 2px solid var(--color-white);
+            border-radius: 50%;
+            border-top-color: transparent;
+            animation: spinner 0.6s linear infinite;
+        }
+
+        @keyframes spinner {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Product Details */
+        .product-details {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--color-light);
+        }
+
+        .detail-section {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .detail-title {
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--color-dark);
+        }
+
+        .detail-content {
+            font-size: 0.9375rem;
+            color: var(--color-gray);
+            line-height: 1.7;
+        }
+
+        .detail-content ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .detail-content ul li {
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .detail-content ul li::before {
+            content: "•";
+            position: absolute;
+            left: 0.5rem;
+            color: var(--color-primary);
+        }
+
+        /* Crew Badge */
+        .crew-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            padding: 0.75rem 1rem;
+            background: linear-gradient(135deg, var(--color-dark) 0%, var(--color-dark-secondary) 100%);
+            border-radius: 8px;
+            color: var(--color-white);
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .crew-badge::before {
+            content: "☁️";
+            font-size: 1.125rem;
+        }
+
+        /* Shipping Notice */
+        .shipping-notice {
+            background: #fef3c7;
+            border-left: 3px solid #f59e0b;
+            padding: 1rem;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            color: #92400e;
+            line-height: 1.6;
+        }
+
+        .shipping-notice strong {
+            display: block;
+            margin-bottom: 0.25rem;
+            color: #78350f;
+        }
+
+        /* Error Message */
+        .error-message {
+            display: none;
+            background: #fee;
+            border-left: 3px solid #dc2626;
+            padding: 1rem;
+            border-radius: 6px;
+            color: #991b1b;
+            font-size: 0.875rem;
+            margin-top: 1rem;
+        }
+
+        .error-message.visible {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <a href="/" class="logo">AORO</a>
+            <a href="/" class="back-link">← Back to Home</a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-container">
+        <div class="product-container">
+            <!-- Product Image -->
+            <div class="product-image-section">
+                <div class="product-image-wrapper">
+                    <span class="preorder-badge">Preorder</span>
+                    <img
+                        src="/images/drops/cloud-piercer-tee.jpg"
+                        alt="AORO T-Shirt - Cloud Piercer Edition"
+                        class="product-image"
+                    >
+                </div>
+            </div>
+
+            <!-- Product Info -->
+            <div class="product-info">
+                <div>
+                    <h1 class="product-title">AORO T-Shirt (Preorder)</h1>
+                    <p class="product-price">£29.99</p>
+                </div>
+
+                <div class="preorder-message">
+                    Preorder — ships in 3 weeks
+                </div>
+
+                <!-- Size Selector -->
+                <div class="size-selector">
+                    <label class="size-label">Select Size *</label>
+                    <div class="size-options">
+                        <div class="size-option">
+                            <input type="radio" id="size-s" name="size" value="S">
+                            <label for="size-s">S</label>
+                        </div>
+                        <div class="size-option">
+                            <input type="radio" id="size-m" name="size" value="M">
+                            <label for="size-m">M</label>
+                        </div>
+                        <div class="size-option">
+                            <input type="radio" id="size-l" name="size" value="L">
+                            <label for="size-l">L</label>
+                        </div>
+                        <div class="size-option">
+                            <input type="radio" id="size-xl" name="size" value="XL">
+                            <label for="size-xl">XL</label>
+                        </div>
+                    </div>
+                    <span class="size-error" id="size-error">Please select a size</span>
+                </div>
+
+                <!-- Shipping Notice -->
+                <div class="shipping-notice">
+                    <strong>Shipping Notice:</strong>
+                    Shipping will be calculated after order confirmation based on your location. We'll email you if additional shipping costs are due.
+                </div>
+
+                <!-- Preorder Button -->
+                <button class="preorder-button" id="preorder-btn">
+                    Preorder Now
+                </button>
+
+                <!-- Error Message -->
+                <div class="error-message" id="error-message"></div>
+
+                <!-- Product Details -->
+                <div class="product-details">
+                    <div class="detail-section">
+                        <h3 class="detail-title">Product Details</h3>
+                        <div class="detail-content">
+                            <p>Premium quality running t-shirt from AORO. Built for performance, designed for the crew. Limited edition preorder.</p>
+                            <ul>
+                                <li>High-quality cotton blend fabric</li>
+                                <li>Athletic fit designed for movement</li>
+                                <li>AORO Cloud Piercer branding</li>
+                                <li>Limited production run</li>
+                                <li>Unisex sizing</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="detail-section">
+                        <h3 class="detail-title">Shipping & Returns</h3>
+                        <div class="detail-content">
+                            <p><strong>Shipping:</strong> Your preorder will ship within 3 weeks of purchase. Shipping costs will be calculated based on your delivery location and communicated via email.</p>
+                            <p><strong>Returns:</strong> Due to the limited nature of this preorder, all sales are final. Please choose your size carefully.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Crew Badge -->
+                <div class="crew-badge">
+                    Cloud Piercer Collective
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Product Page Script
+        (function() {
+            const preorderBtn = document.getElementById('preorder-btn');
+            const sizeInputs = document.querySelectorAll('input[name="size"]');
+            const sizeError = document.getElementById('size-error');
+            const errorMessage = document.getElementById('error-message');
+
+            // Clear size error when a size is selected
+            sizeInputs.forEach(input => {
+                input.addEventListener('change', () => {
+                    sizeError.classList.remove('visible');
+                });
+            });
+
+            // Handle preorder button click
+            preorderBtn.addEventListener('click', async () => {
+                // Get selected size
+                const selectedSize = document.querySelector('input[name="size"]:checked');
+
+                // Validate size selection
+                if (!selectedSize) {
+                    sizeError.classList.add('visible');
+                    sizeError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    return;
+                }
+
+                // Hide any previous errors
+                errorMessage.classList.remove('visible');
+
+                // Disable button and show loading state
+                preorderBtn.disabled = true;
+                preorderBtn.classList.add('loading');
+
+                try {
+                    // Call Netlify Function to create Checkout Session
+                    const response = await fetch('/.netlify/functions/create-checkout-session', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            size: selectedSize.value,
+                            productId: 'prod_TcuU8J95P5EkVd',
+                            successUrl: `${window.location.origin}/success.html?session_id={CHECKOUT_SESSION_ID}`,
+                            cancelUrl: `${window.location.origin}/cancelled.html`
+                        })
+                    });
+
+                    const data = await response.json();
+
+                    if (!response.ok) {
+                        throw new Error(data.error || 'Failed to create checkout session');
+                    }
+
+                    // Redirect to Stripe Checkout
+                    if (data.url) {
+                        window.location.href = data.url;
+                    } else {
+                        throw new Error('No checkout URL returned');
+                    }
+
+                } catch (error) {
+                    console.error('Checkout error:', error);
+                    errorMessage.textContent = error.message || 'Something went wrong. Please try again.';
+                    errorMessage.classList.add('visible');
+
+                    // Re-enable button
+                    preorderBtn.disabled = false;
+                    preorderBtn.classList.remove('loading');
+                }
+            });
+        })();
+    </script>
+</body>
+</html>
