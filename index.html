@@ -29,8 +29,9 @@
     <meta name="theme-color" content="#0F1E21">
     <title>AORO | UK Running Brand & Coffee Pop-ups</title>
 
-    <!-- Preload -->
-    <link rel="preload" href="/images/hero/hero-bg.jpg" as="image">
+    <!-- Preload critical hero background image -->
+    <link rel="preload" href="/images/hero/hero-bg.webp" as="image" type="image/webp">
+    <link rel="preload" href="/images/hero/hero-bg.jpg" as="image" type="image/jpeg">
 
     <!-- Preconnect for performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -152,7 +153,7 @@
         <section id="home" class="hero">
         <!-- Background Image Container -->
         <div class="hero-background">
-            <div class="hero-image" style="background-image: url('/images/hero/hero-bg.jpg')"></div>
+            <div class="hero-image" style="--hero-bg-fallback: url('/images/hero/hero-bg.jpg')"></div>
             <div class="hero-overlay"></div>
         </div>
 
@@ -162,7 +163,28 @@
                 <div class="hero-drop fade-in-up">
                     <article class="hero-drop-card">
                         <div class="hero-drop-artwork" role="button" tabindex="0" aria-label="View a larger image of the Cloud Piercer Tee from Drop 001">
-                            <img src="/images/drops/cloud-piercer-tee.jpg" alt="AORO Cloud Piercer running t-shirt" width="1536" height="1024" fetchpriority="high">
+                            <picture>
+                                <source
+                                    type="image/webp"
+                                    srcset="/images/drops/cloud-piercer-tee-480.webp 480w,
+                                            /images/drops/cloud-piercer-tee-768.webp 768w,
+                                            /images/drops/cloud-piercer-tee-1024.webp 1024w,
+                                            /images/drops/cloud-piercer-tee.webp 1536w"
+                                    sizes="(max-width: 640px) 90vw, (max-width: 1024px) 720px, 640px">
+                                <source
+                                    type="image/jpeg"
+                                    srcset="/images/drops/cloud-piercer-tee-480.jpg 480w,
+                                            /images/drops/cloud-piercer-tee-768.jpg 768w,
+                                            /images/drops/cloud-piercer-tee-1024.jpg 1024w,
+                                            /images/drops/cloud-piercer-tee.jpg 1536w"
+                                    sizes="(max-width: 640px) 90vw, (max-width: 1024px) 720px, 640px">
+                                <img
+                                    src="/images/drops/cloud-piercer-tee.jpg"
+                                    alt="AORO Cloud Piercer running t-shirt"
+                                    width="1536"
+                                    height="1024"
+                                    fetchpriority="high">
+                            </picture>
                         </div>
                         <div class="hero-drop-body">
                             <span class="section-label">Drop 001 · Limited run</span>
@@ -209,7 +231,7 @@
     <!-- Runs Section -->
     <section id="standards" class="values section-padding section-with-bg">
         <div class="section-background">
-            <div class="section-image" style="background-image: url('/images/sections/values-bg.jpg')"></div>
+            <div class="section-image" style="--section-bg-fallback: url('/images/sections/values-bg.jpg')"></div>
             <div class="section-overlay"></div>
         </div>
         <div class="container">
@@ -320,7 +342,27 @@
             <button class="image-modal__close" type="button" aria-label="Close image view">
                 ×
             </button>
-            <img src="/images/drops/cloud-piercer-tee.jpg" alt="AORO Cloud Piercer running t-shirt" class="image-modal__img" width="1536" height="1024" loading="lazy">
+            <picture>
+                <source
+                    type="image/webp"
+                    srcset="/images/drops/cloud-piercer-tee-768.webp 768w,
+                            /images/drops/cloud-piercer-tee-1024.webp 1024w,
+                            /images/drops/cloud-piercer-tee.webp 1536w"
+                    sizes="90vw">
+                <source
+                    type="image/jpeg"
+                    srcset="/images/drops/cloud-piercer-tee-768.jpg 768w,
+                            /images/drops/cloud-piercer-tee-1024.jpg 1024w,
+                            /images/drops/cloud-piercer-tee.jpg 1536w"
+                    sizes="90vw">
+                <img
+                    src="/images/drops/cloud-piercer-tee.jpg"
+                    alt="AORO Cloud Piercer running t-shirt"
+                    class="image-modal__img"
+                    width="1536"
+                    height="1024"
+                    loading="lazy">
+            </picture>
         </div>
     </div>
 

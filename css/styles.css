@@ -211,6 +211,18 @@ a:hover {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    will-change: opacity;
+    /* WebP support with fallback */
+    background-image: var(--section-bg-fallback);
+}
+
+/* WebP support for values section background */
+@supports (background-image: image-set(url("data:") 1x)) {
+    .values .section-image {
+        background-image: image-set(
+            url('/images/sections/values-bg.webp') 1x
+        );
+    }
 }
 
 .section-overlay {
@@ -720,6 +732,18 @@ a:hover {
     background-position: center;
     background-color: var(--color-dark);
     transform: scale(1.02);
+    will-change: transform;
+    /* WebP support with fallback - browser will use WebP if supported */
+    background-image: var(--hero-bg-fallback);
+}
+
+/* WebP support for modern browsers */
+@supports (background-image: image-set(url("data:") 1x)) {
+    .hero-image {
+        background-image: image-set(
+            url('/images/hero/hero-bg.webp') 1x
+        );
+    }
 }
 
 .hero-overlay {
