@@ -138,10 +138,9 @@ animatedElements.forEach(element => {
 // NETLIFY FORM HANDLING
 // ===================================
 const notifyForm = document.getElementById('notifyForm');
-const membershipForm = document.getElementById('membershipForm'); // Keep for backward compatibility
 const toastNotification = document.getElementById('toastNotification');
 
-const activeForm = notifyForm || membershipForm;
+const activeForm = notifyForm;
 const successCopy = 'Welcome to AORO — coordinates incoming.';
 const errorCopy = 'We hit a snag. Give it another shot in a moment.';
 let toastHideTimeout;
@@ -282,22 +281,6 @@ if (urlParams.get('success') === 'true' || window.location.pathname.includes('su
         window.history.replaceState({}, '', newUrl);
     }
 }
-
-// ===================================
-// GALLERY ITEM HOVER EFFECT
-// ===================================
-const galleryItems = document.querySelectorAll('.gallery-item');
-
-galleryItems.forEach(item => {
-    item.addEventListener('click', () => {
-        // Optional: Add lightbox functionality here
-        // For now, just add a subtle scale effect on click
-        item.style.transform = 'scale(0.95)';
-        setTimeout(() => {
-            item.style.transform = 'scale(1)';
-        }, 200);
-    });
-});
 
 // ===================================
 // HERO IMAGE MODAL
@@ -489,19 +472,6 @@ if (document.readyState === 'loading') {
 }
 
 // ===================================
-// UTILITY: Check if element is in viewport
-// ===================================
-function isInViewport(element) {
-    const rect = element.getBoundingClientRect();
-    return (
-        rect.top >= 0 &&
-        rect.left >= 0 &&
-        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-        rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-    );
-}
-
-// ===================================
 // CUSTOM EVENT: Page Loaded
 // ===================================
 window.addEventListener('load', () => {
@@ -581,8 +551,7 @@ document.querySelectorAll('.social-link').forEach(link => {
 // Track form submission
 if (activeForm) {
     activeForm.addEventListener('submit', function() {
-        const formName = notifyForm ? 'Notify Form' : 'Membership Form';
-        trackEvent('Form', 'Submit', formName);
+        trackEvent('Form', 'Submit', 'Notify Form');
     });
 }
 
