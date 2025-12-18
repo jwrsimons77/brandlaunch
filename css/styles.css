@@ -2608,18 +2608,37 @@ a:hover {
 /* ===================================
    MINIMAL FOOTER
    =================================== */
+/* MOBILE-FIRST: Single column, center-aligned layout */
 .footer-content-minimal {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     align-items: center;
+    text-align: center;
     margin-bottom: var(--spacing-lg);
-    flex-wrap: wrap;
-    gap: var(--spacing-lg);
+    gap: var(--spacing-md);
+}
+
+.footer-brand {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-xs);
+}
+
+.footer-meta {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.footer-meta p {
+    margin: 0;
 }
 
 .footer-social {
     display: flex;
     gap: var(--spacing-md);
+    justify-content: center;
 }
 
 .footer-social a {
@@ -2640,6 +2659,35 @@ a:hover {
     color: var(--color-white);
     border-color: var(--color-primary);
     transform: translateY(-2px);
+}
+
+/* TABLET/DESKTOP: Two-column layout */
+@media (min-width: 768px) {
+    .footer-content-minimal {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start;
+        text-align: left;
+        gap: var(--spacing-xl);
+    }
+
+    .footer-brand {
+        align-items: flex-start;
+    }
+
+    .footer-meta {
+        align-items: flex-end;
+        flex: 1;
+        max-width: 400px;
+    }
+
+    .footer-meta p {
+        text-align: right;
+    }
+
+    .footer-social {
+        justify-content: flex-end;
+    }
 }
 
 /* ===================================
