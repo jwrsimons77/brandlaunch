@@ -668,6 +668,23 @@ a:hover {
     box-shadow: none;
 }
 
+.notify-form .btn-primary {
+    min-height: 56px;
+    padding: 1rem 2rem;
+    font-size: var(--font-size-base);
+    font-weight: 700;
+    box-shadow: 0 4px 12px rgba(255, 139, 148, 0.3);
+}
+
+.notify-form .btn-primary:hover {
+    box-shadow: 0 6px 16px rgba(255, 139, 148, 0.4);
+}
+
+.notify-form .btn-primary:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(255, 139, 148, 0.3);
+}
+
 .btn-primary:link,
 .btn-primary:active,
 .btn-primary:focus,
@@ -1493,47 +1510,69 @@ a:hover {
 }
 
 .form-header {
-    margin-bottom: var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
+    text-align: center;
 }
 
 .form-header h3 {
-    font-size: var(--font-size-2xl);
-    margin-bottom: var(--spacing-xs);
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    margin-bottom: var(--spacing-sm);
     font-family: var(--font-primary);
+    font-weight: 700;
+    color: var(--color-dark);
 }
 
 .form-header p {
     color: var(--color-gray);
     margin: 0;
+    font-size: var(--font-size-base);
+    line-height: 1.6;
+}
+
+@media (max-width: 767px) {
+    .form-header {
+        margin-bottom: var(--spacing-lg);
+    }
 }
 
 .form-group {
-    margin-bottom: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
 }
 
 .form-group label {
     display: block;
     font-weight: 600;
-    font-size: var(--font-size-sm);
-    margin-bottom: var(--spacing-xs);
+    font-size: var(--font-size-base);
+    margin-bottom: var(--spacing-sm);
     color: var(--color-dark);
 }
 
 .form-group input,
 .form-group select {
     width: 100%;
-    padding: var(--spacing-sm);
+    padding: 1rem 1.25rem;
+    min-height: 56px;
     border: 2px solid var(--color-gray-light);
     border-radius: var(--radius-md);
     font-family: var(--font-primary);
+    font-size: var(--font-size-lg);
+    transition: all var(--transition-base);
+    background-color: var(--color-white);
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.form-group input::placeholder {
+    color: rgba(10, 10, 10, 0.4);
     font-size: var(--font-size-base);
-    transition: border-color var(--transition-fast);
 }
 
 .form-group input:focus,
 .form-group select:focus {
     outline: none;
     border-color: var(--color-primary);
+    box-shadow: 0 0 0 4px rgba(255, 139, 148, 0.15);
+    transform: translateY(-1px);
 }
 
 .checkbox-group {
@@ -2555,9 +2594,15 @@ a:hover {
 
 .notify-form {
     background-color: var(--color-white);
-    padding: var(--spacing-lg); /* MOBILE: Reduced padding for less bulk */
+    padding: var(--spacing-xl);
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-lg);
+}
+
+@media (max-width: 767px) {
+    .notify-form {
+        padding: var(--spacing-lg);
+    }
 }
 
 /* ===================================
