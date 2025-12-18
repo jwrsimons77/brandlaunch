@@ -237,9 +237,10 @@
         }
 
         .size-option input[type="radio"]:checked + label {
-            border-color: var(--color-dark);
-            background: var(--color-dark);
+            border-color: var(--color-primary);
+            background: var(--color-primary);
             color: var(--color-white);
+            box-shadow: 0 0 0 3px rgba(255, 139, 148, 0.1);
         }
 
         .size-option label:hover {
@@ -263,7 +264,7 @@
             padding: 1.25rem 2rem;
             background: var(--color-dark);
             color: var(--color-white);
-            border: none;
+            border: 2px solid transparent;
             border-radius: 8px;
             font-size: 1rem;
             font-weight: 600;
@@ -272,12 +273,40 @@
             cursor: pointer;
             transition: all var(--transition-base);
             margin-top: 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .preorder-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+            opacity: 0;
+            transition: opacity var(--transition-base);
+            z-index: 0;
+        }
+
+        .preorder-button span {
+            position: relative;
+            z-index: 1;
+        }
+
+        .preorder-button:hover:not(:disabled)::before {
+            opacity: 1;
         }
 
         .preorder-button:hover:not(:disabled) {
-            background: var(--color-dark-secondary);
+            border-color: var(--color-primary);
             transform: translateY(-2px);
-            box-shadow: var(--shadow-md);
+            box-shadow: 0 8px 20px rgba(255, 139, 148, 0.4);
+        }
+
+        .preorder-button:active:not(:disabled) {
+            transform: translateY(0);
         }
 
         .preorder-button:disabled {
@@ -406,6 +435,213 @@
         .error-message.visible {
             display: block;
         }
+
+        /* Collapsible Accordions */
+        .accordion {
+            border-top: 1px solid var(--color-light);
+        }
+
+        .accordion-item {
+            border-bottom: 1px solid var(--color-light);
+        }
+
+        .accordion-header {
+            width: 100%;
+            padding: 1.25rem 0;
+            background: transparent;
+            border: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            text-align: left;
+        }
+
+        .accordion-header:hover {
+            color: var(--color-primary);
+        }
+
+        .accordion-title {
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: inherit;
+        }
+
+        .accordion-icon {
+            width: 20px;
+            height: 20px;
+            position: relative;
+            transition: transform var(--transition-base);
+        }
+
+        .accordion-icon::before,
+        .accordion-icon::after {
+            content: '';
+            position: absolute;
+            background: currentColor;
+            transition: all var(--transition-base);
+        }
+
+        .accordion-icon::before {
+            width: 100%;
+            height: 2px;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+        }
+
+        .accordion-icon::after {
+            width: 2px;
+            height: 100%;
+            left: 50%;
+            top: 0;
+            transform: translateX(-50%);
+        }
+
+        .accordion-header.active .accordion-icon::after {
+            transform: translateX(-50%) rotate(90deg);
+            opacity: 0;
+        }
+
+        .accordion-header.active {
+            color: var(--color-primary);
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height var(--transition-base) ease;
+        }
+
+        .accordion-content.active {
+            max-height: 1000px;
+        }
+
+        .accordion-body {
+            padding-bottom: 1.5rem;
+            font-size: 0.9375rem;
+            color: var(--color-gray);
+            line-height: 1.7;
+        }
+
+        .accordion-body ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 0.75rem;
+        }
+
+        .accordion-body ul li {
+            padding-left: 1.5rem;
+            position: relative;
+            margin-bottom: 0.5rem;
+        }
+
+        .accordion-body ul li::before {
+            content: "•";
+            position: absolute;
+            left: 0.5rem;
+            color: var(--color-primary);
+        }
+
+        .accordion-body p {
+            margin-bottom: 0.75rem;
+        }
+
+        .accordion-body strong {
+            color: var(--color-dark);
+            font-weight: 600;
+        }
+
+        /* Mobile Sticky CTA */
+        .sticky-cta-mobile {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--color-white);
+            border-top: 1px solid var(--color-light);
+            padding: 1rem 1.5rem;
+            z-index: 999;
+            box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        @media (max-width: 767px) {
+            .sticky-cta-mobile {
+                display: block;
+            }
+
+            .product-info .preorder-button {
+                display: none;
+            }
+
+            body {
+                padding-bottom: 90px;
+            }
+        }
+
+        .sticky-cta-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .sticky-cta-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sticky-cta-price {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--color-dark);
+            line-height: 1.2;
+        }
+
+        .sticky-cta-title {
+            font-size: 0.875rem;
+            color: var(--color-gray);
+        }
+
+        .sticky-cta-mobile .preorder-button {
+            flex: 1;
+            margin-top: 0;
+            max-width: 200px;
+        }
+
+        /* Image gallery enhancement */
+        .product-image-wrapper {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        /* Enhanced spacing for premium feel */
+        .product-info {
+            gap: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            .product-info {
+                gap: 2.5rem;
+            }
+        }
+
+        /* Size option pill enhancement */
+        .size-option label {
+            min-height: 56px;
+            font-size: 0.9375rem;
+            transition: all 0.25s cubic-bezier(0.4, 0.0, 0.2, 1);
+        }
+
+        .size-option input[type="radio"]:focus + label {
+            outline: 2px solid var(--color-primary);
+            outline-offset: 2px;
+        }
     </style>
 </head>
 <body>
@@ -475,33 +711,82 @@
 
                 <!-- Preorder Button -->
                 <button class="preorder-button" id="preorder-btn">
-                    Preorder Now
+                    <span>Preorder Now</span>
                 </button>
 
                 <!-- Error Message -->
                 <div class="error-message" id="error-message"></div>
 
-                <!-- Product Details -->
-                <div class="product-details">
-                    <div class="detail-section">
-                        <h3 class="detail-title">Product Details</h3>
-                        <div class="detail-content">
-                            <p>Premium quality running t-shirt from AORO. Built for performance, designed for the crew. Limited edition preorder.</p>
-                            <ul>
-                                <li>High-quality cotton blend fabric</li>
-                                <li>Athletic fit designed for movement</li>
-                                <li>AORO Cloud Piercer branding</li>
-                                <li>Limited production run</li>
-                                <li>Unisex sizing</li>
-                            </ul>
+                <!-- Product Details - Accordion Style -->
+                <div class="accordion">
+                    <!-- Product Details -->
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="true">
+                            <h3 class="accordion-title">Product Details</h3>
+                            <span class="accordion-icon" aria-hidden="true"></span>
+                        </button>
+                        <div class="accordion-content active">
+                            <div class="accordion-body">
+                                <p>Premium quality running t-shirt from AORO. Built for performance, designed for the crew. Limited edition preorder.</p>
+                                <ul>
+                                    <li>High-quality cotton blend fabric</li>
+                                    <li>Athletic fit designed for movement</li>
+                                    <li>AORO Cloud Piercer branding</li>
+                                    <li>Limited production run</li>
+                                    <li>Unisex sizing</li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="detail-section">
-                        <h3 class="detail-title">Shipping & Returns</h3>
-                        <div class="detail-content">
-                            <p><strong>Shipping:</strong> Your preorder will ship within 3 weeks of purchase. Shipping costs will be calculated based on your delivery location and communicated via email.</p>
-                            <p><strong>Returns:</strong> Due to the limited nature of this preorder, all sales are final. Please choose your size carefully.</p>
+                    <!-- Shipping -->
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <h3 class="accordion-title">Shipping</h3>
+                            <span class="accordion-icon" aria-hidden="true"></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="accordion-body">
+                                <p>Your preorder will ship within <strong>3 weeks</strong> of purchase.</p>
+                                <p>Shipping costs will be calculated based on your delivery location and communicated via email after your order is placed.</p>
+                                <p><strong>Estimated delivery:</strong> 3-5 business days after dispatch (UK only)</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Returns -->
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <h3 class="accordion-title">Returns</h3>
+                            <span class="accordion-icon" aria-hidden="true"></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="accordion-body">
+                                <p>Due to the limited nature of this preorder, <strong>all sales are final</strong>.</p>
+                                <p>Please choose your size carefully. Refer to our size guide if you're unsure.</p>
+                                <p>If you receive a defective item, please contact us at <strong>hello@aoro.co</strong> within 7 days of delivery.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Preorder Info -->
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <h3 class="accordion-title">Preorder Info</h3>
+                            <span class="accordion-icon" aria-hidden="true"></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="accordion-body">
+                                <p><strong>What is a preorder?</strong></p>
+                                <p>Preordering allows us to produce limited runs based on demand, reducing waste and ensuring you get exactly what you want.</p>
+                                <p><strong>Timeline:</strong></p>
+                                <ul>
+                                    <li>Order placed today</li>
+                                    <li>Production: 2-3 weeks</li>
+                                    <li>Shipping: 3-5 business days</li>
+                                </ul>
+                                <p>You'll receive email updates throughout the process.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -514,13 +799,48 @@
         </div>
     </main>
 
+    <!-- Mobile Sticky CTA -->
+    <div class="sticky-cta-mobile">
+        <div class="sticky-cta-content">
+            <div class="sticky-cta-info">
+                <span class="sticky-cta-price">£29.99</span>
+                <span class="sticky-cta-title">AORO T-Shirt</span>
+            </div>
+            <button class="preorder-button" id="preorder-btn-mobile">
+                <span>Preorder</span>
+            </button>
+        </div>
+    </div>
+
     <script>
         // Product Page Script
         (function() {
             const preorderBtn = document.getElementById('preorder-btn');
+            const preorderBtnMobile = document.getElementById('preorder-btn-mobile');
             const sizeInputs = document.querySelectorAll('input[name="size"]');
             const sizeError = document.getElementById('size-error');
             const errorMessage = document.getElementById('error-message');
+            const accordionHeaders = document.querySelectorAll('.accordion-header');
+
+            // Accordion functionality
+            accordionHeaders.forEach(header => {
+                header.addEventListener('click', () => {
+                    const isActive = header.classList.contains('active');
+                    const content = header.nextElementSibling;
+
+                    // Toggle active state
+                    header.classList.toggle('active');
+                    content.classList.toggle('active');
+
+                    // Update aria-expanded
+                    header.setAttribute('aria-expanded', !isActive);
+                });
+            });
+
+            // Mark first accordion as active on load
+            if (accordionHeaders.length > 0) {
+                accordionHeaders[0].classList.add('active');
+            }
 
             // Clear size error when a size is selected
             sizeInputs.forEach(input => {
@@ -529,8 +849,8 @@
                 });
             });
 
-            // Handle preorder button click
-            preorderBtn.addEventListener('click', async () => {
+            // Shared checkout handler
+            async function handleCheckout(button) {
                 // Get selected size
                 const selectedSize = document.querySelector('input[name="size"]:checked');
 
@@ -544,9 +864,12 @@
                 // Hide any previous errors
                 errorMessage.classList.remove('visible');
 
-                // Disable button and show loading state
-                preorderBtn.disabled = true;
-                preorderBtn.classList.add('loading');
+                // Disable buttons and show loading state
+                const buttons = [preorderBtn, preorderBtnMobile].filter(btn => btn);
+                buttons.forEach(btn => {
+                    btn.disabled = true;
+                    btn.classList.add('loading');
+                });
 
                 try {
                     // Call Netlify Function to create Checkout Session
@@ -579,11 +902,22 @@
                     errorMessage.textContent = error.message || 'Something went wrong. Please try again.';
                     errorMessage.classList.add('visible');
 
-                    // Re-enable button
-                    preorderBtn.disabled = false;
-                    preorderBtn.classList.remove('loading');
+                    // Re-enable buttons
+                    buttons.forEach(btn => {
+                        btn.disabled = false;
+                        btn.classList.remove('loading');
+                    });
                 }
-            });
+            }
+
+            // Handle preorder button clicks
+            if (preorderBtn) {
+                preorderBtn.addEventListener('click', () => handleCheckout(preorderBtn));
+            }
+
+            if (preorderBtnMobile) {
+                preorderBtnMobile.addEventListener('click', () => handleCheckout(preorderBtnMobile));
+            }
         })();
     </script>
 </body>
