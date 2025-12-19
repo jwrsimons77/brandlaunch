@@ -7,9 +7,8 @@
   publish = "."
   functions = "netlify/functions"
 
-  # No build command needed for static HTML site
-  # If you add a build process later, uncomment and modify:
-  # command = "npm run build"
+  # Build command to optimize images
+  command = "npm run build"
 
 # Redirects are configured in the _redirects file
 # See: https://docs.netlify.com/routing/redirects/
@@ -83,17 +82,17 @@
 # Context-specific settings
 # Production context
 [context.production]
-  command = ""
+  command = "npm run build"
   publish = "."
 
 # Deploy Preview context
 [context.deploy-preview]
-  command = ""
+  command = "npm run build"
   publish = "."
 
 # Branch-specific context (example for staging)
 [context.staging]
-  command = ""
+  command = "npm run build"
   publish = "."
 
 # Functions directory (if you add serverless functions later)
