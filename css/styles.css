@@ -743,9 +743,11 @@ a:hover {
    =================================== */
 .hero {
     position: relative;
+    height: 100vh;
     min-height: 100vh;
-    padding: clamp(4rem, 8vw, 6rem) 0 clamp(3rem, 7vw, 5.5rem);
+    padding: 0;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     overflow: hidden;
@@ -777,6 +779,10 @@ a:hover {
     height: 100%;
     object-fit: cover;
     background-color: var(--color-dark);
+    background-image: url('/images/hero/samuele-giglio-XQRHkFzmCT0-unsplash-1200.webp');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     transform: scale(1.02);
     will-change: transform;
 }
@@ -809,19 +815,20 @@ a:hover {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     gap: clamp(1.75rem, 3.5vw, 2.75rem);
 }
 
 @media (max-width: 768px) {
     .hero {
-        align-items: flex-start;
-        /* even tighter top padding so the floating card sits a touch higher */
-        padding: clamp(1rem, 4.5vw, 1.75rem) 0 clamp(2.5rem, 8vw, 4rem);
+        height: 100vh;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
     }
 
     .hero-content {
-        /* small offset to clear nav + marquee, but minimise empty sky */
-        margin-top: 10px;
+        margin-top: 0;
         padding-left: clamp(1rem, 5vw, 1.5rem);
         padding-right: clamp(1rem, 5vw, 1.5rem);
     }
@@ -848,9 +855,12 @@ a:hover {
 }
 
 @media (max-width: 480px) {
+    .hero {
+        height: 100vh;
+    }
+
     .hero-content {
-        /* keep consistent with general mobile spacing, but tighter to marquee */
-        margin-top: 10px;
+        margin-top: 0;
         padding-left: var(--spacing-md);
         padding-right: var(--spacing-md);
     }
