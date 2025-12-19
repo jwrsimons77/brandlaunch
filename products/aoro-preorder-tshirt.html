@@ -67,11 +67,21 @@
         }
 
         .logo {
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: var(--color-dark);
+            display: inline-flex;
+            align-items: center;
             text-decoration: none;
-            letter-spacing: 0.05em;
+        }
+
+        .logo-image {
+            display: block;
+            height: 22px;
+            width: auto;
+            transition: transform var(--transition-base);
+        }
+
+        .logo-image:hover,
+        .logo-image:focus {
+            transform: translateY(-1px);
         }
 
         .back-link {
@@ -648,13 +658,151 @@
             outline: 2px solid var(--color-primary);
             outline-offset: 2px;
         }
+
+        /* Password Gate Styles */
+        .password-gate {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: #0A0A0A;
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+        }
+
+        .password-gate.hidden {
+            display: none;
+        }
+
+        .password-gate-content {
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .password-gate-logo {
+            display: block;
+            height: 32px;
+            width: auto;
+            margin: 0 auto 2rem;
+        }
+
+        .password-gate h2 {
+            color: var(--color-white);
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.01em;
+        }
+
+        .password-gate p {
+            color: rgba(255, 255, 255, 0.65);
+            font-size: 0.9375rem;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .password-gate-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .password-gate-input {
+            width: 100%;
+            padding: 1rem 1.25rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: var(--color-white);
+            font-size: 1rem;
+            font-family: var(--font-primary);
+            transition: all var(--transition-base);
+            text-align: center;
+        }
+
+        .password-gate-input::placeholder {
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        .password-gate-input:focus {
+            outline: none;
+            border-color: #F97BD2;
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 0 0 3px rgba(249, 123, 210, 0.1);
+        }
+
+        .password-gate-button {
+            width: 100%;
+            padding: 1rem 2rem;
+            background: #F97BD2;
+            color: var(--color-white);
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            transition: all var(--transition-base);
+            font-family: var(--font-primary);
+        }
+
+        .password-gate-button:hover {
+            background: #E46BC4;
+            transform: translateY(-1px);
+            box-shadow: 0 8px 20px rgba(249, 123, 210, 0.4);
+        }
+
+        .password-gate-button:active {
+            transform: translateY(0);
+        }
+
+        .password-gate-error {
+            color: #ff6b6b;
+            font-size: 0.875rem;
+            margin-top: -0.5rem;
+            opacity: 0;
+            transition: opacity var(--transition-base);
+        }
+
+        .password-gate-error.visible {
+            opacity: 1;
+        }
     </style>
 </head>
 <body>
+    <!-- Password Gate (Friends & Family Access) -->
+    <div class="password-gate" id="password-gate">
+        <div class="password-gate-content">
+            <img src="/images/logos/aoro-logo.svg" alt="AORO" class="password-gate-logo">
+            <h2>Friends & Family Access</h2>
+            <p>This preorder page is currently private. Enter the password to continue.</p>
+            <form class="password-gate-form" id="password-form">
+                <input
+                    type="password"
+                    id="password-input"
+                    class="password-gate-input"
+                    placeholder="Enter password"
+                    autocomplete="off"
+                    required
+                >
+                <p class="password-gate-error" id="password-error">Incorrect password. Please try again.</p>
+                <button type="submit" class="password-gate-button">Enter</button>
+            </form>
+        </div>
+    </div>
+
     <!-- Header -->
     <header class="header">
         <div class="header-content">
-            <a href="/" class="logo">AORO</a>
+            <a href="/" class="logo" aria-label="AORO home">
+                <img src="/images/logos/aoro-logo.svg" alt="AORO logo" class="logo-image">
+            </a>
             <a href="/" class="back-link">← Back to Home</a>
         </div>
     </header>
@@ -821,6 +969,98 @@
     </div>
 
     <script>
+        // Password Gate Protection
+        // PASSWORD CHANGE: To update the password, modify the CORRECT_PASSWORD constant below
+        (function() {
+            const CORRECT_PASSWORD = 'just10minutes'; // ← Change password here
+            const STORAGE_KEY = 'aoro_preorder_access';
+            const EXPIRY_DAYS = 7;
+
+            const passwordGate = document.getElementById('password-gate');
+            const passwordForm = document.getElementById('password-form');
+            const passwordInput = document.getElementById('password-input');
+            const passwordError = document.getElementById('password-error');
+
+            // Check if user has valid access
+            function checkAccess() {
+                try {
+                    const stored = localStorage.getItem(STORAGE_KEY);
+                    if (!stored) return false;
+
+                    const data = JSON.parse(stored);
+                    const now = new Date().getTime();
+
+                    // Check if token is still valid (not expired)
+                    if (data.expiry && now < data.expiry) {
+                        return true;
+                    }
+
+                    // Token expired, remove it
+                    localStorage.removeItem(STORAGE_KEY);
+                    return false;
+                } catch (e) {
+                    // If any error, deny access
+                    return false;
+                }
+            }
+
+            // Grant access and store token
+            function grantAccess() {
+                const now = new Date().getTime();
+                const expiry = now + (EXPIRY_DAYS * 24 * 60 * 60 * 1000); // 7 days in milliseconds
+
+                const accessData = {
+                    granted: true,
+                    expiry: expiry
+                };
+
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(accessData));
+                passwordGate.classList.add('hidden');
+                passwordInput.value = '';
+                passwordError.classList.remove('visible');
+            }
+
+            // Handle form submission
+            passwordForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                const enteredPassword = passwordInput.value.trim();
+
+                if (enteredPassword === CORRECT_PASSWORD) {
+                    // Correct password
+                    grantAccess();
+                } else {
+                    // Incorrect password
+                    passwordError.classList.add('visible');
+                    passwordInput.value = '';
+                    passwordInput.focus();
+
+                    // Shake animation (add/remove class)
+                    passwordInput.style.animation = 'none';
+                    setTimeout(() => {
+                        passwordInput.style.animation = '';
+                    }, 10);
+                }
+            });
+
+            // Hide error when user starts typing again
+            passwordInput.addEventListener('input', function() {
+                if (passwordError.classList.contains('visible')) {
+                    passwordError.classList.remove('visible');
+                }
+            });
+
+            // Check access on page load
+            if (checkAccess()) {
+                passwordGate.classList.add('hidden');
+            } else {
+                // Focus the password input after a brief delay
+                setTimeout(() => {
+                    passwordInput.focus();
+                }, 300);
+            }
+        })();
+
         // Product Page Script
         (function() {
             const preorderBtn = document.getElementById('preorder-btn');
