@@ -403,6 +403,8 @@ header {
         backdrop-filter var(--transition-base);
     padding: var(--spacing-sm) 0;
     border-bottom: 1px solid transparent;
+    /* Mobile: Safe area padding for notch */
+    padding-top: calc(env(safe-area-inset-top) + 12px);
 }
 
 /* Desktop: Start with semi-transparent navbar */
@@ -412,6 +414,7 @@ header {
         backdrop-filter: blur(14px);
         -webkit-backdrop-filter: blur(14px);
         border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        padding-top: var(--spacing-sm);
     }
 }
 
@@ -428,11 +431,14 @@ header {
     letter-spacing: 0.18em;
     padding-block: 0.4rem;
     margin-top: 72px; /* mobile: clear full nav height so strip starts just below */
+    /* Hide on mobile to let hero be full-screen */
+    display: none;
 }
 
 @media (min-width: 768px) {
     .brand-marquee {
         margin-top: 60px;
+        display: block;
     }
 }
 
@@ -490,7 +496,8 @@ header {
     height: 22px;
     width: auto;
     transition: transform var(--transition-fast), filter var(--transition-fast);
-    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.5));
+    /* Mobile: White logo with strong shadow for visibility over hero */
+    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.5)) brightness(0) invert(1);
 }
 
 .logo-image:hover,
@@ -499,17 +506,17 @@ header {
 }
 
 .navbar.scrolled .logo-image {
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3)) brightness(0) invert(1);
 }
 
 /* Desktop: Lighter shadow since navbar has background */
 @media (min-width: 768px) {
     .logo-image {
-        filter: drop-shadow(0 2px 4px rgba(10, 10, 10, 0.15));
+        filter: drop-shadow(0 2px 4px rgba(10, 10, 10, 0.15)) brightness(0) invert(1);
     }
 
     .navbar.scrolled .logo-image {
-        filter: none;
+        filter: brightness(0) invert(1);
     }
 }
 
@@ -784,8 +791,13 @@ header {
    =================================== */
 .hero {
     position: relative;
-    height: 100vh;
+    /* Modern viewport units with fallbacks for iPhone Safari */
+    height: 100vh; /* Fallback for older browsers */
+    height: 100svh; /* Small viewport height */
+    height: 100dvh; /* Dynamic viewport height (best for mobile) */
     min-height: 100vh;
+    min-height: 100svh;
+    min-height: 100dvh;
     padding: 0;
     display: flex;
     flex-direction: column;
@@ -828,6 +840,15 @@ header {
     will-change: transform;
 }
 
+/* Mobile: Use specified hero image */
+@media (max-width: 768px) {
+    .hero-image {
+        background-image: url('/images/hero/57C9980E-9F97-47A7-B945-7F5288BA9B49.png');
+        background-position: center;
+        object-position: center;
+    }
+}
+
 .hero-overlay {
     position: absolute;
     top: 0;
@@ -843,6 +864,19 @@ header {
         rgba(6, 10, 12, 0.15) 100%
     );
     z-index: 1;
+}
+
+/* Mobile: Stronger bottom gradient for text readability */
+@media (max-width: 768px) {
+    .hero-overlay {
+        background: linear-gradient(
+            to top,
+            rgba(6, 10, 12, 0.75) 0%,
+            rgba(6, 10, 12, 0.3) 40%,
+            rgba(6, 10, 12, 0.1) 70%,
+            rgba(6, 10, 12, 0) 100%
+        );
+    }
 }
 
 .hero-content {
@@ -863,11 +897,18 @@ header {
 @media (max-width: 768px) {
     .hero {
         height: 100vh;
+        height: 100svh;
+        height: 100dvh;
         min-height: 100vh;
+        min-height: 100svh;
+        min-height: 100dvh;
         max-height: 100vh;
+        max-height: 100svh;
+        max-height: 100dvh;
         align-items: center;
-        justify-content: center;
+        justify-content: flex-end;
         padding: 0;
+        padding-bottom: calc(env(safe-area-inset-bottom) + 20px);
         overflow: hidden;
     }
 
@@ -1176,69 +1217,53 @@ header {
     }
 }
 
+/* Hide mobile content by default (desktop) */
+.hero-mobile-content {
+    display: none;
+}
+
 @media (max-width: 768px) {
+    /* Hide hero drop card on mobile for UVU-style minimal layout */
     .hero-drop {
-        padding-inline: var(--spacing-sm);
-        margin-top: 0;
-        max-height: calc(100vh - 100px);
-        overflow: visible;
+        display: none;
+    }
+
+    /* Show minimal bottom content instead */
+    .hero-mobile-content {
         display: flex;
+        flex-direction: column;
         align-items: center;
-        justify-content: center;
+        gap: var(--spacing-sm);
+        width: 100%;
     }
 
-    /* Tighter hero card + image on mobile so everything fits on screen */
-    .hero-drop-card {
-        border-radius: 24px;
-        padding: 1rem 1rem 1.5rem;
-        max-height: calc(100vh - 120px);
-        overflow: visible;
-    }
-
-    .hero-drop-artwork {
-        aspect-ratio: 4 / 3;
-        min-height: clamp(220px, 50vw, 320px);
-        max-height: 320px;
-        padding: 0.5rem;
-    }
-
-    .hero-drop-body {
+    .hero-content {
+        width: 100%;
+        max-width: 100%;
+        display: flex;
+        flex-direction: column;
         align-items: center;
-        gap: clamp(0.6rem, 1.8vw, 1rem);
+        justify-content: flex-end;
+        gap: var(--spacing-sm);
+        text-align: center;
     }
 
-    .hero-drop-tags {
-        justify-content: center;
-        margin: 0.15rem 0 0.35rem;
+    /* Minimal label + CTA at bottom */
+    .hero-drop-label-mobile {
+        font-size: var(--font-size-xs);
+        text-transform: uppercase;
+        letter-spacing: 0.16em;
+        color: rgba(255, 255, 255, 0.9);
+        margin-bottom: 0;
+        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
     }
 
-    .hero-drop-btn {
-        align-self: center;
+    .hero-drop-btn-mobile {
         width: 100%;
         max-width: 280px;
     }
 }
 
-@media (max-width: 480px) {
-    .hero-drop {
-        margin-top: 0;
-        padding-inline: clamp(0.75rem, 3vw, 1rem);
-    }
-
-    .hero-drop-card {
-        padding: 0.85rem 0.85rem 1.25rem;
-        max-height: calc(100vh - 100px);
-    }
-
-    .hero-drop-artwork {
-        min-height: clamp(200px, 48vw, 280px);
-        max-height: 280px;
-    }
-
-    .hero-drop-btn {
-        width: 100%;
-    }
-}
 
 /* Scroll Indicator */
 .scroll-indicator {
