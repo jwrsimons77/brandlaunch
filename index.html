@@ -307,17 +307,6 @@
     <section id="notify" class="notify section-padding bg-accent">
         <div class="container">
             <div class="notify-wrapper">
-                <div class="notify-content fade-in">
-                    <span class="section-label">Join the Crew</span>
-                    <h2 class="section-title">Be first to know</h2>
-                    <p class="lead">Limited drops sell out. Pop-ups fill up. Add your name and we'll send locations and drop alerts straight to you.</p>
-                    <ul class="notify-highlights" aria-label="What you'll receive">
-                        <li>Limited tee drops</li>
-                        <li>UK pop-up locations</li>
-                        <li>Group runs and coffee meetups</li>
-                    </ul>
-                </div>
-
                 <!-- Netlify Form -->
                 <div class="notify-form-wrapper fade-in">
                     <form name="notify" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" class="notify-form" id="notifyForm" aria-labelledby="form-title">
@@ -336,12 +325,12 @@
 
                         <div class="form-group">
                             <label for="name">Name</label>
-                            <input type="text" id="name" name="name" required placeholder="Your name">
+                            <input type="text" id="name" name="name" required placeholder="Your name" autocomplete="name">
                         </div>
 
                         <div class="form-group">
                             <label for="email">Email</label>
-                            <input type="email" id="email" name="email" required placeholder="your@email.com">
+                            <input type="email" id="email" name="email" required placeholder="your@email.com" autocomplete="email" inputmode="email" autocapitalize="none" autocorrect="off" enterkeyhint="done">
                         </div>
 
                         <button type="submit" class="btn btn-primary btn-block">Join the Crew</button>

@@ -181,7 +181,13 @@ a:hover {
 }
 
 #notify.section-padding {
-    padding-top: var(--spacing-lg);
+    padding-top: var(--spacing-md); /* Reduced for mobile: form immediately visible */
+}
+
+@media (min-width: 768px) {
+    #notify.section-padding {
+        padding-top: var(--spacing-lg);
+    }
 }
 
 .bg-dark {
