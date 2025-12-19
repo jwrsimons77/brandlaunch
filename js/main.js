@@ -182,8 +182,13 @@ if (activeForm) {
     activeForm.addEventListener('submit', async (e) => {
         e.preventDefault();
 
+        // Performance: Start timing
+        const perfStart = performance.now();
+
         const submitButton = activeForm.querySelector('button[type="submit"]');
         const originalText = submitButton ? submitButton.textContent : null;
+
+        // Performance: Immediate visual feedback (<10ms)
         if (submitButton) {
             submitButton.textContent = 'Joining...';
             submitButton.disabled = true;
@@ -198,7 +203,11 @@ if (activeForm) {
             }
         };
 
+        // Performance: Streamlined data extraction (do once, use twice)
         const formData = new FormData(activeForm);
+        const nameValue = formData.get('name');
+        const emailValue = formData.get('email');
+
         const encodedFormData = new URLSearchParams();
         formData.forEach((value, key) => {
             encodedFormData.append(key, value);
@@ -222,6 +231,8 @@ if (activeForm) {
 
         try {
             const action = activeForm.getAttribute('action') || '/';
+
+            // Performance: Primary form submission (critical path)
             const response = await fetch(action, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -232,11 +243,18 @@ if (activeForm) {
                 throw new Error(`Form submission failed with status ${response.status}`);
             }
 
-            const nameValue = formData.get('name');
-            const emailValue = formData.get('email');
+            // Performance: Show success immediately after Netlify form submission
+            // Don't wait for email send - it's non-critical for user feedback
+            const perfNetlifyDone = performance.now();
+            console.log(`⚡ Form submitted in ${Math.round(perfNetlifyDone - perfStart)}ms`);
 
+            handleFormSuccess();
+            restoreSubmitState();
+
+            // Performance: Fire-and-forget email send (non-blocking)
+            // This happens AFTER success UI is shown
             if (nameValue && emailValue) {
-                const functionResponse = await fetch('/.netlify/functions/form-submission', {
+                fetch('/.netlify/functions/form-submission', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
@@ -245,26 +263,25 @@ if (activeForm) {
                             email: emailValue
                         }
                     })
-                });
-
-                if (!functionResponse.ok) {
-                    let errorDetails = {};
-                    try {
-                        errorDetails = await functionResponse.json();
-                    } catch (parseError) {
-                        // ignore parse errors
+                }).then(functionResponse => {
+                    if (!functionResponse.ok) {
+                        // Log but don't show error to user - they're already subscribed
+                        console.warn('Email send failed (non-critical):', functionResponse.status);
+                    } else {
+                        const perfTotal = performance.now();
+                        console.log(`⚡ Total with email: ${Math.round(perfTotal - perfStart)}ms`);
                     }
-                    throw new Error(errorDetails.error || `Notify function failed with status ${functionResponse.status}`);
-                }
+                }).catch(emailError => {
+                    // Log but don't show error to user - they're already subscribed
+                    console.warn('Email send error (non-critical):', emailError);
+                });
             } else {
                 console.warn('Notify form missing name or email; skipping function trigger.');
             }
 
-            handleFormSuccess();
         } catch (error) {
             console.error('Form submission error:', error);
             showToast(errorCopy, 'error');
-        } finally {
             restoreSubmitState();
         }
     });
