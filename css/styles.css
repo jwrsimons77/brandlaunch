@@ -389,15 +389,26 @@ a:hover {
     left: 0;
     right: 0;
     z-index: var(--z-fixed);
-    background-color: rgba(0, 0, 0, 0.7);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
+    background-color: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
     transition:
         background-color var(--transition-base),
         box-shadow var(--transition-base),
-        border-color var(--transition-base);
+        border-color var(--transition-base),
+        backdrop-filter var(--transition-base);
     padding: var(--spacing-sm) 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    border-bottom: 1px solid transparent;
+}
+
+/* Desktop: Start with semi-transparent navbar */
+@media (min-width: 768px) {
+    .navbar {
+        background-color: rgba(0, 0, 0, 0.7);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
 }
 
 /* Brand marquee (inspired by SUMS review strip) */
@@ -452,7 +463,9 @@ a:hover {
 }
 
 .navbar.scrolled {
-    background-color: rgba(0, 0, 0, 0.82);
+    background-color: rgba(0, 0, 0, 0.9);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
     box-shadow: 0 1px 0 rgba(0, 0, 0, 0.6);
     border-bottom-color: rgba(255, 255, 255, 0.06);
 }
@@ -473,7 +486,7 @@ a:hover {
     height: 22px;
     width: auto;
     transition: transform var(--transition-fast), filter var(--transition-fast);
-    filter: drop-shadow(0 4px 10px rgba(10, 10, 10, 0.15));
+    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.5));
 }
 
 .logo-image:hover,
@@ -482,7 +495,18 @@ a:hover {
 }
 
 .navbar.scrolled .logo-image {
-    filter: none;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+/* Desktop: Lighter shadow since navbar has background */
+@media (min-width: 768px) {
+    .logo-image {
+        filter: drop-shadow(0 2px 4px rgba(10, 10, 10, 0.15));
+    }
+
+    .navbar.scrolled .logo-image {
+        filter: none;
+    }
 }
 
 .nav-menu {
@@ -585,10 +609,23 @@ a:hover {
     background-color: var(--color-white);
     transition: all var(--transition-base);
     border-radius: 2px;
+    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.6));
 }
 
 .navbar.scrolled .hamburger-line {
     background-color: var(--color-white);
+    filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.3));
+}
+
+/* Desktop: Lighter shadow since navbar has background */
+@media (min-width: 768px) {
+    .hamburger-line {
+        filter: none;
+    }
+
+    .navbar.scrolled .hamburger-line {
+        filter: none;
+    }
 }
 
 .hamburger.active .hamburger-line {
@@ -822,13 +859,18 @@ a:hover {
 @media (max-width: 768px) {
     .hero {
         height: 100vh;
+        min-height: 100vh;
+        max-height: 100vh;
         align-items: center;
         justify-content: center;
         padding: 0;
+        overflow: hidden;
     }
 
     .hero-content {
         margin-top: 0;
+        padding-top: 0;
+        padding-bottom: 0;
         padding-left: clamp(1rem, 5vw, 1.5rem);
         padding-right: clamp(1rem, 5vw, 1.5rem);
     }
@@ -1134,26 +1176,36 @@ a:hover {
     .hero-drop {
         padding-inline: var(--spacing-sm);
         margin-top: 0.5rem;
+        max-height: calc(100vh - 100px);
+        overflow: visible;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
-    /* Tighter hero card + image on mobile so it doesn't feel full-screen */
+    /* Tighter hero card + image on mobile so everything fits on screen */
     .hero-drop-card {
         border-radius: 24px;
-        padding: 1.25rem 1.25rem 1.75rem;
+        padding: 1rem 1rem 1.5rem;
+        max-height: calc(100vh - 120px);
+        overflow: visible;
     }
 
     .hero-drop-artwork {
         aspect-ratio: 4 / 3;
-        min-height: clamp(260px, 60vw, 360px);
+        min-height: clamp(220px, 50vw, 320px);
+        max-height: 320px;
         padding: 0.5rem;
     }
 
     .hero-drop-body {
         align-items: center;
+        gap: clamp(0.6rem, 1.8vw, 1rem);
     }
 
     .hero-drop-tags {
         justify-content: center;
+        margin: 0.15rem 0 0.35rem;
     }
 
     .hero-drop-btn {
@@ -1165,9 +1217,18 @@ a:hover {
 
 @media (max-width: 480px) {
     .hero-drop {
-        /* match tablet spacing so the card sits closer to the banner */
         margin-top: 0.5rem;
-        gap: var(--spacing-md);
+        padding-inline: clamp(0.75rem, 3vw, 1rem);
+    }
+
+    .hero-drop-card {
+        padding: 0.85rem 0.85rem 1.25rem;
+        max-height: calc(100vh - 100px);
+    }
+
+    .hero-drop-artwork {
+        min-height: clamp(200px, 48vw, 280px);
+        max-height: 280px;
     }
 
     .hero-drop-btn {
