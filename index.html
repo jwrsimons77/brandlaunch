@@ -29,9 +29,16 @@
     <meta name="theme-color" content="#0F1E21">
     <title>AORO | UK Running Brand & Coffee Pop-ups</title>
 
-    <!-- Preload critical hero background image -->
-    <link rel="preload" as="image" type="image/png"
-          href="/images/hero/57C9980E-9F97-47A7-B945-7F5288BA9B49.png">
+    <!-- Preload critical hero background image - AVIF with responsive srcset -->
+    <link rel="preload" as="image" type="image/avif"
+          imagesrcset="/images/hero/optimized/hero-640.avif 640w,
+                       /images/hero/optimized/hero-750.avif 750w,
+                       /images/hero/optimized/hero-828.avif 828w,
+                       /images/hero/optimized/hero-1024.avif 1024w,
+                       /images/hero/optimized/hero-1280.avif 1280w,
+                       /images/hero/optimized/hero-1536.avif 1536w"
+          imagesizes="100vw"
+          fetchpriority="high">
 
     <!-- Preload hero product image (LCP element) -->
     <link rel="preload" as="image" type="image/jpeg"
@@ -159,7 +166,45 @@
         <!-- Background Image Container -->
         <div class="hero-background">
             <picture class="hero-image-picture">
-                <img src="/images/hero/57C9980E-9F97-47A7-B945-7F5288BA9B49.png" alt="Two runners on a track" class="hero-image" loading="eager" fetchpriority="high" width="3089" height="2048">
+                <!-- AVIF format - best compression, modern browsers -->
+                <source type="image/avif"
+                        srcset="/images/hero/optimized/hero-640.avif 640w,
+                                /images/hero/optimized/hero-750.avif 750w,
+                                /images/hero/optimized/hero-828.avif 828w,
+                                /images/hero/optimized/hero-1024.avif 1024w,
+                                /images/hero/optimized/hero-1280.avif 1280w,
+                                /images/hero/optimized/hero-1536.avif 1536w"
+                        sizes="100vw">
+
+                <!-- WebP format - good compression, wide browser support -->
+                <source type="image/webp"
+                        srcset="/images/hero/optimized/hero-640.webp 640w,
+                                /images/hero/optimized/hero-750.webp 750w,
+                                /images/hero/optimized/hero-828.webp 828w,
+                                /images/hero/optimized/hero-1024.webp 1024w,
+                                /images/hero/optimized/hero-1280.webp 1280w,
+                                /images/hero/optimized/hero-1536.webp 1536w"
+                        sizes="100vw">
+
+                <!-- JPEG fallback - universal browser support -->
+                <source type="image/jpeg"
+                        srcset="/images/hero/optimized/hero-640.jpg 640w,
+                                /images/hero/optimized/hero-750.jpg 750w,
+                                /images/hero/optimized/hero-828.jpg 828w,
+                                /images/hero/optimized/hero-1024.jpg 1024w,
+                                /images/hero/optimized/hero-1280.jpg 1280w,
+                                /images/hero/optimized/hero-1536.jpg 1536w"
+                        sizes="100vw">
+
+                <!-- Fallback image with correct dimensions -->
+                <img src="/images/hero/optimized/hero-1280.jpg"
+                     alt="Two runners on a track"
+                     class="hero-image"
+                     loading="eager"
+                     fetchpriority="high"
+                     decoding="async"
+                     width="1536"
+                     height="1024">
             </picture>
             <div class="hero-overlay"></div>
         </div>
