@@ -9,21 +9,11 @@
  * - UK-only shipping
  *
  * Environment variables required:
- * - STRIPE_SECRET_KEY (test or live secret key)
+ * - STRIPE_SECRET_KEY (test or live secret key starting with sk_live_ or sk_test_)
  * - STRIPE_PRICE_ID_TSHIRT (price ID like price_...)
  */
 
-// Initialize Stripe - this will throw an error if STRIPE_SECRET_KEY is missing
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY, {
-  apiVersion: '2024-06-20',
-});
-
 exports.handler = async (event) => {
-  // Debug logs (safe - no secrets exposed)
-  console.log('STRIPE_SECRET_KEY present:', !!process.env.STRIPE_SECRET_KEY);
-  console.log('STRIPE_PRICE_ID_TSHIRT present:', !!process.env.STRIPE_PRICE_ID_TSHIRT);
-  console.log('Request origin:', event.headers.origin);
-
   // Only accept POST requests
   if (event.httpMethod !== 'POST') {
     return {
@@ -32,22 +22,52 @@ exports.handler = async (event) => {
     };
   }
 
-  // Validate environment variables
-  if (!process.env.STRIPE_SECRET_KEY) {
+  // Step 1: Read and sanitize STRIPE_SECRET_KEY
+  const rawKey = process.env.STRIPE_SECRET_KEY || '';
+  const secretKey = rawKey.trim();
+
+  // Detect whitespace issue
+  if (rawKey !== secretKey) {
+    console.warn('⚠️ STRIPE_SECRET_KEY had whitespace; trimmed');
+  }
+
+  // Step 2: Validate environment variables
+  if (!secretKey) {
     console.error('STRIPE_SECRET_KEY is not set');
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: 'Server configuration error: Missing STRIPE_SECRET_KEY' })
+      body: JSON.stringify({ error: 'Server misconfigured: STRIPE_SECRET_KEY is missing' })
     };
   }
 
-  if (!process.env.STRIPE_PRICE_ID_TSHIRT) {
-    console.error('STRIPE_PRICE_ID_TSHIRT is not set');
+  // Step 3: Validate key prefix
+  if (!secretKey.startsWith('sk_live_') && !secretKey.startsWith('sk_test_')) {
+    console.error('Invalid STRIPE_SECRET_KEY prefix:', secretKey.substring(0, 3) + '...');
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: 'Server configuration error: Missing STRIPE_PRICE_ID_TSHIRT' })
+      body: JSON.stringify({ error: 'Server misconfigured: STRIPE_SECRET_KEY must start with sk_live_ or sk_test_' })
     };
   }
+
+  // Step 4: Sanitize and validate STRIPE_PRICE_ID_TSHIRT
+  const priceId = (process.env.STRIPE_PRICE_ID_TSHIRT || '').trim();
+  if (!priceId || !priceId.startsWith('price_')) {
+    console.error('Invalid STRIPE_PRICE_ID_TSHIRT:', priceId || '(empty)');
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ error: 'Server misconfigured: Missing/invalid STRIPE_PRICE_ID_TSHIRT' })
+    };
+  }
+
+  // Safe debug logs (prefix only - no secrets exposed)
+  console.log('STRIPE_SECRET_KEY prefix:', secretKey.substring(0, 8) + '...');
+  console.log('STRIPE_PRICE_ID_TSHIRT:', priceId);
+  console.log('Request origin:', event.headers.origin);
+
+  // Initialize Stripe with sanitized key
+  const stripe = require('stripe')(secretKey, {
+    apiVersion: '2024-06-20',
+  });
 
   try {
     const { size, quantity } = JSON.parse(event.body);
@@ -76,23 +96,27 @@ exports.handler = async (event) => {
       };
     }
 
-    // Get Price ID from environment
-    const priceId = process.env.STRIPE_PRICE_ID_TSHIRT;
-    console.log('Using priceId:', priceId);
-
     // Build redirect URLs from request origin
     const origin = event.headers.origin || process.env.URL || 'https://aoro.run';
     const successUrl = `${origin}/success.html?session_id={CHECKOUT_SESSION_ID}`;
     const cancelUrl = `${origin}/products/aoro-preorder-tshirt.html`;
 
-    console.log('Success URL:', successUrl);
-    console.log('Cancel URL:', cancelUrl);
+    console.log('Creating checkout session:', {
+      priceId,
+      size,
+      quantity: qty,
+      successUrl,
+      cancelUrl
+    });
+
+    // Generate idempotency key to prevent duplicate sessions on double-click
+    const idempotencyKey = `checkout_${Date.now()}_${Math.random().toString(36).substring(7)}`;
 
     // Create Stripe Checkout Session
     const session = await stripe.checkout.sessions.create({
       mode: 'payment',
 
-      // Line items - using Price ID from environment
+      // Line items - using sanitized Price ID
       line_items: [
         {
           price: priceId,
@@ -121,14 +145,15 @@ exports.handler = async (event) => {
 
       // Additional settings
       allow_promotion_codes: true, // Allow discount codes
+    }, {
+      idempotencyKey: idempotencyKey
     });
 
     // Log session creation (helpful for debugging)
-    console.log('Checkout session created:', {
+    console.log('✅ Checkout session created:', {
       sessionId: session.id,
       size: size,
-      amount: PRODUCT_PRICE,
-      currency: CURRENCY,
+      quantity: qty
     });
 
     // Return the checkout URL to redirect the customer
@@ -141,7 +166,7 @@ exports.handler = async (event) => {
     };
 
   } catch (error) {
-    console.error('Error creating checkout session:', error);
+    console.error('❌ Error creating checkout session:', error);
 
     return {
       statusCode: 500,

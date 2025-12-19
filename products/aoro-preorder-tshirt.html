@@ -310,8 +310,14 @@
         }
 
         .preorder-button:disabled {
-            opacity: 0.5;
+            opacity: 0.4;
             cursor: not-allowed;
+            transform: none !important;
+            box-shadow: none !important;
+        }
+
+        .preorder-button:disabled::before {
+            opacity: 0;
         }
 
         .preorder-button.loading {
@@ -822,6 +828,10 @@
             const errorMessage = document.getElementById('error-message');
             const accordionHeaders = document.querySelectorAll('.accordion-header');
 
+            // Initialize buttons as disabled (until size is selected)
+            if (preorderBtn) preorderBtn.disabled = true;
+            if (preorderBtnMobile) preorderBtnMobile.disabled = true;
+
             // Accordion functionality
             accordionHeaders.forEach(header => {
                 header.addEventListener('click', () => {
@@ -842,10 +852,14 @@
                 accordionHeaders[0].classList.add('active');
             }
 
-            // Clear size error when a size is selected
+            // Enable buttons and clear error when a size is selected
             sizeInputs.forEach(input => {
                 input.addEventListener('change', () => {
                     sizeError.classList.remove('visible');
+
+                    // Enable preorder buttons when size is selected
+                    if (preorderBtn) preorderBtn.disabled = false;
+                    if (preorderBtnMobile) preorderBtnMobile.disabled = false;
                 });
             });
 
