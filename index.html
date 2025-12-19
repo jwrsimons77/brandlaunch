@@ -30,8 +30,11 @@
     <title>AORO | UK Running Brand & Coffee Pop-ups</title>
 
     <!-- Preload critical hero background image -->
-    <link rel="preload" href="/images/hero/hero-bg.webp" as="image" type="image/webp">
-    <link rel="preload" href="/images/hero/hero-bg.jpg" as="image" type="image/jpeg">
+    <link rel="preload" as="image" type="image/webp"
+          imagesrcset="/images/hero/samuele-giglio-XQRHkFzmCT0-unsplash-400.webp 400w,
+                       /images/hero/samuele-giglio-XQRHkFzmCT0-unsplash-800.webp 800w,
+                       /images/hero/samuele-giglio-XQRHkFzmCT0-unsplash-1200.webp 1200w"
+          imagesizes="100vw">
 
     <!-- Preload hero product image (LCP element) -->
     <link rel="preload" as="image" type="image/avif"
@@ -162,7 +165,10 @@
         <section id="home" class="hero">
         <!-- Background Image Container -->
         <div class="hero-background">
-            <div class="hero-image" style="--hero-bg-fallback: url('/images/hero/hero-bg.jpg')"></div>
+            <picture class="hero-image-picture">
+                <source srcset="/images/hero/samuele-giglio-XQRHkFzmCT0-unsplash-1200.webp 1200w, /images/hero/samuele-giglio-XQRHkFzmCT0-unsplash-800.webp 800w, /images/hero/samuele-giglio-XQRHkFzmCT0-unsplash-400.webp 400w" type="image/webp" sizes="100vw">
+                <img src="/images/hero/samuele-giglio-XQRHkFzmCT0-unsplash-800.webp" alt="Two runners on a track" class="hero-image" loading="eager" fetchpriority="high" width="3089" height="2048">
+            </picture>
             <div class="hero-overlay"></div>
         </div>
 
