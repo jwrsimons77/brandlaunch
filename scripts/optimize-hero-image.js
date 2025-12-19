@@ -5,26 +5,27 @@ const fs = require('fs').promises;
 const path = require('path');
 
 // Configuration
-const SOURCE_IMAGE = path.join(__dirname, '../images/drops/cloud-piercer-tee.jpg');
-const OUTPUT_DIR = path.join(__dirname, '../images/drops/optimized');
-const IMAGE_NAME = 'cloud-piercer-tee';
+const SOURCE_IMAGE = path.join(__dirname, '../images/hero/57C9980E-9F97-47A7-B945-7F5288BA9B49.png');
+const OUTPUT_DIR = path.join(__dirname, '../images/hero/optimized');
+const IMAGE_NAME = 'hero';
 
-// Responsive sizes (widths in pixels)
-const SIZES = [640, 960, 1280, 1600];
+// Responsive sizes (widths in pixels) - Mobile-first approach
+// Original is 1536x1024, so max size is 1536w
+const SIZES = [640, 750, 828, 1024, 1280, 1536];
 
-// Format configurations
+// Format configurations - Aggressive compression for <250KB target
 const FORMATS = [
   {
     ext: 'avif',
-    options: { quality: 80, effort: 6 }, // effort: 0-9, higher = better compression but slower
+    options: { quality: 75, effort: 8 }, // effort: 0-9, higher = better compression but slower
   },
   {
     ext: 'webp',
-    options: { quality: 85 },
+    options: { quality: 80 },
   },
   {
     ext: 'jpg',
-    options: { quality: 85, mozjpeg: true },
+    options: { quality: 80, mozjpeg: true },
   },
 ];
 
