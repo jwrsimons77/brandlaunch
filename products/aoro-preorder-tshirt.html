@@ -16,19 +16,25 @@
     <link rel="icon" type="image/svg+xml" href="/images/icons/favicon.svg">
 
     <style>
-        /* AORO Product Page Styles - Isolated, inspired by premium product pages */
+        /* AORO Product Page Styles - Dark theme with pink accents matching homepage */
         :root {
-            --color-primary: #FF8B94;
-            --color-primary-dark: #E46F78;
+            /* Updated: Pink accent color matching AORO nav button */
+            --color-primary: #F97BD2;
+            --color-primary-hover: #E46BC4;
+            --color-primary-light: rgba(249, 123, 210, 0.1);
+            /* Updated: Dark gradient background */
             --color-dark: #0A0A0A;
             --color-dark-secondary: #1A1A1A;
-            --color-gray: rgba(10, 10, 10, 0.65);
-            --color-gray-light: #CCCCCC;
-            --color-light: #F5F5F5;
+            --color-dark-card: #131313;
+            --color-gray: rgba(255, 255, 255, 0.65);
+            --color-gray-light: rgba(255, 255, 255, 0.2);
+            --color-light: rgba(255, 255, 255, 0.05);
             --color-white: #FFFFFF;
             --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             --transition-base: 0.3s ease;
-            --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.15);
+            /* Updated: Enhanced shadow for card effect */
+            --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.4);
+            --shadow-card-hover: 0 12px 48px rgba(0, 0, 0, 0.5);
         }
 
         * {
@@ -37,22 +43,26 @@
             box-sizing: border-box;
         }
 
+        /* Updated: Dark gradient background matching homepage aesthetic */
         body {
             font-family: var(--font-primary);
-            background-color: var(--color-white);
-            color: var(--color-dark);
+            background: linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 50%, #0F0F0F 100%);
+            background-attachment: fixed;
+            color: var(--color-white);
             line-height: 1.6;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
+            min-height: 100vh;
         }
 
-        /* Header */
+        /* Updated: Header with dark theme */
         .header {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
-            background: var(--color-white);
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
             border-bottom: 1px solid var(--color-light);
             z-index: 1000;
             padding: 1rem 1.5rem;
@@ -77,6 +87,7 @@
             height: 22px;
             width: auto;
             transition: transform var(--transition-base);
+            filter: brightness(0) invert(1); /* Updated: Make logo white on dark background */
         }
 
         .logo-image:hover,
@@ -92,7 +103,7 @@
         }
 
         .back-link:hover {
-            color: var(--color-dark);
+            color: var(--color-white);
         }
 
         /* Main Container */
@@ -102,12 +113,22 @@
             padding-top: 80px;
         }
 
-        /* Product Layout */
+        /* Updated: Product Layout with card wrapper */
         .product-container {
             display: grid;
             grid-template-columns: 1fr;
             gap: 2rem;
             padding: 2rem 1.5rem;
+            /* Updated: Card-style wrapper with dark background, shadow, and rounded corners */
+            background: var(--color-dark-card);
+            border-radius: 24px;
+            box-shadow: var(--shadow-card);
+            transition: box-shadow var(--transition-base);
+            margin: 1.5rem;
+        }
+
+        .product-container:hover {
+            box-shadow: var(--shadow-card-hover);
         }
 
         @media (min-width: 768px) {
@@ -115,6 +136,7 @@
                 grid-template-columns: 1fr 1fr;
                 gap: 3rem;
                 padding: 3rem 2rem;
+                margin: 2rem;
             }
         }
 
@@ -122,6 +144,7 @@
             .product-container {
                 gap: 4rem;
                 padding: 4rem 3rem;
+                margin: 3rem auto;
             }
         }
 
@@ -130,13 +153,15 @@
             position: relative;
         }
 
+        /* Updated: Image wrapper with enhanced styling for dark theme */
         .product-image-wrapper {
             position: sticky;
             top: 100px;
-            background: var(--color-light);
-            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 16px;
             overflow: hidden;
             aspect-ratio: 3/4;
+            border: 1px solid var(--color-light);
         }
 
         .product-image {
@@ -145,6 +170,7 @@
             object-fit: cover;
         }
 
+        /* Updated: Preorder badge with new pink accent color */
         .preorder-badge {
             position: absolute;
             top: 1rem;
@@ -157,6 +183,7 @@
             font-weight: 600;
             letter-spacing: 0.05em;
             text-transform: uppercase;
+            box-shadow: 0 4px 12px rgba(249, 123, 210, 0.3);
         }
 
         /* Product Info Section */
@@ -166,11 +193,40 @@
             gap: 1.5rem;
         }
 
+        /* New: DROP label styling matching homepage aesthetic */
+        .drop-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--color-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .drop-label::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: var(--color-primary);
+            border-radius: 50%;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Updated: Product title with enhanced typography */
         .product-title {
             font-size: 2rem;
             font-weight: 700;
             letter-spacing: -0.02em;
             line-height: 1.2;
+            color: var(--color-white);
         }
 
         @media (min-width: 768px) {
@@ -179,12 +235,14 @@
             }
         }
 
+        /* Updated: Price styling for dark theme */
         .product-price {
             font-size: 1.5rem;
             font-weight: 600;
-            color: var(--color-dark);
+            color: var(--color-white);
         }
 
+        /* Updated: Preorder message for dark theme */
         .preorder-message {
             display: inline-flex;
             align-items: center;
@@ -194,6 +252,7 @@
             border-radius: 8px;
             font-size: 0.875rem;
             color: var(--color-gray);
+            border: 1px solid var(--color-gray-light);
         }
 
         .preorder-message::before {
@@ -201,7 +260,7 @@
             font-size: 1rem;
         }
 
-        /* Size Selector */
+        /* Updated: Size Selector for dark theme */
         .size-selector {
             display: flex;
             flex-direction: column;
@@ -233,33 +292,37 @@
             height: 0;
         }
 
+        /* Updated: Outlined pill-shaped size buttons */
         .size-option label {
             display: flex;
             align-items: center;
             justify-content: center;
             padding: 1rem;
             border: 2px solid var(--color-gray-light);
-            border-radius: 8px;
+            border-radius: 999px; /* Updated: Full pill shape (rounded ends) */
             font-weight: 600;
             cursor: pointer;
             transition: all var(--transition-base);
-            background: var(--color-white);
+            background: transparent; /* Updated: Transparent background */
+            color: var(--color-white);
         }
 
+        /* Updated: Pink highlight for selected size (outlined style, not filled) */
         .size-option input[type="radio"]:checked + label {
             border-color: var(--color-primary);
-            background: var(--color-primary);
-            color: var(--color-white);
-            box-shadow: 0 0 0 3px rgba(255, 139, 148, 0.1);
+            background: var(--color-primary-light); /* Updated: Light pink background instead of solid */
+            color: var(--color-primary);
+            box-shadow: 0 0 0 3px rgba(249, 123, 210, 0.15);
         }
 
         .size-option label:hover {
-            border-color: var(--color-dark);
+            border-color: var(--color-primary);
+            background: rgba(249, 123, 210, 0.05);
         }
 
         .size-error {
             display: none;
-            color: #dc2626;
+            color: #ff6b6b;
             font-size: 0.875rem;
             margin-top: 0.25rem;
         }
@@ -268,14 +331,14 @@
             display: block;
         }
 
-        /* CTA Button */
+        /* Updated: Pink preorder button matching nav style */
         .preorder-button {
             width: 100%;
             padding: 1.25rem 2rem;
-            background: var(--color-dark);
+            background: var(--color-primary); /* Updated: Bright pink fill */
             color: var(--color-white);
-            border: 2px solid transparent;
-            border-radius: 8px;
+            border: 2px solid var(--color-primary);
+            border-radius: 12px; /* Updated: More rounded corners */
             font-size: 1rem;
             font-weight: 600;
             text-transform: uppercase;
@@ -285,6 +348,7 @@
             margin-top: 1rem;
             position: relative;
             overflow: hidden;
+            box-shadow: 0 4px 16px rgba(249, 123, 210, 0.3);
         }
 
         .preorder-button::before {
@@ -294,7 +358,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+            background: var(--color-primary-hover);
             opacity: 0;
             transition: opacity var(--transition-base);
             z-index: 0;
@@ -305,25 +369,28 @@
             z-index: 1;
         }
 
+        /* Updated: Hover effect with darker pink */
         .preorder-button:hover:not(:disabled)::before {
             opacity: 1;
         }
 
         .preorder-button:hover:not(:disabled) {
-            border-color: var(--color-primary);
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(255, 139, 148, 0.4);
+            box-shadow: 0 8px 24px rgba(249, 123, 210, 0.5);
         }
 
         .preorder-button:active:not(:disabled) {
             transform: translateY(0);
         }
 
+        /* Updated: Disabled state styling */
         .preorder-button:disabled {
-            opacity: 0.4;
+            opacity: 0.5;
             cursor: not-allowed;
             transform: none !important;
-            box-shadow: none !important;
+            box-shadow: 0 4px 16px rgba(249, 123, 210, 0.15) !important;
+            background: rgba(249, 123, 210, 0.3);
+            border-color: rgba(249, 123, 210, 0.3);
         }
 
         .preorder-button:disabled::before {
@@ -354,7 +421,7 @@
             to { transform: rotate(360deg); }
         }
 
-        /* Product Details */
+        /* Updated: Product Details for dark theme */
         .product-details {
             display: flex;
             flex-direction: column;
@@ -374,7 +441,7 @@
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.05em;
-            color: var(--color-dark);
+            color: var(--color-white);
         }
 
         .detail-content {
@@ -400,14 +467,15 @@
             color: var(--color-primary);
         }
 
-        /* Crew Badge */
+        /* Updated: Crew Badge for dark theme */
         .crew-badge {
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
             margin-top: 1rem;
             padding: 0.75rem 1rem;
-            background: linear-gradient(135deg, var(--color-dark) 0%, var(--color-dark-secondary) 100%);
+            background: var(--color-light);
+            border: 1px solid var(--color-gray-light);
             border-radius: 8px;
             color: var(--color-white);
             font-size: 0.875rem;
@@ -419,31 +487,32 @@
             font-size: 1.125rem;
         }
 
-        /* Shipping Notice */
+        /* Updated: Shipping Notice - moved below button with smaller text */
         .shipping-notice {
-            background: #fef3c7;
+            background: rgba(245, 158, 11, 0.1);
             border-left: 3px solid #f59e0b;
-            padding: 1rem;
+            padding: 0.75rem 1rem;
             border-radius: 6px;
-            font-size: 0.875rem;
-            color: #92400e;
-            line-height: 1.6;
+            font-size: 0.8125rem;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.5;
+            margin-top: 0.75rem;
         }
 
         .shipping-notice strong {
             display: block;
             margin-bottom: 0.25rem;
-            color: #78350f;
+            color: var(--color-white);
         }
 
-        /* Error Message */
+        /* Updated: Error Message for dark theme */
         .error-message {
             display: none;
-            background: #fee;
+            background: rgba(220, 38, 38, 0.1);
             border-left: 3px solid #dc2626;
             padding: 1rem;
             border-radius: 6px;
-            color: #991b1b;
+            color: #ff6b6b;
             font-size: 0.875rem;
             margin-top: 1rem;
         }
@@ -452,7 +521,7 @@
             display: block;
         }
 
-        /* Collapsible Accordions */
+        /* Updated: Collapsible Accordions for dark theme */
         .accordion {
             border-top: 1px solid var(--color-light);
         }
@@ -470,8 +539,9 @@
             justify-content: space-between;
             align-items: center;
             cursor: pointer;
-            transition: all var(--transition-fast);
+            transition: all var(--transition-base);
             text-align: left;
+            color: var(--color-white);
         }
 
         .accordion-header:hover {
@@ -536,6 +606,7 @@
             max-height: 1000px;
         }
 
+        /* Updated: Accordion body for dark theme */
         .accordion-body {
             padding-bottom: 1.5rem;
             font-size: 0.9375rem;
@@ -567,22 +638,23 @@
         }
 
         .accordion-body strong {
-            color: var(--color-dark);
+            color: var(--color-white);
             font-weight: 600;
         }
 
-        /* Mobile Sticky CTA */
+        /* Updated: Mobile Sticky CTA for dark theme */
         .sticky-cta-mobile {
             display: none;
             position: fixed;
             bottom: 0;
             left: 0;
             right: 0;
-            background: var(--color-white);
+            background: rgba(10, 10, 10, 0.98);
+            backdrop-filter: blur(10px);
             border-top: 1px solid var(--color-light);
             padding: 1rem 1.5rem;
             z-index: 999;
-            box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.5);
         }
 
         @media (max-width: 767px) {
@@ -616,7 +688,7 @@
         .sticky-cta-price {
             font-size: 1.25rem;
             font-weight: 700;
-            color: var(--color-dark);
+            color: var(--color-white);
             line-height: 1.2;
         }
 
@@ -647,7 +719,7 @@
             }
         }
 
-        /* Size option pill enhancement */
+        /* Updated: Size option pill enhancement with improved focus states */
         .size-option label {
             min-height: 56px;
             font-size: 0.9375rem;
@@ -657,6 +729,10 @@
         .size-option input[type="radio"]:focus + label {
             outline: 2px solid var(--color-primary);
             outline-offset: 2px;
+        }
+
+        .size-option input[type="radio"]:focus:not(:focus-visible) + label {
+            outline: none;
         }
 
         /* Password Gate Styles */
@@ -826,7 +902,9 @@
 
             <!-- Product Info -->
             <div class="product-info">
+                <!-- New: DROP label above product title -->
                 <div>
+                    <div class="drop-label">DROP 001 · LIMITED RUN</div>
                     <h1 class="product-title">AORO T-Shirt (Preorder)</h1>
                     <p class="product-price">£29.99</p>
                 </div>
@@ -859,16 +937,16 @@
                     <span class="size-error" id="size-error">Please select a size</span>
                 </div>
 
-                <!-- Shipping Notice -->
+                <!-- Preorder Button (moved before shipping notice) -->
+                <button class="preorder-button" id="preorder-btn">
+                    <span>Preorder Now</span>
+                </button>
+
+                <!-- Updated: Shipping Notice moved below button with smaller text -->
                 <div class="shipping-notice">
                     <strong>Shipping Notice:</strong>
                     Shipping will be calculated after order confirmation based on your location. We'll email you if additional shipping costs are due.
                 </div>
-
-                <!-- Preorder Button -->
-                <button class="preorder-button" id="preorder-btn">
-                    <span>Preorder Now</span>
-                </button>
 
                 <!-- Error Message -->
                 <div class="error-message" id="error-message"></div>
