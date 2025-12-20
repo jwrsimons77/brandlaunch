@@ -9,9 +9,9 @@
    =================================== */
 :root {
     /* Primary Color Palette - AORO pink */
-    --color-primary: #FF8E9E;        /* Brand primary pink - AORO official */
-    --color-primary-dark: #E46F78;
-    --color-primary-light: #FFC2C7;
+    --color-primary: #F97BD2;        /* Brand primary pink - AORO official */
+    --color-primary-dark: #E46BC4;
+    --color-primary-light: #FFC2E7;
 
     /* Neutral Colors - Clean athletic palette */
     --color-dark: #0A0A0A;
