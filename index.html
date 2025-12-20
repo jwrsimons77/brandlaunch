@@ -57,6 +57,9 @@
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/images/icons/favicon.svg">
 
+    <!-- Preload header logo for instant render -->
+    <link rel="preload" as="image" type="image/svg+xml" href="/images/logos/aoro-logo.svg" fetchpriority="high">
+
     <!-- Structured Data -->
     <script type="application/ld+json">
     {
@@ -119,7 +122,7 @@
                 <div class="nav-wrapper">
                     <!-- Logo/Brand Name -->
                     <a href="#home" class="logo" aria-label="AORO home">
-                        <img src="/images/logos/aoro-logo.svg" alt="AORO logo" class="logo-image">
+                        <img src="/images/logos/aoro-logo.svg" alt="AORO logo" class="logo-image" width="88" height="22" loading="eager" fetchpriority="high" decoding="async">
                     </a>
 
                     <!-- Desktop Navigation -->
@@ -349,7 +352,7 @@
         <div class="container">
             <div class="footer-content-minimal">
                 <div class="footer-brand">
-                    <img src="/images/logos/aoro-logo.svg" alt="AORO logo" class="logo-image" loading="lazy">
+                    <img src="/images/logos/aoro-logo.svg" alt="AORO logo" class="logo-image" width="88" height="22" loading="eager" decoding="async">
                     <p>Run together.</p>
                 </div>
 

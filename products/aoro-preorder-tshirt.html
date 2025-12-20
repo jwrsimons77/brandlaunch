@@ -15,6 +15,9 @@
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/images/icons/favicon.svg">
 
+    <!-- Preload header logo for instant render -->
+    <link rel="preload" as="image" type="image/svg+xml" href="/images/logos/aoro-logo.svg" fetchpriority="high">
+
     <style>
         /* AORO Product Page Styles - Dark theme with pink accents matching homepage */
         :root {
@@ -642,7 +645,7 @@
             font-weight: 600;
         }
 
-        /* Updated: Mobile Sticky CTA for dark theme */
+        /* Updated: Mobile Sticky CTA for dark theme with size selector */
         .sticky-cta-mobile {
             display: none;
             position: fixed;
@@ -662,27 +665,29 @@
                 display: block;
             }
 
-            .product-info .preorder-button {
+            .product-info .preorder-button,
+            .product-info .size-selector {
                 display: none;
             }
 
             body {
-                padding-bottom: 90px;
+                padding-bottom: 140px;
             }
         }
 
         .sticky-cta-content {
             display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 1rem;
+            flex-direction: column;
+            gap: 0.75rem;
             max-width: 1280px;
             margin: 0 auto;
         }
 
+        /* Top row: Price and title */
         .sticky-cta-info {
             display: flex;
-            flex-direction: column;
+            justify-content: space-between;
+            align-items: baseline;
         }
 
         .sticky-cta-price {
@@ -697,10 +702,82 @@
             color: var(--color-gray);
         }
 
+        /* Bottom row: Size selector and button side by side */
+        .sticky-cta-actions {
+            display: flex;
+            gap: 0.75rem;
+            align-items: stretch;
+        }
+
+        .sticky-size-selector {
+            flex: 0 0 auto;
+            min-width: 80px;
+        }
+
+        .sticky-size-selector select {
+            width: 100%;
+            height: 100%;
+            padding: 0.875rem 0.75rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid var(--color-gray-light);
+            border-radius: 12px;
+            color: var(--color-white);
+            font-size: 0.9375rem;
+            font-weight: 600;
+            font-family: var(--font-primary);
+            cursor: pointer;
+            transition: all var(--transition-base);
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23F97BD2' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 0.75rem center;
+            padding-right: 2rem;
+        }
+
+        .sticky-size-selector select:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            background: rgba(249, 123, 210, 0.05);
+            box-shadow: 0 0 0 3px rgba(249, 123, 210, 0.15);
+        }
+
+        .sticky-size-selector select option {
+            background: #1A1A1A;
+            color: var(--color-white);
+            padding: 0.5rem;
+        }
+
         .sticky-cta-mobile .preorder-button {
             flex: 1;
             margin-top: 0;
-            max-width: 200px;
+            padding: 0.875rem 1.5rem;
+            font-size: 0.875rem;
+        }
+
+        /* Error message in sticky bar */
+        .sticky-size-error {
+            display: none;
+            color: #ff6b6b;
+            font-size: 0.75rem;
+            margin-top: -0.5rem;
+            text-align: center;
+        }
+
+        .sticky-size-error.visible {
+            display: block;
+        }
+
+        /* Screen reader only utility class */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
         }
 
         /* Image gallery enhancement */
@@ -855,7 +932,7 @@
     <!-- Password Gate (Friends & Family Access) -->
     <div class="password-gate" id="password-gate">
         <div class="password-gate-content">
-            <img src="/images/logos/aoro-logo.svg" alt="AORO" class="password-gate-logo">
+            <img src="/images/logos/aoro-logo.svg" alt="AORO" class="password-gate-logo" width="128" height="32" loading="eager" decoding="async">
             <h2>Friends & Family Access</h2>
             <p>This preorder page is currently private. Enter the password to continue.</p>
             <form class="password-gate-form" id="password-form">
@@ -877,7 +954,7 @@
     <header class="header">
         <div class="header-content">
             <a href="/" class="logo" aria-label="AORO home">
-                <img src="/images/logos/aoro-logo.svg" alt="AORO logo" class="logo-image">
+                <img src="/images/logos/aoro-logo.svg" alt="AORO logo" class="logo-image" width="88" height="22" loading="eager" fetchpriority="high" decoding="async">
             </a>
             <a href="/" class="back-link">← Back to Home</a>
         </div>
@@ -1040,9 +1117,22 @@
                 <span class="sticky-cta-price">£29.99</span>
                 <span class="sticky-cta-title">AORO T-Shirt</span>
             </div>
-            <button class="preorder-button" id="preorder-btn-mobile">
-                <span>Preorder</span>
-            </button>
+            <div class="sticky-cta-actions">
+                <div class="sticky-size-selector">
+                    <label for="size-mobile" class="sr-only">Select size</label>
+                    <select id="size-mobile" name="size-mobile" aria-label="Select size" required>
+                        <option value="">Size</option>
+                        <option value="S">S</option>
+                        <option value="M">M</option>
+                        <option value="L">L</option>
+                        <option value="XL">XL</option>
+                    </select>
+                </div>
+                <button class="preorder-button" id="preorder-btn-mobile">
+                    <span>Preorder</span>
+                </button>
+            </div>
+            <span class="sticky-size-error" id="sticky-size-error">Select a size</span>
         </div>
     </div>
 
@@ -1144,13 +1234,11 @@
             const preorderBtn = document.getElementById('preorder-btn');
             const preorderBtnMobile = document.getElementById('preorder-btn-mobile');
             const sizeInputs = document.querySelectorAll('input[name="size"]');
+            const sizeMobileSelect = document.getElementById('size-mobile');
             const sizeError = document.getElementById('size-error');
+            const stickySizeError = document.getElementById('sticky-size-error');
             const errorMessage = document.getElementById('error-message');
             const accordionHeaders = document.querySelectorAll('.accordion-header');
-
-            // Initialize buttons as disabled (until size is selected)
-            if (preorderBtn) preorderBtn.disabled = true;
-            if (preorderBtnMobile) preorderBtnMobile.disabled = true;
 
             // Accordion functionality
             accordionHeaders.forEach(header => {
@@ -1172,31 +1260,66 @@
                 accordionHeaders[0].classList.add('active');
             }
 
-            // Enable buttons and clear error when a size is selected
+            // Sync desktop radio buttons with mobile select (bidirectional)
             sizeInputs.forEach(input => {
                 input.addEventListener('change', () => {
                     sizeError.classList.remove('visible');
+                    stickySizeError.classList.remove('visible');
 
-                    // Enable preorder buttons when size is selected
-                    if (preorderBtn) preorderBtn.disabled = false;
-                    if (preorderBtnMobile) preorderBtnMobile.disabled = false;
+                    // Sync to mobile select
+                    if (sizeMobileSelect) {
+                        sizeMobileSelect.value = input.value;
+                    }
                 });
             });
 
+            // Sync mobile select with desktop radio buttons
+            if (sizeMobileSelect) {
+                sizeMobileSelect.addEventListener('change', () => {
+                    const selectedValue = sizeMobileSelect.value;
+                    stickySizeError.classList.remove('visible');
+                    sizeError.classList.remove('visible');
+
+                    // Sync to desktop radios
+                    sizeInputs.forEach(input => {
+                        if (input.value === selectedValue) {
+                            input.checked = true;
+                        }
+                    });
+                });
+            }
+
             // Shared checkout handler
-            async function handleCheckout(button) {
-                // Get selected size
-                const selectedSize = document.querySelector('input[name="size"]:checked');
+            async function handleCheckout(button, isMobile = false) {
+                // Get selected size from appropriate source
+                let selectedSizeValue = null;
+
+                if (isMobile && sizeMobileSelect) {
+                    selectedSizeValue = sizeMobileSelect.value;
+                } else {
+                    const selectedSize = document.querySelector('input[name="size"]:checked');
+                    selectedSizeValue = selectedSize ? selectedSize.value : null;
+                }
 
                 // Validate size selection
-                if (!selectedSize) {
-                    sizeError.classList.add('visible');
-                    sizeError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                if (!selectedSizeValue) {
+                    if (isMobile) {
+                        stickySizeError.classList.add('visible');
+                        // Auto-focus the size selector on mobile
+                        if (sizeMobileSelect) {
+                            sizeMobileSelect.focus();
+                        }
+                    } else {
+                        sizeError.classList.add('visible');
+                        sizeError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
                     return;
                 }
 
                 // Hide any previous errors
                 errorMessage.classList.remove('visible');
+                sizeError.classList.remove('visible');
+                stickySizeError.classList.remove('visible');
 
                 // Disable buttons and show loading state
                 const buttons = [preorderBtn, preorderBtnMobile].filter(btn => btn);
@@ -1213,7 +1336,7 @@
                             'Content-Type': 'application/json',
                         },
                         body: JSON.stringify({
-                            size: selectedSize.value,
+                            size: selectedSizeValue,
                             quantity: 1
                         })
                     });
@@ -1246,11 +1369,11 @@
 
             // Handle preorder button clicks
             if (preorderBtn) {
-                preorderBtn.addEventListener('click', () => handleCheckout(preorderBtn));
+                preorderBtn.addEventListener('click', () => handleCheckout(preorderBtn, false));
             }
 
             if (preorderBtnMobile) {
-                preorderBtnMobile.addEventListener('click', () => handleCheckout(preorderBtnMobile));
+                preorderBtnMobile.addEventListener('click', () => handleCheckout(preorderBtnMobile, true));
             }
         })();
     </script>
