@@ -18,6 +18,9 @@
     <!-- Preload header logo for instant render -->
     <link rel="preload" as="image" type="image/svg+xml" href="/images/logos/aoro-logo.svg" fetchpriority="high">
 
+    <!-- Preload hero product image (LCP element) -->
+    <link rel="preload" as="image" type="image/jpeg" href="/images/drops/IMG_3389.jpeg" fetchpriority="high">
+
     <style>
         /* AORO Product Page Styles - Dark theme with pink accents matching homepage */
         :root {
@@ -90,7 +93,6 @@
             height: 22px;
             width: auto;
             transition: transform var(--transition-base);
-            filter: brightness(0) invert(1); /* Updated: Make logo white on dark background */
         }
 
         .logo-image:hover,
@@ -113,7 +115,7 @@
         .main-container {
             max-width: 1280px;
             margin: 0 auto;
-            padding-top: 80px;
+            padding-top: 60px;
         }
 
         /* Updated: Product Layout with card wrapper */
@@ -121,13 +123,13 @@
             display: grid;
             grid-template-columns: 1fr;
             gap: 2rem;
-            padding: 2rem 1.5rem;
+            padding: 1rem 1rem;
             /* Updated: Card-style wrapper with dark background, shadow, and rounded corners */
             background: var(--color-dark-card);
             border-radius: 24px;
             box-shadow: var(--shadow-card);
             transition: box-shadow var(--transition-base);
-            margin: 1.5rem;
+            margin: 0.5rem;
         }
 
         .product-container:hover {
@@ -971,8 +973,11 @@
                         src="/images/drops/IMG_3389.jpeg"
                         alt="AORO T-Shirt - Limited Edition with Feather Design"
                         class="product-image"
+                        width="1536"
+                        height="2048"
                         loading="eager"
                         fetchpriority="high"
+                        decoding="async"
                     >
                 </div>
             </div>
@@ -1100,11 +1105,6 @@
                             </div>
                         </div>
                     </div>
-                </div>
-
-                <!-- Crew Badge -->
-                <div class="crew-badge">
-                    Cloud Piercer Collective
                 </div>
             </div>
         </div>
