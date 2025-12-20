@@ -9,7 +9,7 @@
    =================================== */
 :root {
     /* Primary Color Palette - AORO pink */
-    --color-primary: #FF8B94;        /* Brand primary pink */
+    --color-primary: #FF8E9E;        /* Brand primary pink - AORO official */
     --color-primary-dark: #E46F78;
     --color-primary-light: #FFC2C7;
 
@@ -502,8 +502,6 @@ header {
     height: 22px;
     width: auto;
     transition: transform var(--transition-fast), filter var(--transition-fast);
-    /* Mobile: White logo with strong shadow for visibility over hero */
-    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.5)) brightness(0) invert(1);
 }
 
 .logo-image:hover,
@@ -511,18 +509,37 @@ header {
     transform: translateY(-1px);
 }
 
-.navbar.scrolled .logo-image {
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3)) brightness(0) invert(1);
+/* Force AORO brand pink on header logo */
+header .logo,
+header .logo svg,
+header .logo path,
+header .logo text,
+header .logo-image {
+    fill: var(--color-primary) !important;
+    color: var(--color-primary) !important;
 }
 
-/* Desktop: Lighter shadow since navbar has background */
+/* Ensure no color shifts on scroll */
+.navbar.scrolled .logo-image {
+    filter: none;
+}
+
+.navbar.scrolled .logo,
+.navbar.scrolled .logo svg,
+.navbar.scrolled .logo path,
+.navbar.scrolled .logo text {
+    fill: var(--color-primary) !important;
+    color: var(--color-primary) !important;
+}
+
+/* Desktop: Maintain consistent pink */
 @media (min-width: 768px) {
     .logo-image {
-        filter: drop-shadow(0 2px 4px rgba(10, 10, 10, 0.15)) brightness(0) invert(1);
+        filter: none;
     }
 
     .navbar.scrolled .logo-image {
-        filter: brightness(0) invert(1);
+        filter: none;
     }
 }
 
@@ -2109,6 +2126,22 @@ header {
     margin-bottom: var(--spacing-sm);
 }
 
+/* Force AORO brand pink on footer logo */
+footer .logo,
+footer .logo svg,
+footer .logo path,
+footer .logo text,
+footer .logo-image,
+footer .footer-brand,
+footer .footer-brand svg,
+footer .footer-brand path,
+footer .footer-brand text {
+    fill: var(--color-primary) !important;
+    color: var(--color-primary) !important;
+    opacity: 1 !important;
+    filter: none !important;
+}
+
 .footer-brand p {
     color: var(--color-gray);
     margin: 0;
@@ -3075,6 +3108,47 @@ header {
     .culture-grid,
     .events-grid-minimal {
         gap: var(--spacing-md); /* Tighter gaps on mobile */
+    }
+}
+
+/* ===================================
+   MOBILE SAFARI LOGO COLOR FIX
+   Prevent color shifting on iPhone Safari
+   =================================== */
+/* Neutralize any potential color-shifting effects on logos */
+header .logo,
+header .logo *,
+footer .logo,
+footer .logo *,
+footer .footer-brand,
+footer .footer-brand * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    mix-blend-mode: normal !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+}
+
+/* Prevent dark mode from affecting logo colors */
+@media (prefers-color-scheme: dark) {
+    header .logo,
+    header .logo svg,
+    header .logo path,
+    header .logo text,
+    header .logo-image,
+    footer .logo,
+    footer .logo svg,
+    footer .logo path,
+    footer .logo text,
+    footer .logo-image,
+    footer .footer-brand,
+    footer .footer-brand svg,
+    footer .footer-brand path,
+    footer .footer-brand text {
+        fill: var(--color-primary) !important;
+        color: var(--color-primary) !important;
+        opacity: 1 !important;
+        filter: none !important;
     }
 }
 
