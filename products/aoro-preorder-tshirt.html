@@ -928,6 +928,317 @@
         .password-gate-error.visible {
             opacity: 1;
         }
+
+        /* Size & Fit Guide Modal Styles */
+        .size-fit-guide-trigger {
+            background: transparent;
+            border: none;
+            color: var(--color-primary);
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-decoration: underline;
+            cursor: pointer;
+            padding: 0;
+            margin-top: 0.5rem;
+            transition: color var(--transition-base);
+            font-family: var(--font-primary);
+        }
+
+        .size-fit-guide-trigger:hover {
+            color: var(--color-primary-hover);
+        }
+
+        /* Modal Overlay */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(10, 10, 10, 0.85);
+            backdrop-filter: blur(8px);
+            z-index: 10001;
+            padding: 1rem;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .modal-overlay.visible {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Modal Container */
+        .modal-container {
+            background: var(--color-dark-card);
+            border-radius: 16px;
+            max-width: 800px;
+            width: 100%;
+            max-height: 90vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+            border: 1px solid var(--color-light);
+            position: relative;
+            margin: 2rem auto;
+        }
+
+        @media (max-width: 767px) {
+            .modal-container {
+                max-width: 100%;
+                margin: 1rem;
+                max-height: 95vh;
+            }
+        }
+
+        /* Modal Header */
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid var(--color-light);
+            flex-shrink: 0;
+        }
+
+        @media (max-width: 767px) {
+            .modal-header {
+                padding: 1.25rem 1.5rem;
+            }
+        }
+
+        .modal-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--color-white);
+            letter-spacing: -0.01em;
+            margin: 0;
+        }
+
+        .modal-close {
+            background: transparent;
+            border: none;
+            color: var(--color-gray);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.25rem;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 6px;
+            transition: all var(--transition-base);
+            line-height: 1;
+        }
+
+        .modal-close:hover {
+            background: var(--color-light);
+            color: var(--color-white);
+        }
+
+        .modal-close:focus {
+            outline: 2px solid var(--color-primary);
+            outline-offset: 2px;
+        }
+
+        /* Modal Body */
+        .modal-body {
+            padding: 2rem;
+            overflow-y: auto;
+            flex: 1;
+        }
+
+        @media (max-width: 767px) {
+            .modal-body {
+                padding: 1.5rem;
+            }
+        }
+
+        /* Unit Toggle */
+        .unit-toggle-container {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 1.5rem;
+        }
+
+        .unit-toggle {
+            display: inline-flex;
+            background: var(--color-light);
+            border-radius: 999px;
+            padding: 0.25rem;
+            gap: 0.25rem;
+            border: 1px solid var(--color-gray-light);
+        }
+
+        .unit-toggle button {
+            padding: 0.5rem 1rem;
+            background: transparent;
+            border: none;
+            color: var(--color-gray);
+            font-size: 0.875rem;
+            font-weight: 600;
+            border-radius: 999px;
+            cursor: pointer;
+            transition: all var(--transition-base);
+            font-family: var(--font-primary);
+        }
+
+        .unit-toggle button.active {
+            background: var(--color-primary);
+            color: var(--color-white);
+            box-shadow: 0 2px 8px rgba(249, 123, 210, 0.3);
+        }
+
+        .unit-toggle button:hover:not(.active) {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--color-white);
+        }
+
+        /* Size Chart Table */
+        .size-chart-wrapper {
+            overflow-x: auto;
+            margin-bottom: 2rem;
+            border-radius: 8px;
+            border: 1px solid var(--color-light);
+        }
+
+        .size-chart-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.875rem;
+        }
+
+        .size-chart-table thead {
+            background: var(--color-light);
+        }
+
+        .size-chart-table th {
+            padding: 1rem 0.75rem;
+            text-align: left;
+            font-weight: 600;
+            color: var(--color-white);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-size: 0.75rem;
+            border-bottom: 1px solid var(--color-gray-light);
+        }
+
+        .size-chart-table th:first-child {
+            padding-left: 1.5rem;
+        }
+
+        .size-chart-table th:last-child {
+            padding-right: 1.5rem;
+        }
+
+        .size-chart-table td {
+            padding: 1rem 0.75rem;
+            color: var(--color-gray);
+            border-bottom: 1px solid var(--color-light);
+        }
+
+        .size-chart-table td:first-child {
+            color: var(--color-white);
+            font-weight: 600;
+            padding-left: 1.5rem;
+        }
+
+        .size-chart-table td:last-child {
+            padding-right: 1.5rem;
+        }
+
+        .size-chart-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .size-chart-table tbody tr:hover {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        @media (max-width: 767px) {
+            .size-chart-table th,
+            .size-chart-table td {
+                padding: 0.75rem 0.5rem;
+                font-size: 0.8125rem;
+            }
+
+            .size-chart-table th:first-child,
+            .size-chart-table td:first-child {
+                padding-left: 1rem;
+            }
+
+            .size-chart-table th:last-child,
+            .size-chart-table td:last-child {
+                padding-right: 1rem;
+            }
+        }
+
+        /* How to Measure Section */
+        .how-to-measure {
+            padding-top: 2rem;
+            border-top: 1px solid var(--color-light);
+        }
+
+        .how-to-measure-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--color-white);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .measurement-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .measurement-step {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+        }
+
+        .measurement-step-number {
+            flex-shrink: 0;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--color-primary-light);
+            color: var(--color-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        .measurement-step-content {
+            flex: 1;
+        }
+
+        .measurement-step-label {
+            font-weight: 600;
+            color: var(--color-white);
+            margin-bottom: 0.25rem;
+            font-size: 0.875rem;
+        }
+
+        .measurement-step-description {
+            color: var(--color-gray);
+            font-size: 0.875rem;
+            line-height: 1.6;
+        }
+
+        /* Prevent body scroll when modal is open */
+        body.modal-open {
+            overflow: hidden;
+        }
     </style>
 </head>
 <body>
@@ -1016,6 +1327,9 @@
                             <label for="size-xl">XL</label>
                         </div>
                     </div>
+                    <button type="button" class="size-fit-guide-trigger" id="size-fit-guide-trigger">
+                        Size & Fit Guide
+                    </button>
                     <span class="size-error" id="size-error">Please select a size</span>
                 </div>
 
@@ -1136,6 +1450,95 @@
         </div>
     </div>
 
+    <!-- Size & Fit Guide Modal -->
+    <div class="modal-overlay" id="size-fit-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <div class="modal-container" role="document">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h2 class="modal-title" id="modal-title">Size Guide</h2>
+                <button type="button" class="modal-close" id="modal-close" aria-label="Close size guide">
+                    ×
+                </button>
+            </div>
+
+            <!-- Modal Body -->
+            <div class="modal-body" id="modal-body">
+                <!-- Unit Toggle -->
+                <div class="unit-toggle-container">
+                    <div class="unit-toggle" role="group" aria-label="Unit selection">
+                        <button type="button" id="unit-inches" class="active" aria-pressed="true">
+                            Inches
+                        </button>
+                        <button type="button" id="unit-cm" aria-pressed="false">
+                            Centimeters
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Size Chart Table -->
+                <div class="size-chart-wrapper">
+                    <table class="size-chart-table" aria-label="Size chart measurements">
+                        <thead>
+                            <tr>
+                                <th scope="col">Size</th>
+                                <th scope="col">Chest</th>
+                                <th scope="col">Length</th>
+                                <th scope="col">Shoulder</th>
+                                <th scope="col">Sleeve Length</th>
+                            </tr>
+                        </thead>
+                        <tbody id="size-chart-body">
+                            <!-- Data will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- How to Measure Section -->
+                <div class="how-to-measure">
+                    <h3 class="how-to-measure-title">How to Measure</h3>
+                    <div class="measurement-steps">
+                        <div class="measurement-step">
+                            <div class="measurement-step-number">1</div>
+                            <div class="measurement-step-content">
+                                <div class="measurement-step-label">Length</div>
+                                <div class="measurement-step-description">
+                                    Measure from where the shoulder seam meets the collar to the hem.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="measurement-step">
+                            <div class="measurement-step-number">2</div>
+                            <div class="measurement-step-content">
+                                <div class="measurement-step-label">Shoulder</div>
+                                <div class="measurement-step-description">
+                                    Measure from where the shoulder seam meets the sleeve on one side to another side.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="measurement-step">
+                            <div class="measurement-step-number">3</div>
+                            <div class="measurement-step-content">
+                                <div class="measurement-step-label">Chest</div>
+                                <div class="measurement-step-description">
+                                    Measure from the stitches below the armpits on one side to another.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="measurement-step">
+                            <div class="measurement-step-number">4</div>
+                            <div class="measurement-step-content">
+                                <div class="measurement-step-label">Sleeve Length</div>
+                                <div class="measurement-step-description">
+                                    Measure from where the shoulder seam meets armhole to the cuff.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
         // Password Gate Protection
         // PASSWORD CHANGE: To update the password, modify the CORRECT_PASSWORD constant below
@@ -1226,6 +1629,215 @@
                 setTimeout(() => {
                     passwordInput.focus();
                 }, 300);
+            }
+        })();
+
+        // Size & Fit Guide Modal Script
+        (function() {
+            // Sizing data in inches
+            const sizingData = {
+                sizes: ['S', 'M', 'L', 'XL', '2XL', '3XL'],
+                measurements: {
+                    inches: {
+                        chest: [22.05, 22.83, 23.62, 24.41, 25.20, 26.38],
+                        length: [27.56, 28.35, 29.13, 29.92, 30.71, 31.10],
+                        shoulder: [20.87, 21.65, 22.44, 23.23, 24.02, 24.80],
+                        sleeveLength: [8.19, 8.46, 8.74, 9.02, 9.29, 9.29]
+                    }
+                }
+            };
+
+            // DOM Elements
+            const modal = document.getElementById('size-fit-modal');
+            const modalBody = document.getElementById('modal-body');
+            const modalContainer = modal.querySelector('.modal-container');
+            const trigger = document.getElementById('size-fit-guide-trigger');
+            const closeBtn = document.getElementById('modal-close');
+            const unitInchesBtn = document.getElementById('unit-inches');
+            const unitCmBtn = document.getElementById('unit-cm');
+            const sizeChartBody = document.getElementById('size-chart-body');
+
+            // State
+            let currentUnit = 'inches';
+            let focusedElementBeforeModal = null;
+            let focusableElements = [];
+            let firstFocusableElement = null;
+            let lastFocusableElement = null;
+
+            // Convert inches to cm
+            function inchesToCm(inches) {
+                return (inches * 2.54).toFixed(1);
+            }
+
+            // Get measurements for current unit
+            function getMeasurements() {
+                const inches = sizingData.measurements.inches;
+
+                if (currentUnit === 'inches') {
+                    return {
+                        chest: inches.chest,
+                        length: inches.length,
+                        shoulder: inches.shoulder,
+                        sleeveLength: inches.sleeveLength
+                    };
+                } else {
+                    return {
+                        chest: inches.chest.map(inchesToCm),
+                        length: inches.length.map(inchesToCm),
+                        shoulder: inches.shoulder.map(inchesToCm),
+                        sleeveLength: inches.sleeveLength.map(inchesToCm)
+                    };
+                }
+            }
+
+            // Render size chart table
+            function renderSizeChart() {
+                const measurements = getMeasurements();
+                const sizes = sizingData.sizes;
+
+                let html = '';
+                for (let i = 0; i < sizes.length; i++) {
+                    html += `
+                        <tr>
+                            <td>${sizes[i]}</td>
+                            <td>${measurements.chest[i]}</td>
+                            <td>${measurements.length[i]}</td>
+                            <td>${measurements.shoulder[i]}</td>
+                            <td>${measurements.sleeveLength[i]}</td>
+                        </tr>
+                    `;
+                }
+
+                sizeChartBody.innerHTML = html;
+            }
+
+            // Update focusable elements
+            function updateFocusableElements() {
+                focusableElements = modalContainer.querySelectorAll(
+                    'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+                );
+                firstFocusableElement = focusableElements[0];
+                lastFocusableElement = focusableElements[focusableElements.length - 1];
+            }
+
+            // Handle tab key for focus trap
+            function handleTabKey(e) {
+                if (e.key !== 'Tab') return;
+
+                if (e.shiftKey) {
+                    // Shift + Tab
+                    if (document.activeElement === firstFocusableElement) {
+                        e.preventDefault();
+                        lastFocusableElement.focus();
+                    }
+                } else {
+                    // Tab
+                    if (document.activeElement === lastFocusableElement) {
+                        e.preventDefault();
+                        firstFocusableElement.focus();
+                    }
+                }
+            }
+
+            // Handle escape key
+            function handleEscapeKey(e) {
+                if (e.key === 'Escape') {
+                    closeModal();
+                }
+            }
+
+            // Open modal
+            function openModal() {
+                // Store currently focused element
+                focusedElementBeforeModal = document.activeElement;
+
+                // Show modal
+                modal.classList.add('visible');
+                document.body.classList.add('modal-open');
+
+                // Render initial chart
+                renderSizeChart();
+
+                // Update focusable elements and set focus
+                updateFocusableElements();
+                if (closeBtn) {
+                    closeBtn.focus();
+                }
+
+                // Add event listeners
+                document.addEventListener('keydown', handleEscapeKey);
+                document.addEventListener('keydown', handleTabKey);
+            }
+
+            // Close modal
+            function closeModal() {
+                // Hide modal
+                modal.classList.remove('visible');
+                document.body.classList.remove('modal-open');
+
+                // Remove event listeners
+                document.removeEventListener('keydown', handleEscapeKey);
+                document.removeEventListener('keydown', handleTabKey);
+
+                // Return focus to trigger
+                if (focusedElementBeforeModal) {
+                    focusedElementBeforeModal.focus();
+                }
+            }
+
+            // Toggle unit
+            function setUnit(unit) {
+                currentUnit = unit;
+
+                // Update button states
+                if (unit === 'inches') {
+                    unitInchesBtn.classList.add('active');
+                    unitInchesBtn.setAttribute('aria-pressed', 'true');
+                    unitCmBtn.classList.remove('active');
+                    unitCmBtn.setAttribute('aria-pressed', 'false');
+                } else {
+                    unitCmBtn.classList.add('active');
+                    unitCmBtn.setAttribute('aria-pressed', 'true');
+                    unitInchesBtn.classList.remove('active');
+                    unitInchesBtn.setAttribute('aria-pressed', 'false');
+                }
+
+                // Re-render table
+                renderSizeChart();
+            }
+
+            // Event Listeners
+            if (trigger) {
+                trigger.addEventListener('click', openModal);
+            }
+
+            if (closeBtn) {
+                closeBtn.addEventListener('click', closeModal);
+            }
+
+            // Close on backdrop click
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    closeModal();
+                }
+            });
+
+            // Prevent click inside modal from closing it
+            modalContainer.addEventListener('click', function(e) {
+                e.stopPropagation();
+            });
+
+            // Unit toggle handlers
+            if (unitInchesBtn) {
+                unitInchesBtn.addEventListener('click', function() {
+                    setUnit('inches');
+                });
+            }
+
+            if (unitCmBtn) {
+                unitCmBtn.addEventListener('click', function() {
+                    setUnit('cm');
+                });
             }
         })();
 
