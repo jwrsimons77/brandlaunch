@@ -701,7 +701,19 @@
 
         .sticky-cta-title {
             font-size: 0.875rem;
-            color: var(--color-gray);
+            color: var(--color-primary);
+            background: transparent;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+            text-decoration: underline;
+            font-weight: 600;
+            font-family: var(--font-primary);
+            transition: color var(--transition-base);
+        }
+
+        .sticky-cta-title:hover {
+            color: var(--color-primary-hover);
         }
 
         /* Bottom row: Size selector and button side by side */
@@ -1429,7 +1441,7 @@
         <div class="sticky-cta-content">
             <div class="sticky-cta-info">
                 <span class="sticky-cta-price">£29.99</span>
-                <span class="sticky-cta-title">AORO T-Shirt</span>
+                <button type="button" class="sticky-cta-title" id="size-guide-trigger-mobile">Size Guide</button>
             </div>
             <div class="sticky-cta-actions">
                 <div class="sticky-size-selector">
@@ -1652,6 +1664,7 @@
             const modalBody = document.getElementById('modal-body');
             const modalContainer = modal.querySelector('.modal-container');
             const trigger = document.getElementById('size-fit-guide-trigger');
+            const triggerMobile = document.getElementById('size-guide-trigger-mobile');
             const closeBtn = document.getElementById('modal-close');
             const unitInchesBtn = document.getElementById('unit-inches');
             const unitCmBtn = document.getElementById('unit-cm');
@@ -1809,6 +1822,10 @@
             // Event Listeners
             if (trigger) {
                 trigger.addEventListener('click', openModal);
+            }
+
+            if (triggerMobile) {
+                triggerMobile.addEventListener('click', openModal);
             }
 
             if (closeBtn) {
