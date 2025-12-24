@@ -2490,32 +2490,44 @@ footer .footer-brand text {
 /* ===================================
    ABOUT SECTION - STORY FORMAT
    =================================== */
+#about {
+    scroll-margin-top: 80px; /* Prevent header overlap on anchor links */
+}
+
 .about-content-story {
-    max-width: 900px;
+    max-width: 720px; /* Tighter max-width for better readability */
     margin: 0 auto;
 }
 
 .about-header {
     text-align: center;
-    margin-bottom: var(--spacing-2xl); /* MOBILE: 64px generous space before story begins */
+    margin-bottom: var(--spacing-xl); /* MOBILE: 48px - tighter, more intentional */
 }
 
 .about-header .section-label {
-    margin-bottom: var(--spacing-md); /* MOBILE: 24px space below eyebrow */
+    margin-bottom: var(--spacing-sm); /* MOBILE: 16px - tighter spacing below eyebrow */
+    font-size: 0.6875rem; /* 11px */
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-primary);
 }
 
 .about-header .section-title {
     margin-bottom: 0; /* Remove default margin, handled by about-header */
+    font-size: clamp(1.75rem, 5vw, 2.25rem); /* 28-36px responsive */
+    line-height: 1.2;
+    font-weight: 600;
 }
 
 .about-story {
-    margin-bottom: var(--spacing-xl); /* MOBILE: Reduced from 2xl to xl */
+    margin-bottom: var(--spacing-lg); /* MOBILE: 32px - tighter spacing */
 }
 
 .about-story p {
     font-size: clamp(1rem, 3vw, 1.125rem);
-    line-height: 1.8;
-    margin-bottom: var(--spacing-md);
+    line-height: 1.65; /* Slightly tighter for cleaner feel */
+    margin-bottom: var(--spacing-sm); /* 16px between paragraphs */
     color: var(--color-gray);
 }
 
@@ -2523,7 +2535,7 @@ footer .footer-brand text {
     font-size: clamp(1.125rem, 4vw, 1.25rem);
     font-weight: 500;
     color: var(--color-dark);
-    line-height: 1.7;
+    line-height: 1.6;
 }
 
 /* Who We Are - Story Block Structure */
@@ -2533,29 +2545,28 @@ footer .footer-brand text {
     padding: 0 var(--spacing-md); /* MOBILE: Left/right padding to avoid edge touching */
 }
 
-/* Story blocks - generous spacing between sections */
+/* Story blocks - tighter, more intentional spacing */
 .story-block {
-    margin-bottom: var(--spacing-2xl); /* MOBILE: 64px breathing room between blocks */
+    margin-bottom: var(--spacing-lg); /* MOBILE: 32px - tighter rhythm */
 }
 
 /* Story intro - slight emphasis, AORO in caps */
 .story-intro {
-    font-size: 0.9375rem; /* 15px */
-    font-weight: 600;
-    letter-spacing: 0.02em;
+    font-size: 1rem; /* 16px - slightly larger for better hierarchy */
+    font-weight: 500;
+    letter-spacing: 0.01em;
     color: var(--color-dark);
-    line-height: 1.7;
-    margin-bottom: var(--spacing-sm); /* 16px */
+    line-height: 1.6;
+    margin-bottom: var(--spacing-xs); /* 8px - tighter */
 }
 
 /* Story body - calm, readable, sentence case */
 .story-body {
-    font-size: 0.9375rem; /* 15px */
+    font-size: 1rem; /* 16px - consistent sizing */
     font-weight: 400;
     color: var(--color-gray);
-    line-height: 1.8; /* MOBILE: Generous line-height for readability */
-    margin-bottom: var(--spacing-md); /* 24px between paragraphs */
-    max-width: 480px; /* Constrain for better readability */
+    line-height: 1.7; /* MOBILE: Clean, readable line-height */
+    margin-bottom: var(--spacing-sm); /* 16px between paragraphs */
 }
 
 .story-body:last-child {
@@ -2564,41 +2575,51 @@ footer .footer-brand text {
 
 /* Story emphasis - for "It was this." */
 .story-emphasis {
-    font-size: 1rem; /* 16px - slightly larger */
+    font-size: 1.0625rem; /* 17px - slightly larger */
     font-weight: 600;
     color: var(--color-dark);
-    line-height: 1.6;
+    line-height: 1.5;
     margin-bottom: 0;
 }
 
-/* BEFORE/AFTER/BETWEEN moments - vertical, calm layout */
+/* BEFORE/AFTER/BETWEEN ritual cards - premium, intentional design */
 .moments-grid {
-    margin-top: var(--spacing-2xl); /* MOBILE: 64px space above */
+    margin-top: var(--spacing-xl); /* MOBILE: 48px - cleaner spacing */
     margin-bottom: 0;
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-md); /* MOBILE: 24px between moments */
+    display: grid;
+    grid-template-columns: 1fr; /* MOBILE: stacked cards */
+    gap: var(--spacing-sm); /* MOBILE: 16px between cards */
 }
 
 .moment {
     display: flex;
     flex-direction: column;
-    gap: 0.375rem; /* 6px between label and value */
+    gap: 0.5rem; /* 8px between label and value */
+    padding: var(--spacing-md) var(--spacing-lg); /* 24px vertical, 32px horizontal */
+    background-color: rgba(0, 0, 0, 0.02); /* Subtle background */
+    border-left: 2px solid var(--color-primary); /* Pink accent */
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+.moment:hover {
+    background-color: rgba(0, 0, 0, 0.03);
+    border-left-color: var(--color-primary);
+    transform: translateX(2px);
 }
 
 .moment-label {
-    font-size: 0.6875rem; /* 11px - smaller, subtle */
-    font-weight: 600;
-    letter-spacing: 0.1em;
+    font-size: 0.6875rem; /* 11px */
+    font-weight: 700;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: var(--color-primary); /* Pink for subtle pop */
-    opacity: 0.8;
+    color: var(--color-primary);
 }
 
 .moment-value {
-    font-size: 0.9375rem; /* 15px */
-    font-weight: 400;
-    color: var(--color-gray);
+    font-size: 1rem; /* 16px - larger for better hierarchy */
+    font-weight: 500;
+    color: var(--color-dark);
     line-height: 1.5;
 }
 
@@ -3022,39 +3043,48 @@ footer .footer-brand text {
 
     /* About story section */
     .about-header {
-        margin-bottom: var(--spacing-3xl); /* TABLET: 96px even more generous space */
+        margin-bottom: var(--spacing-2xl); /* TABLET: 64px - balanced spacing */
     }
 
     .about-story {
-        margin-bottom: var(--spacing-2xl); /* TABLET: Restore fuller margin */
+        margin-bottom: var(--spacing-xl); /* TABLET: 48px - balanced margin */
     }
 
     /* Who We Are - Tablet/Desktop styles */
     .story-intro {
-        font-size: 1rem; /* 16px - slightly larger on desktop */
-        line-height: 1.8;
+        font-size: 1.0625rem; /* 17px - slightly larger on desktop */
+        line-height: 1.7;
     }
 
     .story-body {
-        font-size: 1rem; /* 16px - slightly larger on desktop */
-        line-height: 1.9; /* More relaxed line height */
+        font-size: 1.0625rem; /* 17px - slightly larger on desktop */
+        line-height: 1.8; /* Comfortable line height */
     }
 
     .story-emphasis {
-        font-size: 1.0625rem; /* 17px - slightly larger on desktop */
+        font-size: 1.125rem; /* 18px - slightly larger on desktop */
+    }
+
+    .story-block {
+        margin-bottom: var(--spacing-xl); /* DESKTOP: 48px between blocks */
     }
 
     .moments-grid {
-        margin-top: var(--spacing-3xl); /* DESKTOP: 96px more space above */
-        gap: var(--spacing-lg); /* DESKTOP: 32px between moments */
+        margin-top: var(--spacing-2xl); /* DESKTOP: 64px - balanced space above */
+        grid-template-columns: repeat(3, 1fr); /* DESKTOP: 3 equal columns */
+        gap: var(--spacing-md); /* DESKTOP: 24px between cards */
+    }
+
+    .moment {
+        padding: var(--spacing-lg) var(--spacing-md); /* Adjusted padding for columns */
     }
 
     .moment-label {
-        font-size: 0.75rem; /* 12px - slightly larger on desktop */
+        font-size: 0.75rem; /* 12px */
     }
 
     .moment-value {
-        font-size: 1rem; /* 16px - match desktop body size */
+        font-size: 1.0625rem; /* 17px - larger on desktop */
     }
 
     /* Values grid */
