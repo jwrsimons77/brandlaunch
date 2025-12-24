@@ -2661,6 +2661,113 @@ footer .footer-brand text {
 }
 
 /* ===================================
+   WHO WE ARE - MANIFESTO STYLE
+   =================================== */
+/* Cadence-inspired wall-text with clean hierarchy */
+.about-manifesto {
+    max-width: 720px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.about-manifesto .section-label {
+    display: block;
+    margin-bottom: var(--spacing-lg); /* 32px */
+    font-size: 0.6875rem; /* 11px */
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    opacity: 0.8;
+}
+
+.manifesto-content {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md); /* 24px side padding on mobile */
+}
+
+/* Main title: AORO */
+.manifesto-title {
+    font-size: clamp(2.5rem, 8vw, 4rem); /* 40-64px responsive */
+    font-weight: 700;
+    letter-spacing: -0.02em; /* Tight tracking */
+    text-transform: uppercase;
+    color: var(--color-dark);
+    line-height: 1;
+    margin-bottom: var(--spacing-lg); /* 32px */
+}
+
+/* Subhead: STARTED WITH TWO MATES... */
+.manifesto-subhead {
+    font-size: clamp(1.125rem, 4vw, 1.5rem); /* 18-24px responsive */
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: var(--color-dark);
+    line-height: 1.4;
+    margin-bottom: var(--spacing-xl); /* 48px */
+}
+
+/* Body paragraphs */
+.manifesto-body {
+    font-size: clamp(0.9375rem, 3.5vw, 1.125rem); /* 15-18px responsive */
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    text-transform: uppercase;
+    color: var(--color-gray);
+    line-height: 1.65;
+    margin-bottom: var(--spacing-lg); /* 32px between blocks */
+}
+
+/* Emphasis block: BUT RATHER THE SHARED SUNRISES */
+.manifesto-emphasis {
+    font-weight: 600;
+    color: var(--color-dark);
+    margin-top: var(--spacing-md); /* 24px extra space above */
+    margin-bottom: var(--spacing-md); /* 24px extra space below */
+}
+
+/* Footnote: (THAT YOU CAN NOW WEAR MATCHING KIT WITH) */
+.manifesto-footnote {
+    font-size: clamp(0.8125rem, 3vw, 0.9375rem); /* 13-15px responsive */
+    font-weight: 400;
+    letter-spacing: 0.01em;
+    text-transform: uppercase;
+    color: var(--color-gray);
+    opacity: 0.7;
+    line-height: 1.6;
+    margin-top: var(--spacing-lg); /* 32px */
+    margin-bottom: 0;
+}
+
+/* Mobile optimization: tighter spacing */
+@media (max-width: 640px) {
+    .manifesto-content {
+        padding: 0 20px; /* Comfortable edge padding */
+    }
+
+    .manifesto-title {
+        margin-bottom: var(--spacing-md); /* 24px on mobile */
+    }
+
+    .manifesto-subhead {
+        margin-bottom: var(--spacing-lg); /* 32px on mobile */
+    }
+
+    .manifesto-body {
+        margin-bottom: var(--spacing-md); /* 24px on mobile */
+    }
+}
+
+/* Desktop: increase spacing for better rhythm */
+@media (min-width: 768px) {
+    .manifesto-content {
+        padding: 0 var(--spacing-lg); /* 32px on tablet+ */
+    }
+}
+
+/* ===================================
    VALUES SECTION
    =================================== */
 /* MOBILE: Single column with optimized spacing */
