@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /success
+Disallow: /success.html
+Disallow: /cancelled
+Disallow: /cancelled.html
+
+Sitemap: https://aoro.co/sitemap.xml

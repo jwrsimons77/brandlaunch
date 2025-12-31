@@ -13,7 +13,7 @@
     <meta property="og:type" content="website">
     <meta property="og:title" content="AORO — Run Together">
     <meta property="og:description" content="UK running brand built on community. Limited tees, coffee after runs, pop-ups where runners meet.">
-    <meta property="og:image" content="/images/hero/og-image.jpg">
+    <meta property="og:image" content="https://aoro.co/images/hero/optimized/hero-1280.jpg">
     <meta property="og:image:alt" content="AORO running crew sharing coffee after a run">
     <meta property="og:url" content="https://aoro.co/">
     <meta property="og:site_name" content="AORO">
@@ -22,8 +22,8 @@
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="AORO — Run Together">
-    <meta name="twitter:description" content="UK running brand. Limited tees, coffee after runs, and the community that shows up."
-    <meta name="twitter:image" content="/images/hero/og-image.jpg">
+    <meta name="twitter:description" content="UK running brand. Limited tees, coffee after runs, and the community that shows up.">
+    <meta name="twitter:image" content="https://aoro.co/images/hero/optimized/hero-1280.jpg">
     <meta name="twitter:site" content="@aoro.cloud">
 
     <meta name="theme-color" content="#0F1E21">
@@ -49,7 +49,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
 
     <!-- Stylesheet -->
     <link rel="stylesheet" href="/css/styles.css">
@@ -64,47 +64,70 @@
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
-        "@type": "Brand",
-        "name": "AORO",
-        "alternateName": "AORO Running",
-        "description": "UK running brand built on community. Limited tees, coffee after runs, and pop-ups across the Peak District, London, and Wales.",
-        "url": "https://aoro.co/",
-        "brand": "AORO",
-        "slogan": "Run Together",
-        "email": "hello@aoro.co",
-        "sameAs": [
-            "https://www.instagram.com/aoro.cloud",
-            "https://www.tiktok.com/@aoro.cloud"
-        ],
-        "foundingDate": "2024",
-        "founder": [
+        "@graph": [
             {
-                "@type": "Person",
-                "name": "AORO Founders",
-                "description": "Two mates who started AORO between runs and coffee."
-            }
-        ],
-        "knowsAbout": [
-            "Running apparel",
-            "Pop-up shops",
-            "Running communities",
-            "Specialty coffee"
-        ],
-        "makesOffer": [
-            {
-                "@type": "Offer",
-                "name": "Limited tee drops",
-                "availability": "https://schema.org/PreOrder"
+                "@type": "Organization",
+                "@id": "https://aoro.co/#organization",
+                "name": "AORO",
+                "alternateName": "AORO Running",
+                "description": "UK running brand built on community. Limited tees, coffee after runs, and pop-ups across the Peak District, London, and Wales.",
+                "url": "https://aoro.co/",
+                "logo": "https://aoro.co/images/logos/aoro-logo.svg",
+                "email": "hello@aoro.co",
+                "sameAs": [
+                    "https://www.instagram.com/aoro.cloud",
+                    "https://www.tiktok.com/@aoro.cloud"
+                ],
+                "foundingDate": "2024",
+                "founder": [
+                    {
+                        "@type": "Person",
+                        "name": "AORO Founders",
+                        "description": "Two mates who started AORO between runs and coffee."
+                    }
+                ],
+                "knowsAbout": [
+                    "Running apparel",
+                    "Pop-up shops",
+                    "Running communities",
+                    "Specialty coffee"
+                ],
+                "makesOffer": [
+                    {
+                        "@type": "Offer",
+                        "name": "Limited tee drops",
+                        "availability": "https://schema.org/PreOrder"
+                    },
+                    {
+                        "@type": "Offer",
+                        "name": "Pop-up events",
+                        "availability": "https://schema.org/InStoreOnly"
+                    },
+                    {
+                        "@type": "Offer",
+                        "name": "Group runs",
+                        "availability": "https://schema.org/InStoreOnly"
+                    }
+                ]
             },
             {
-                "@type": "Offer",
-                "name": "Pop-up events",
-                "availability": "https://schema.org/InStoreOnly"
+                "@type": "WebSite",
+                "@id": "https://aoro.co/#website",
+                "url": "https://aoro.co/",
+                "name": "AORO",
+                "description": "UK running brand built on community. Limited tees, coffee after runs, and pop-ups across the Peak District, London, and Wales.",
+                "inLanguage": "en-GB",
+                "publisher": {
+                    "@id": "https://aoro.co/#organization"
+                }
             },
             {
-                "@type": "Offer",
-                "name": "Group runs",
-                "availability": "https://schema.org/InStoreOnly"
+                "@type": "Brand",
+                "@id": "https://aoro.co/#brand",
+                "name": "AORO",
+                "url": "https://aoro.co/",
+                "logo": "https://aoro.co/images/logos/aoro-logo.svg",
+                "slogan": "Run Together"
             }
         ]
     }
